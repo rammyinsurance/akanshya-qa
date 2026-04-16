@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playwright Mastery: Beginner to Advanced Guide</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #05070a;
+            --bg-card: rgba(15, 20, 28, 0.7);
+            --accent-cyan: #00f2ff;
+            --accent-lime: #a2ff00;
+            --accent-purple: #bc00ff;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-blur: blur(12px);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Background Glows */
+        .glow {
+            position: fixed;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(150px);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        .glow-1 { top: -20%; left: -10%; background: var(--accent-cyan); }
+        .glow-2 { bottom: -10%; right: -10%; background: var(--accent-purple); }
+
+        /* Typography */
+        h1, h2, h3 { font-weight: 800; letter-spacing: -0.02em; }
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-lime));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+            z-index: -1;
+            mask-image: radial-gradient(circle, black, transparent 80%);
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(5, 7, 10, 0.8);
+            backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 100;
+            padding: 1rem 0;
+        }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--accent-cyan); }
+
+        /* Sections */
+        section { padding: 6rem 0; }
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+        .card:hover {
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: #000;
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        pre { font-family: 'Fira Code', monospace; font-size: 0.9rem; color: #d1d5db; }
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--glass-border);
+            border: none;
+            color: var(--text-dim);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .copy-btn:hover { background: var(--accent-cyan); color: #000; }
+
+        /* Levels Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .badge-beginner { background: rgba(0, 242, 255, 0.1); color: var(--accent-cyan); border: 1px solid var(--accent-cyan); }
+        .badge-intermediate { background: rgba(162, 255, 0, 0.1); color: var(--accent-lime); border: 1px solid var(--accent-lime); }
+        .badge-advanced { background: rgba(188, 0, 255, 0.1); color: var(--accent-purple); border: 1px solid var(--accent-purple); }
+
+        /* Steps */
+        .step {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .step-num {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0;
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-content h1 { font-size: 3rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+
+    <header id="home">
+        <img src="playwright_hero_1776354245911.png" alt="Playwright Hero" class="hero-image">
+        <div class="container hero-content">
+            <h1 class="gradient-text">Playwright Mastery</h1>
+            <p>Your comprehensive guide to building modern, reliable, and lightning-fast web automation suites.</p>
+            <a href="#install" class="card" style="display: inline-block; text-decoration: none; padding: 1rem 2rem; border-radius: 100px; font-weight: 700; background: var(--accent-cyan); color: #000;">Start Your Journey</a>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#install">Installation</a></li>
+                <li><a href="#beginner">Beginner</a></li>
+                <li><a href="#intermediate">Intermediate</a></li>
+                <li><a href="#advanced">Advanced</a></li>
+                <li><a href="#debugging">Debugging</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        
+        <!-- Installation Section -->
+        <section id="install">
+            <h2 class="section-title">Zero to Automated <span class="gradient-text">Setup</span></h2>
+            <div class="card">
+                <div class="badge badge-beginner">Level 1: The Apprentice</div>
+                <p>Getting Playwright up and running in your machine takes less than 60 seconds. Follow these high-speed steps.</p>
+                
+                <div class="step" style="margin-top: 2rem;">
+                    <div class="step-num">1</div>
+                    <div>
+                        <h3>Initialize Playwright</h3>
+                        <p>Run the initialization command in your project directory. This sets up the config and folder structure.</p>
+                        <div class="code-block">
+                            <button class="copy-btn">Copy</button>
+                            <pre>npm init playwright@latest</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div>
+                        <h3>Configure Your Setup</h3>
+                        <p>The installer will ask you a few questions. We recommend <strong>TypeScript</strong> for the best developer experience.</p>
+                        <ul>
+                            <li>Use TypeScript? → <strong>Yes</strong></li>
+                            <li>Where to put tests? → <strong>tests</strong></li>
+                            <li>Add GitHub Actions? → <strong>Yes</strong></li>
+                            <li>Install Playwright browsers? → <strong>Yes</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div>
+                        <h3>Run Your First Test</h3>
+                        <p>Verify everything is working by running the boilerplate tests.</p>
+                        <div class="code-block">
+                            <button class="copy-btn">Copy</button>
+                            <pre>npx playwright test</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Beginner Section -->
+        <section id="beginner">
+            <h2 class="section-title">The <span class="gradient-text">DNA</span> of a Test</h2>
+            <div class="card">
+                <div class="badge badge-beginner">Beginner Fundamentals</div>
+                <p>Every Playwright test follows a simple pattern: <strong>Arrange, Act, Assert.</strong></p>
+                
+                <div class="code-block" style="margin-top: 2rem;">
+                    <button class="copy-btn">Copy</button>
+                    <pre>import { test, expect } from '@playwright/test';
+
+test('has title and link', async ({ page }) => {
+  // 1. Arrange: Go to the page
+  await page.goto('https://playwright.dev/');
+
+  // 2. Act: Click the 'Get Started' link
+  await page.getByRole('link', { name: 'Get started' }).click();
+
+  // 3. Assert: Verify the URL contains 'intro'
+  await expect(page).toHaveURL(/.*intro/);
+});</pre>
+                </div>
+                <div style="margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px;">
+                        <h4 style="color: var(--accent-cyan);">The 'page' Fixture</h4>
+                        <p style="font-size: 0.9rem;">Provides isolated browser contexts for every test. No cookies or cache leakage.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 12px;">
+                        <h4 style="color: var(--accent-cyan);">Auto-Waiting</h4>
+                        <p style="font-size: 0.9rem;">Actions like .click() automatically wait for elements to be visible and stable.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Intermediate Section -->
+        <section id="intermediate">
+            <h2 class="section-title">Precision <span class="gradient-text">Locators</span></h2>
+            <div class="card">
+                <div class="badge badge-intermediate">Level 2: The Craftsman</div>
+                <p>Stop using brittle CSS selectors. Use locators that mirror how users see the web.</p>
+
+                <div style="margin-top: 2rem;">
+                    <h3 style="margin-bottom: 1rem;">The Golden Rule: Role-Based Locators</h3>
+                    <div class="code-block">
+                        <button class="copy-btn">Copy</button>
+                        <pre>// Best: Reliable and Accessible
+await page.getByRole('button', { name: 'Submit' }).click();
+
+// Good: Text-based
+await page.getByText('Login successful').isVisible();
+
+// Fallback: Test IDs (industry best practice for QA)
+await page.getByTestId('cart-icon').click();</pre>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <h3>Common Actions</h3>
+                    <ul style="list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <li>🚀 <code>.fill('text')</code> - Type into input</li>
+                        <li>✅ <code>.check()</code> - Check checkbox/radio</li>
+                        <li>🖱️ <code>.hover()</code> - Mouse hover</li>
+                        <li>📁 <code>.setInputFiles()</code> - File upload</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced Section -->
+        <section id="advanced">
+            <h2 class="section-title">Architectural <span class="gradient-text">Excellence</span></h2>
+            <div class="card">
+                <div class="badge badge-advanced">Level 3: The Architect</div>
+                <h3>The Page Object Model (POM)</h3>
+                <p>Maintain large suites by abstracting pages into reusable classes.</p>
+
+                <div class="code-block" style="margin-top: 1rem;">
+                    <button class="copy-btn">Copy</button>
+                    <pre>// login-page.ts
+export class LoginPage {
+  readonly page: Page;
+  readonly usernameInput: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.usernameInput = page.getByPlaceholder('Username');
+  }
+
+  async login(user: string) {
+    await this.usernameInput.fill(user);
+    await this.page.getByRole('button', { name: 'Login' }).click();
+  }
+}</pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="badge badge-advanced">Advanced Tip</div>
+                <h3>Visual Regression Testing</h3>
+                <p>Capture and compare screenshots automatically to ensure zero visual breakages.</p>
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+                    <pre>await expect(page).toHaveScreenshot('homepage.png');</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Debugging Section -->
+        <section id="debugging">
+            <h2 class="section-title">Mastering the <span class="gradient-text">Trace</span></h2>
+            <div class="card">
+                <p>Never debug blindly. Use Playwright's time-traveling tools.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+                    <div class="card" style="margin-bottom: 0; background: rgba(0, 242, 255, 0.05);">
+                        <h4 style="color: var(--accent-cyan); margin-bottom: 0.5rem;">The UI Mode</h4>
+                        <p style="font-size: 0.9rem;">Run tests locally with a live watch mode and step-by-step preview.</p>
+                        <code style="display: block; margin-top: 1rem; background: #000; padding: 0.5rem; border-radius: 4px;">npx playwright test --ui</code>
+                    </div>
+                    <div class="card" style="margin-bottom: 0; background: rgba(188, 0, 255, 0.05);">
+                        <h4 style="color: var(--accent-purple); margin-bottom: 0.5rem;">The Trace Viewer</h4>
+                        <p style="font-size: 0.9rem;">View failures in CI with a full DOM snapshot, console logs, and network traffic.</p>
+                        <code style="display: block; margin-top: 1rem; background: #000; padding: 0.5rem; border-radius: 4px;">npx playwright show-trace path/to/trace.zip</code>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Playwright Mastery Guide. Built with precision for modern QA Engineers.</p>
+            <p style="font-size: 0.8rem; margin-top: 1rem;">Powered by Playwright & Node.js</p>
+        </div>
+    </footer>
+
+    <script>
+        // Copy Code Functionality
+        document.querySelectorAll('.copy-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const code = button.nextElementSibling.innerText;
+                navigator.clipboard.writeText(code).then(() => {
+                    button.innerText = 'Copied!';
+                    setTimeout(() => button.innerText = 'Copy', 2000);
+                });
+            });
+        });
+
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section, .card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
