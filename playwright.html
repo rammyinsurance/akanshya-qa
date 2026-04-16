@@ -244,6 +244,7 @@
                 <li><a href="#install">Installation</a></li>
                 <li><a href="#beginner">Beginner</a></li>
                 <li><a href="#intermediate">Intermediate</a></li>
+                <li><a href="#qa-lab">QA Lab</a></li>
                 <li><a href="#advanced">Advanced</a></li>
                 <li><a href="#debugging">Debugging</a></li>
             </ul>
@@ -364,6 +365,74 @@ await page.getByTestId('cart-icon').click();</pre>
                         <li>🖱️ <code>.hover()</code> - Mouse hover</li>
                         <li>📁 <code>.setInputFiles()</code> - File upload</li>
                     </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- QA Lab Section -->
+        <section id="qa-lab">
+            <h2 class="section-title">The <span class="gradient-text">QA Lab</span>: Real-World Scenarios</h2>
+            
+            <div class="card">
+                <div class="badge badge-intermediate">Scenario 1: Authenticated State</div>
+                <h3>Login Once, Test Everywhere</h3>
+                <p>Avoid logging in for every test. Authenticate once in a global setup and reuse the session storage.</p>
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+                    <pre>// playwright.config.ts
+export default defineConfig({
+  projects: [
+    { name: 'setup', testMatch: /.*\.setup\.ts/ },
+    {
+      name: 'chromium',
+      use: { 
+        ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/user.json',
+      },
+      dependencies: ['setup'],
+    },
+  ],
+});</pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="badge badge-intermediate">Scenario 2: Dynamic Tables</div>
+                <h3>Precision Table Interrogation</h3>
+                <p>Locate a specific row by unique text, then find an action element within that scope.</p>
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+                    <pre>// Find the row containing "Order #12345" and click its 'View' button
+const row = page.locator('tr', { hasText: 'Order #12345' });
+await row.getByRole('button', { name: 'View' }).click();</pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="badge badge-advanced">Scenario 3: Network Interception</div>
+                <h3>API Mocking & Verification</h3>
+                <p>Modify backend responses or simulate 500 errors to test edge cases without real data.</p>
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+                    <pre>// Mock the profile API to return an 'Admin' role
+await page.route('**/api/profile', async (route) => {
+  await route.fulfill({
+    status: 200,
+    body: JSON.stringify({ name: 'QA Engineer', role: 'admin' }),
+  });
+});</pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="badge badge-advanced">Scenario 4: IFrames & Shadow DOM</div>
+                <h3>Piercing Hidden Layers</h3>
+                <p>Playwright automatically pierces Shadow DOM. For IFrames, use <code>frameLocator</code>.</p>
+                <div class="code-block">
+                    <button class="copy-btn">Copy</button>
+                    <pre>// Interacting with a credit card form inside an IFrame
+const stripeFrame = page.frameLocator('#stripe-iframe');
+await stripeFrame.getByLabel('Card number').fill('4242 4242 4242');</pre>
                 </div>
             </div>
         </section>
