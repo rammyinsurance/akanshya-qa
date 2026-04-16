@@ -1,13 +1,2037 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interview Prep — Akanksha Ramteke | QA & Automation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2128;
+    --border: #30363d;
+    --accent: #e6a817;
+    --accent2: #58a6ff;
+    --accent3: #3fb950;
+    --accent4: #f85149;
+    --text: #e6edf3;
+    --text-muted: #8b949e;
+    --text-dim: #484f58;
+    --q-bg: #1a2332;
+    --a-bg: #111a11;
+    --tag-bg: #21262d;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  /* HEADER */
+  .hero {
+    background: linear-gradient(135deg, #0d1117 0%, #1a1a2e 50%, #16213e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(230,168,23,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(230,168,23,0.15);
+    border: 1px solid rgba(230,168,23,0.4);
+    color: var(--accent);
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 30px;
+  }
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+  .stat {
+    text-align: center;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 24px;
+  }
+  .stat-num { font-size: 2rem; font-weight: 700; color: var(--accent); font-family: 'Playfair Display', serif; }
+  .stat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); }
+
+  /* NAV */
+  .nav-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+  }
+  .nav-bar a {
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 14px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .nav-bar a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* LAYOUT */
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 48px; height: 48px;
+    background: rgba(230,168,23,0.15);
+    border: 1px solid rgba(230,168,23,0.3);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .section-count {
+    margin-left: auto;
+    background: var(--tag-bg);
+    color: var(--text-muted);
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+
+  /* Q&A CARDS */
+  .qa-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .qa-card:hover { border-color: rgba(230,168,23,0.35); }
+  .qa-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 24px;
+    background: var(--q-bg);
+    cursor: pointer;
+    user-select: none;
+  }
+  .q-num {
+    background: var(--accent);
+    color: #000;
+    font-weight: 700;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .q-label {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text);
+    flex: 1;
+    line-height: 1.5;
+  }
+  .q-toggle {
+    color: var(--text-muted);
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+  .qa-card.open .q-toggle { transform: rotate(180deg); }
+  .qa-body {
+    display: none;
+    padding: 24px;
+    border-top: 1px solid var(--border);
+    background: var(--surface2);
+  }
+  .qa-card.open .qa-body { display: block; }
+  .answer-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent3);
+    margin-bottom: 12px;
+  }
+  .qa-body p { color: var(--text); margin-bottom: 12px; }
+  .qa-body p:last-child { margin-bottom: 0; }
+  .qa-body ul { padding-left: 20px; margin-bottom: 12px; }
+  .qa-body ul li { color: var(--text); margin-bottom: 6px; }
+  .qa-body strong { color: var(--accent); }
+  .qa-body em { color: var(--accent2); font-style: normal; font-weight: 600; }
+
+  /* Code blocks */
+  .code-block {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'Fira Code', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #e6edf3;
+    overflow-x: auto;
+    margin: 12px 0;
+  }
+  .code-block .kw { color: #ff7b72; }
+  .code-block .cl { color: #79c0ff; }
+  .code-block .str { color: #a5d6ff; }
+  .code-block .cm { color: #8b949e; font-style: italic; }
+  .code-block .fn { color: #d2a8ff; }
+  .code-block .nm { color: #ffa657; }
+
+  /* Tags */
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+  .tag-basic { color: var(--accent3); border-color: rgba(63,185,80,0.3); background: rgba(63,185,80,0.08); }
+  .tag-inter { color: var(--accent2); border-color: rgba(88,166,255,0.3); background: rgba(88,166,255,0.08); }
+  .tag-adv { color: var(--accent); border-color: rgba(230,168,23,0.3); background: rgba(230,168,23,0.08); }
+  .tag-exp { color: var(--accent4); border-color: rgba(248,81,73,0.3); background: rgba(248,81,73,0.08); }
+  .tag-lead { color: #bc8cff; border-color: rgba(188,140,255,0.3); background: rgba(188,140,255,0.08); }
+
+  /* TIP BOX */
+  .tip-box {
+    background: rgba(230,168,23,0.08);
+    border: 1px solid rgba(230,168,23,0.25);
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .tip-box strong { color: var(--accent); }
+
+  /* SCENARIO BOX */
+  .scenario {
+    background: rgba(88,166,255,0.06);
+    border: 1px solid rgba(88,166,255,0.2);
+    border-left: 4px solid var(--accent2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    font-size: 14px;
+    color: var(--text);
+  }
+  .scenario strong { color: var(--accent2); }
+
+  /* SECTION spacing */
+  .section { margin-bottom: 60px; }
+
+  /* PROGRESS */
+  .progress-bar-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .progress-label { font-weight: 600; font-size: 14px; color: var(--text-muted); }
+  .progress-track { flex: 1; min-width: 200px; background: var(--border); border-radius: 4px; height: 8px; }
+  .progress-fill { height: 100%; border-radius: 4px; background: linear-gradient(90deg, var(--accent3), var(--accent)); width: 0%; transition: width 1s ease; }
+
+  /* footer */
+  footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .hero { padding: 40px 20px; }
+    .nav-bar { padding: 0 16px; }
+    .container { padding: 24px 16px; }
+    .qa-header { padding: 16px; }
+    .qa-body { padding: 16px; }
+  }
+</style>
 </head>
 <body>
-    <h1>Akanshya QA</h1>
-    <p>Welcome to the Akanshya QA page. How can we assist you today?</p>
 
+<div class="hero">
+  <div class="hero-badge">Interview Preparation Guide</div>
+  <h1>Akanksha <span>Ramteke</span></h1>
+  <p>Senior Consultant · Test Lead · QA & Automation Engineer<br>
+  Capgemini India · 10+ Years Experience · ISTQB Certified</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Q&A Pairs</div></div>
+    <div class="stat"><div class="stat-num">15</div><div class="stat-label">Topic Categories</div></div>
+    <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Years Experience</div></div>
+    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Career Confidence</div></div>
+  </div>
+</div>
+
+<nav class="nav-bar">
+  <a href="#intro">👤 Intro</a>
+  <a href="#manual">🧪 Manual QA</a>
+  <a href="#selenium-basics">🤖 Selenium Basics</a>
+  <a href="#selenium-csharp">💻 C# Selenium</a>
+  <a href="#pom">🏗️ POM</a>
+  <a href="#bdd">🥒 BDD/SpecFlow</a>
+  <a href="#frameworks">⚙️ Frameworks</a>
+  <a href="#ci-cd">🚀 CI/CD</a>
+  <a href="#agile">🔄 Agile</a>
+  <a href="#api">🌐 API Testing</a>
+  <a href="#sql">🗃️ SQL</a>
+  <a href="#leadership">👑 Leadership</a>
+  <a href="#behavioral">🧠 Behavioral</a>
+  <a href="#scenarios">🎯 Scenarios</a>
+  <a href="#advanced">🔥 Advanced</a>
+</nav>
+
+<div class="container">
+
+<!-- ============================================================ -->
+<!-- SECTION 1: INTRODUCTION                                       -->
+<!-- ============================================================ -->
+<section class="section" id="intro">
+<div class="section-header">
+  <div class="section-icon">👤</div>
+  <div>
+    <div class="section-title">Introduction & Background</div>
+    <div style="color:var(--text-muted);font-size:14px">Tell me about yourself · Past experience · Current role</div>
+  </div>
+  <div class="section-count">Q1–Q30</div>
+</div>
+
+<!-- Q1 -->
+<div class="qa-card open" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q1</span>
+  <span class="q-label">Tell me something about yourself.</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span><span class="tag tag-exp">HR</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>Thank you for this opportunity. My name is <strong>Akanksha Ramteke</strong> and I'm a Senior Consultant and Test Lead at <strong>Capgemini India</strong> with over <strong>10 years of comprehensive QA experience</strong> spanning manual testing, test automation, and team leadership.</p>
+  <p>I hold an <strong>MCA (First Class with Distinction)</strong> and a <strong>B.Sc. in Computer Science</strong>, along with a Post Graduate Diploma in Advanced Computing from CDAC and an <strong>ISTQB Certified Tester (CTFL)</strong> certification.</p>
+  <p>I started my career in 2015 at <em>Revamp Consulting Pvt. Ltd.</em> as a Software Engineer in QA, where I built strong foundations in manual testing and initiated early automation using <strong>Selenium with Java</strong>. In 2018, I joined <strong>Capgemini India</strong>, where I've grown into a Senior Consultant and Test Lead role — leading teams, building scalable automation frameworks in <strong>C# and Java</strong>, and delivering QA dashboards, heat maps, and ROI-based automation reports to stakeholders.</p>
+  <p>Currently I'm working on a <strong>Salesforce-based healthcare application</strong> for a leading U.S. provider, using <strong>C#, NUnit, SpecFlow (BDD)</strong>, and <strong>Azure DevOps</strong> for CI/CD. I've been recognised with <strong>two WOW Awards</strong> at Capgemini for delivery excellence. I'm also exploring <strong>Playwright with TypeScript</strong> for next-generation automation.</p>
+  <div class="tip-box"><strong>💡 Tip:</strong> Keep this to 2–3 minutes. Structure: Name → Education → Career start → Current role → Key skills → Awards → What you're learning now.</div>
+</div>
+</div>
+
+<!-- Q2 -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q2</span>
+  <span class="q-label">Walk me through your professional journey from the beginning.</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span><span class="tag tag-exp">HR</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>2011–2015 – Education:</strong> I completed B.Sc. in Computer Science followed by MCA with distinction. I then did a CDAC Post Graduate Diploma in Advanced Computing which sharpened my technical foundation.</p>
+  <p><strong>2015–2018 – Revamp Consulting:</strong> I began as a Software Engineer in QA. My core responsibilities were manual functional, regression, smoke, and sanity testing across web and desktop applications. I wrote detailed test cases, managed defects in JIRA and HP ALM, and initiated automation using Selenium WebDriver with Java. I actively participated in UAT sessions and client demos.</p>
+  <p><strong>2018–Present – Capgemini India:</strong> I joined as a QA professional and grew into a Senior Consultant and Test Lead role. I lead a team of QA engineers, build Selenium automation frameworks in <strong>Java and C#</strong>, deliver QA analytics dashboards, and collaborate with BAs and developers. I've received <strong>two WOW Awards</strong> and consistently rated 'Exceeds Expectations'. Currently implementing <strong>Playwright with TypeScript</strong>.</p>
+</div>
+</div>
+
+<!-- Q3 -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q3</span>
+  <span class="q-label">Describe your current project and your role in it.</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-exp">Experience</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>Currently I'm working on a <strong>Salesforce-based web application</strong> developed for a leading U.S. healthcare provider at Capgemini. My role is <strong>Test Lead and Senior Consultant</strong>.</p>
+  <p><strong>My responsibilities include:</strong></p>
+  <ul>
+    <li>Leading and mentoring a team of QA engineers</li>
+    <li>Designing test strategy, test plans, and acceptance criteria in collaboration with Business Analysts</li>
+    <li>Executing Functional, Regression, and Integration Testing</li>
+    <li>Applying <strong>BDD principles using SpecFlow</strong> — writing Gherkin feature files and step definitions in C#</li>
+    <li>Automating test cases using <strong>C# and NUnit</strong></li>
+    <li>Managing test cases and defect tracking using <strong>Azure DevOps</strong></li>
+    <li>Running automated scripts via <strong>Azure CI/CD pipelines</strong></li>
+    <li>Delivering QA dashboards, heat maps, and <strong>ROI-based automation savings reports</strong> to stakeholders</li>
+    <li>Working in an <strong>Agile Scrum</strong> environment with daily standups, sprint planning, backlog grooming, reviews, and retrospectives</li>
+  </ul>
+</div>
+</div>
+
+<!-- Q4 -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q4</span>
+  <span class="q-label">Why did you choose QA as a career?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span><span class="tag tag-exp">HR</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>I've always been naturally analytical and detail-oriented. During my MCA, I realised I had a knack for finding gaps and edge cases that others missed. QA felt like the perfect intersection of <strong>technical depth and critical thinking</strong>.</p>
+  <p>What drew me in and kept me passionate is that QA is the last line of defence before software reaches the user — it's a role with real responsibility and real impact. Over the years, as I moved into automation and leadership, I've seen how a strong QA culture can <strong>reduce costs, accelerate delivery, and genuinely improve user experience</strong>. That motivates me every day.</p>
+</div>
+</div>
+
+<!-- Q5 -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q5</span>
+  <span class="q-label">What are your key strengths as a QA professional?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span><span class="tag tag-exp">HR</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <ul>
+    <li><strong>Framework Design:</strong> I've built scalable Selenium frameworks in both Java and C# using Page Object Model and BDD patterns.</li>
+    <li><strong>QA Analytics:</strong> I convert testing data into business insights — heat maps, ROI reports, defect trend analysis.</li>
+    <li><strong>Leadership:</strong> I've led QA teams, acted as Scrum Master, and mentored junior engineers.</li>
+    <li><strong>Communication:</strong> I bridge the gap between technical teams and business stakeholders effectively.</li>
+    <li><strong>Adaptability:</strong> I've consistently learned and adopted new tools — recently transitioning to Playwright with TypeScript.</li>
+    <li><strong>Proactive mindset:</strong> I focus on defect prevention, not just detection — collaborating with BAs and devs from the very start.</li>
+  </ul>
+</div>
+</div>
+
+<!-- Q6 -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q6</span>
+  <span class="q-label">What is your greatest weakness? How are you working on it?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span><span class="tag tag-exp">HR</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>Honestly, I tend to be a <strong>perfectionist</strong> — I sometimes spend more time than necessary polishing a test framework or a report to ensure it's flawless. In fast-paced Agile environments, this can slow me down initially.</p>
+  <p>I've learned to counterbalance this by <strong>timeboxing tasks</strong> and adopting a "good enough to ship, then iterate" mindset. I now define a clear Definition of Done for automation tasks and resist the urge to over-engineer before validating the core behaviour first.</p>
+  <div class="tip-box"><strong>💡 Tip:</strong> Never say "I work too hard" — interviewers see through it. Name a real, minor weakness and always follow up with how you actively manage it.</div>
+</div>
+</div>
+
+<!-- Q7 -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q7</span>
+  <span class="q-label">Why are you looking for a change / What motivates you to switch roles?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span><span class="tag tag-exp">HR</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>I've had an incredibly fulfilling journey at Capgemini — leading teams, building frameworks, and winning WOW Awards. I'm now at a point where I want to <strong>expand my scope and take on new challenges</strong>.</p>
+  <p>I'm particularly interested in organisations where I can contribute at a <strong>strategic level</strong> — shaping QA culture, driving automation at scale, and working with cutting-edge technologies. I'm also eager to work in environments that are heavily invested in <strong>AI-driven testing and cloud-native architectures</strong>.</p>
+  <div class="tip-box"><strong>💡 Tip:</strong> Never say "salary" or "bad management." Focus on growth, new challenges, and alignment with the target company's vision.</div>
+</div>
+</div>
+
+<!-- Q8 -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q8</span>
+  <span class="q-label">Where do you see yourself in 5 years?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span><span class="tag tag-exp">HR</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>In 5 years, I see myself in a <strong>QA Manager or Principal Test Architect</strong> role — owning the end-to-end quality strategy for a product or a portfolio. I want to be the person who <strong>designs the testing vision</strong>, builds the automation CoE (Centre of Excellence), and ensures that quality is embedded from Day 0 in the SDLC.</p>
+  <p>I'm also passionate about mentoring — I want to be someone who builds the next generation of QA engineers. I plan to deepen my expertise in <strong>AI-powered testing tools and Playwright</strong> to stay ahead of the curve.</p>
+</div>
+</div>
+
+<!-- Q9 -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q9</span>
+  <span class="q-label">What are your salary expectations?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span><span class="tag tag-exp">HR</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>Based on my <strong>10+ years of experience</strong>, my expertise in both manual and automation testing, my leadership background, and current market benchmarks — I'm looking for a package in the range of <strong>[research current market rate for your city]</strong>. However, I'm open to discussing this based on the overall role, growth opportunities, and total compensation structure.</p>
+  <div class="tip-box"><strong>💡 Tip:</strong> Research Glassdoor / LinkedIn for senior QA Lead / Senior Consultant salaries in Mumbai before the interview. Aim 20–30% above your current CTC.</div>
+</div>
+</div>
+
+<!-- Q10 -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q10</span>
+  <span class="q-label">What does the WOW Award at Capgemini mean and what did you do to earn it?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-exp">Experience</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>The <strong>WOW Award</strong> at Capgemini is a prestigious peer and manager recognition given for <strong>exceptional performance, outstanding quality delivery, and significant contribution to team success</strong>. It's not given routinely — it requires nominating evidence and approval.</p>
+  <p>I received it <strong>twice</strong> — once for leading a particularly high-stakes release where I designed the entire regression suite from scratch under a tight timeline, reducing escaped defects to zero. The second time was for building an <strong>automation framework with ROI reporting</strong> that saved the client significant effort-hours and was presented at a leadership review as a best-practice example.</p>
+</div>
+</div>
+
+<!-- Q11 -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q11</span>
+  <span class="q-label">How many people have you managed? Tell me about your leadership style.</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-lead">Leadership</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>I've led QA teams ranging from <strong>4 to 8 engineers</strong> at Capgemini, including a mix of manual testers and automation engineers. I've also served as <strong>Scrum Master</strong> for multiple sprints, facilitating ceremonies and removing blockers.</p>
+  <p>My leadership style is <strong>servant-leadership</strong> — I believe a great lead clears the path for the team rather than commanding from above. In practice this means:</p>
+  <ul>
+    <li>Daily 1:1 check-ins during crunch phases</li>
+    <li>Pair-testing and code reviews for automation scripts</li>
+    <li>Creating a safe space to raise blockers early</li>
+    <li>Celebrating wins publicly, addressing issues privately</li>
+    <li>Actively mentoring juniors on both technical skills and career growth</li>
+  </ul>
+</div>
+</div>
+
+<!-- Q12 -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q12</span>
+  <span class="q-label">What technologies and tools are you currently working with day-to-day?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span><span class="tag tag-exp">Experience</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <ul>
+    <li><strong>Automation:</strong> Selenium WebDriver (C#), NUnit, SpecFlow, Page Object Model</li>
+    <li><strong>BDD:</strong> SpecFlow with Gherkin feature files</li>
+    <li><strong>CI/CD:</strong> Azure DevOps Pipelines</li>
+    <li><strong>Test Management:</strong> Azure DevOps Test Plans</li>
+    <li><strong>Defect Tracking:</strong> Azure DevOps Boards, JIRA</li>
+    <li><strong>Version Control:</strong> Git / GitHub</li>
+    <li><strong>API Testing:</strong> Postman</li>
+    <li><strong>Database:</strong> SQL for test data validation</li>
+    <li><strong>Reporting:</strong> QA dashboards, defect heat maps, ROI reports</li>
+    <li><strong>Learning:</strong> Playwright with TypeScript</li>
+  </ul>
+</div>
+</div>
+
+<!-- Q13 -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q13</span>
+  <span class="q-label">What is the most challenging testing situation you have faced?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-exp">Behavioral</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>One of the toughest situations was when our healthcare Salesforce project had a <strong>major regression release with a 48-hour deadline</strong> and two team members were on leave unexpectedly.</p>
+  <p><strong>My approach (STAR):</strong></p>
+  <ul>
+    <li><strong>Situation:</strong> Critical release, half the team unavailable, 200+ test cases to execute</li>
+    <li><strong>Task:</strong> Ensure quality delivery without compromising coverage</li>
+    <li><strong>Action:</strong> I performed risk-based testing — prioritised high-impact business flows, ran our Selenium automated regression suite in parallel on Azure Pipelines, and focused manual effort only on new features and high-risk areas</li>
+    <li><strong>Result:</strong> Delivered on time with zero critical defects in production. The automation suite covered 65% of the regression independently</li>
+  </ul>
+</div>
+</div>
+
+<!-- Q14 -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q14</span>
+  <span class="q-label">How do you keep up with the latest trends in QA and automation?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span><span class="tag tag-exp">HR</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <ul>
+    <li>Following <strong>Ministry of Testing</strong>, <strong>Test Automation University</strong>, and QA-focused blogs</li>
+    <li>Hands-on learning — currently building Playwright test suites with TypeScript in side projects</li>
+    <li>Attending Capgemini internal knowledge-sharing sessions</li>
+    <li>Engaging with the QA community on LinkedIn</li>
+    <li>Reading release notes for tools I use (Selenium, Azure DevOps, NUnit)</li>
+    <li>Participating in ISTQB and other certification programs</li>
+  </ul>
+</div>
+</div>
+
+<!-- Q15 -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q15</span>
+  <span class="q-label">Describe a time you disagreed with a developer. How did you handle it?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-exp">Behavioral</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>There was an instance where a developer marked a defect as "Not a Bug" — they argued the behaviour was by design. I had a different view based on the business requirements.</p>
+  <p>Instead of escalating immediately, I <strong>pulled the actual requirements document</strong>, highlighted the specific acceptance criterion that was being violated, and arranged a quick 15-minute call with the developer and the BA. Once we aligned on the requirement, the developer agreed it was indeed a defect and fixed it in the same sprint.</p>
+  <p>The key was staying <strong>evidence-based and collaborative</strong> — not making it personal, and involving the right stakeholder to make the call.</p>
+</div>
+</div>
+
+<!-- Q16-Q30 rapid fire -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q16</span>
+  <span class="q-label">What is your notice period / when can you join?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span><span class="tag tag-exp">HR</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>My current notice period is <strong>[X days/weeks — typically 60-90 days at Capgemini]</strong>. However, I am open to discussing early joining if required, subject to my organisation's approval. I can potentially negotiate a buyout if the opportunity is the right fit.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q17</span>
+  <span class="q-label">What do you know about our company and why do you want to join us?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span><span class="tag tag-exp">HR</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>[Always research the company before the interview!]</strong> "From what I've researched, [Company Name] is known for [specific strength — e.g., innovative fintech platform / cloud-native solutions / strong QA culture]. I'm particularly drawn to your [specific initiative, product, or technology stack]. My experience in automation, healthcare domain, and Agile delivery aligns well with the kind of quality challenges your team is likely facing. I'm excited about the opportunity to contribute while also growing within your organisation."</p>
+  <div class="tip-box"><strong>💡 Tip:</strong> Research LinkedIn, Glassdoor, the company website, and recent news. Mention something specific — not generic.</div>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q18</span>
+  <span class="q-label">What is your experience with Salesforce testing?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-exp">Domain</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>My current project at Capgemini is a <strong>Salesforce-based web application</strong> for a U.S. healthcare provider. In Salesforce testing, I've handled:</p>
+  <ul>
+    <li>Functional testing of <strong>standard and custom Salesforce objects</strong>, flows, and Lightning pages</li>
+    <li>Regression testing after each Salesforce release or org-specific customisation</li>
+    <li>Automation using <strong>Selenium C# for UI-level testing</strong> of Salesforce Lightning pages — handling dynamic locators and Shadow DOM challenges</li>
+    <li>Validating data integrity between <strong>Salesforce and backend systems</strong> using SQL queries</li>
+    <li>Integration testing for <strong>third-party API calls</strong> using Postman</li>
+    <li>Testing in <strong>Sandbox environments</strong> before deploying to production</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q19</span>
+  <span class="q-label">How do you handle multiple priorities and tight deadlines?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-lead">Leadership</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>I rely on <strong>risk-based prioritisation</strong> — understanding which features are business-critical and focusing effort there first. In Agile, every sprint has a clear Definition of Done and I actively negotiate scope with the Product Owner when the quality bar is at risk.</p>
+  <p>Practically: I use <strong>Azure DevOps boards</strong> to track work items, communicate blockers in standups immediately rather than at the last minute, and lean on the automation suite to reduce manual regression burden when timelines compress.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q20</span>
+  <span class="q-label">What is QA ROI and how have you measured and reported it?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-exp">Analytics</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>QA ROI (Return on Investment)</strong> measures the financial value automation and QA practices return against their cost. I've built dedicated ROI reports for stakeholders showing:</p>
+  <ul>
+    <li><strong>Effort saved:</strong> Manual hours vs. automated test execution time per sprint</li>
+    <li><strong>Cost savings:</strong> Effort-hours × hourly rate = cost saved per sprint and per quarter</li>
+    <li><strong>Defect leakage rate:</strong> Defects found in production vs. test environments (lower is better)</li>
+    <li><strong>Automation coverage %:</strong> What % of regression is automated</li>
+    <li><strong>Heat maps:</strong> Visual representation of defect-dense modules to guide testing focus</li>
+  </ul>
+  <p>These reports were presented to clients and Capgemini leadership and were one of the reasons for my WOW Award recognition.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q21</span>
+  <span class="q-label">What is a defect heat map and how do you create one?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-exp">Analytics</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>A <strong>defect heat map</strong> is a visual representation that shows which modules, features, or user stories have the highest defect concentration. It helps teams identify <strong>high-risk areas</strong> and direct testing effort accordingly.</p>
+  <p><strong>How I create one:</strong></p>
+  <ul>
+    <li>Extract defect data from <strong>Azure DevOps</strong> or JIRA — module, severity, sprint</li>
+    <li>Aggregate defect counts by module</li>
+    <li>Map them on a colour-coded grid (red = high, amber = medium, green = low)</li>
+    <li>Include it in the weekly QA dashboard delivered to stakeholders</li>
+  </ul>
+  <p>This gives managers an at-a-glance view of quality risk and guides where to invest additional testing or code review effort.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q22</span>
+  <span class="q-label">How do you mentor junior QA engineers?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-lead">Leadership</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <ul>
+    <li><strong>Pair testing / pair programming:</strong> I sit with juniors on complex scenarios and walk through my thought process</li>
+    <li><strong>Code reviews:</strong> I review automation scripts and explain why certain patterns (POM, explicit waits) matter</li>
+    <li><strong>Learning paths:</strong> I guide them toward ISTQB certification and Test Automation University resources</li>
+    <li><strong>Safe environment:</strong> I encourage them to ask "dumb questions" — there are none in my team</li>
+    <li><strong>Stretch assignments:</strong> Gradually giving them ownership — e.g., "You own the smoke test suite for this sprint"</li>
+    <li><strong>Regular feedback:</strong> Bi-weekly 1:1s to discuss growth and challenges</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q23</span>
+  <span class="q-label">Have you ever dealt with a difficult stakeholder? How did you manage it?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-exp">Behavioral</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>Yes. We had a client stakeholder who consistently pushed to skip regression testing before releases citing time pressure. I didn't simply comply or refuse — I prepared a <strong>data-backed presentation</strong> showing that the last three sprints where regression was skipped resulted in production defects that cost 3x more to fix than the time saved by skipping testing.</p>
+  <p>I also offered a <strong>risk-based compromise</strong>: a faster "smoke + critical path" automated regression run (30 minutes) that gave them confidence without the full 2-hour suite. The stakeholder appreciated the pragmatic approach and we moved to that model, which became the standard for all future releases.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q24</span>
+  <span class="q-label">What is your experience with healthcare domain testing?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-exp">Domain</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>My current project is for a <strong>leading U.S. healthcare provider</strong>, so I'm well-versed in the domain. Key aspects of healthcare testing I've handled:</p>
+  <ul>
+    <li><strong>Data sensitivity:</strong> Ensuring PHI (Protected Health Information) is properly masked in test environments</li>
+    <li><strong>Regulatory awareness:</strong> Understanding HIPAA compliance requirements and how they influence test scenarios</li>
+    <li><strong>Patient workflow testing:</strong> Validating end-to-end flows like patient registration, appointment scheduling, and billing workflows on Salesforce</li>
+    <li><strong>Integration testing:</strong> Verifying data flows between Salesforce and backend healthcare systems</li>
+    <li><strong>UAT with domain experts:</strong> Co-ordinating with clinical staff during UAT to validate real-world scenarios</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q25</span>
+  <span class="q-label">How do you handle a situation where requirements are unclear or incomplete?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-exp">Process</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <ul>
+    <li><strong>Ask early:</strong> I raise ambiguities during backlog refinement — not during test execution. The cost of clarification is zero at this stage.</li>
+    <li><strong>Collaborate with BAs:</strong> I work directly with Business Analysts to define acceptance criteria before development starts.</li>
+    <li><strong>Document assumptions:</strong> If I cannot get clarity immediately, I document my assumptions and share with the BA/PO for sign-off.</li>
+    <li><strong>Use BDD:</strong> Writing Gherkin scenarios forces requirements to be concrete and testable — this naturally surfaces ambiguities.</li>
+    <li><strong>Defer high-risk test cases:</strong> If I still can't get clarity on an edge case, I flag it as "blocked" rather than guess and create invalid test data.</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q26</span>
+  <span class="q-label">What is the difference between verification and validation?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Verification</strong> — "Are we building the product right?" It's a static process checking that the software conforms to specifications. Examples: code reviews, requirement reviews, design walkthroughs. <em>No execution required.</em></p>
+  <p><strong>Validation</strong> — "Are we building the right product?" It's a dynamic process — actually running the software to ensure it meets the user's needs. Examples: functional testing, UAT, system testing. <em>Execution required.</em></p>
+  <div class="scenario"><strong>Scenario:</strong> If a requirement says "login button must be blue" and the developer builds a blue button that opens the wrong page — verification passes (blue button exists) but validation fails (wrong page). Both are necessary.</div>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q27</span>
+  <span class="q-label">How do you decide what to automate and what to test manually?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-exp">Strategy</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Good candidates for automation:</strong></p>
+  <ul>
+    <li>Regression test cases run repeatedly every sprint</li>
+    <li>Smoke / sanity suites executed after every deployment</li>
+    <li>Data-driven tests with many input combinations</li>
+    <li>Cross-browser test scenarios</li>
+    <li>Performance-sensitive flows</li>
+  </ul>
+  <p><strong>Better kept manual:</strong></p>
+  <ul>
+    <li>Exploratory testing — human intuition finds unexpected bugs</li>
+    <li>UI/UX and usability testing — subjective, needs human judgement</li>
+    <li>One-time or rarely-run scenarios</li>
+    <li>Tests on rapidly changing UI (automation maintenance cost exceeds benefit)</li>
+    <li>UAT — end-users should be involved</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q28</span>
+  <span class="q-label">What is the ISTQB certification and what did you learn from it?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>ISTQB (International Software Testing Qualifications Board)</strong> is the globally recognised certification body for software testing. I hold the <strong>Foundation Level (CTFL)</strong> certification.</p>
+  <p>Key concepts I deepened through ISTQB: Software development lifecycle models and where testing fits, the 7 testing principles (e.g., testing shows presence of defects, exhaustive testing is impossible), test levels (unit, integration, system, acceptance), test types (functional, non-functional, regression), black-box and white-box techniques (equivalence partitioning, boundary value analysis, decision tables), defect lifecycle, and test management fundamentals.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q29</span>
+  <span class="q-label">Tell me about your experience acting as a Scrum Master.</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-lead">Leadership</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>I've served as <strong>Scrum Master for 3+ years</strong> at Capgemini. My responsibilities included:</p>
+  <ul>
+    <li>Facilitating daily standups, sprint planning, sprint reviews, and retrospectives</li>
+    <li>Maintaining and refining the product backlog with the PO</li>
+    <li>Tracking sprint velocity and burn-down charts</li>
+    <li>Removing impediments — whether it was a blocked environment, an unclear requirement, or a team conflict</li>
+    <li>Shielding the team from scope creep mid-sprint</li>
+    <li>Ensuring Agile ceremonies were productive, not bureaucratic</li>
+  </ul>
+  <p>The SM role made me a far better QA lead — it deepened my ability to communicate risks, manage cross-functional dependencies, and think about delivery holistically.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q30</span>
+  <span class="q-label">What is the difference between your experience at Revamp Consulting vs Capgemini?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span><span class="tag tag-exp">Experience</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Revamp Consulting (2015–2018):</strong> This was where I built my foundation. The focus was on <strong>manual QA</strong> — functional, regression, smoke, and sanity testing across web and desktop apps. I also got my first taste of automation — initiated Selenium+Java scripts for a basic regression suite. The team was smaller and more generalist.</p>
+  <p><strong>Capgemini (2018–Present):</strong> A significant leap in scale, complexity, and responsibility. I moved from individual contributor to <strong>team lead</strong>. The work involves enterprise-scale Salesforce applications, proper automation frameworks (POM + BDD), CI/CD integration, stakeholder reporting, and QA analytics. The client is a U.S. healthcare provider — so the domain and compliance requirements added another layer of complexity.</p>
+</div>
+</div>
+
+</section>
+<!-- ============================================================ -->
+<!-- SECTION 2: MANUAL QA                                          -->
+<!-- ============================================================ -->
+<section class="section" id="manual">
+<div class="section-header">
+  <div class="section-icon">🧪</div>
+  <div>
+    <div class="section-title">Manual QA Fundamentals</div>
+    <div style="color:var(--text-muted);font-size:14px">Test types · STLC · Defect lifecycle · Test design techniques</div>
+  </div>
+  <div class="section-count">Q31–Q80</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q31</span>
+  <span class="q-label">What is the Software Testing Life Cycle (STLC)?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>STLC is the sequence of activities performed during the testing process. The phases are:</p>
+  <ul>
+    <li><strong>1. Requirement Analysis:</strong> Review requirements, identify testable requirements, clarify ambiguities. Output: Requirements Traceability Matrix (RTM)</li>
+    <li><strong>2. Test Planning:</strong> Define scope, strategy, resources, timeline, risks. Output: Test Plan document</li>
+    <li><strong>3. Test Case Design:</strong> Write detailed test cases and test scripts. Output: Test cases, test data</li>
+    <li><strong>4. Test Environment Setup:</strong> Prepare test environment, install software, configure data</li>
+    <li><strong>5. Test Execution:</strong> Execute test cases, log defects, update status</li>
+    <li><strong>6. Test Closure:</strong> Evaluate exit criteria, prepare test summary report, lessons learned</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q32</span>
+  <span class="q-label">What are the 7 principles of software testing?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <ul>
+    <li><strong>1. Testing shows presence of defects</strong> — it reduces the probability of undiscovered defects but cannot prove absence</li>
+    <li><strong>2. Exhaustive testing is impossible</strong> — test with risk-based and priority-driven approaches</li>
+    <li><strong>3. Early testing saves money</strong> — defects found in requirements are cheaper to fix than in production</li>
+    <li><strong>4. Defect clustering</strong> — most defects are found in a small number of modules (80/20 rule)</li>
+    <li><strong>5. Pesticide paradox</strong> — repeating the same tests finds fewer new bugs; tests must evolve</li>
+    <li><strong>6. Testing is context dependent</strong> — safety-critical testing differs from e-commerce testing</li>
+    <li><strong>7. Absence of errors fallacy</strong> — a bug-free system that doesn't meet user needs still fails</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q33</span>
+  <span class="q-label">Explain the defect lifecycle with all statuses.</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <ul>
+    <li><strong>New:</strong> Defect logged by tester</li>
+    <li><strong>Assigned:</strong> Assigned to developer</li>
+    <li><strong>Open:</strong> Developer starts investigating</li>
+    <li><strong>Fixed:</strong> Developer has fixed and moved to QA</li>
+    <li><strong>Retest:</strong> Tester retests the fix</li>
+    <li><strong>Verified:</strong> Fix confirmed by tester</li>
+    <li><strong>Closed:</strong> Defect resolved and closed</li>
+    <li><strong>Rejected:</strong> Developer says it's not a bug</li>
+    <li><strong>Deferred:</strong> Will be fixed in a later release</li>
+    <li><strong>Reopened:</strong> Tester finds the fix didn't work</li>
+    <li><strong>Duplicate:</strong> Same defect already reported</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q34</span>
+  <span class="q-label">What is Equivalence Partitioning? Give a real example.</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Equivalence Partitioning (EP)</strong> is a black-box test design technique where input data is divided into valid and invalid partitions. The assumption is that all values in a partition will be treated the same way, so testing one value per partition is sufficient.</p>
+  <div class="scenario">
+    <strong>Real Example — Age field for a health insurance form (18–65 years allowed):</strong><br>
+    • <strong>Valid partition:</strong> 18–65 → test with 40 (one value covers whole partition)<br>
+    • <strong>Invalid partition 1:</strong> below 18 → test with 10<br>
+    • <strong>Invalid partition 2:</strong> above 65 → test with 70<br>
+    • <strong>Invalid partition 3:</strong> non-numeric → test with "abc"
+  </div>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q35</span>
+  <span class="q-label">What is Boundary Value Analysis? How is it different from EP?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Boundary Value Analysis (BVA)</strong> tests values at the boundaries of valid and invalid partitions — because defects tend to hide at boundaries.</p>
+  <p>BVA is a complement to EP, not a replacement. EP tests one value per partition; BVA tests boundary values specifically.</p>
+  <div class="scenario">
+    <strong>Age 18–65 example using BVA:</strong><br>
+    • 17 (just below lower boundary) — invalid<br>
+    • 18 (lower boundary) — valid<br>
+    • 19 (just above lower boundary) — valid<br>
+    • 64 (just below upper boundary) — valid<br>
+    • 65 (upper boundary) — valid<br>
+    • 66 (just above upper boundary) — invalid
+  </div>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q36</span>
+  <span class="q-label">What is a Decision Table and when do you use it?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>A <strong>Decision Table</strong> is a test design technique used when multiple conditions/rules must be combined to determine an action. It ensures all combinations of conditions are tested.</p>
+  <div class="scenario">
+    <strong>Example — Loan approval logic:</strong><br>
+    Conditions: Credit Score Good (Y/N) | Income Sufficient (Y/N)<br><br>
+    | Credit Score | Income | Result |<br>
+    | Y | Y | Approved |<br>
+    | Y | N | Rejected |<br>
+    | N | Y | Review |<br>
+    | N | N | Rejected |<br><br>
+    Use when: multiple business rules interact, complex conditional logic exists.
+  </div>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q37</span>
+  <span class="q-label">What is State Transition Testing?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>State Transition Testing</strong> is used when an application behaves differently based on its current state. You model all possible states and the transitions between them.</p>
+  <div class="scenario">
+    <strong>Healthcare example — Patient Appointment:</strong><br>
+    States: Requested → Confirmed → In Progress → Completed / Cancelled<br>
+    Test that valid transitions work and invalid ones (e.g., jumping from Requested to Completed without Confirmed) are blocked.
+  </div>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q38</span>
+  <span class="q-label">Difference between Functional and Non-Functional Testing?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Functional Testing</strong> — tests WHAT the system does. Validates business requirements and application features. Examples: login works, data is saved correctly, search returns right results.</p>
+  <p><strong>Non-Functional Testing</strong> — tests HOW the system performs. Examples:</p>
+  <ul>
+    <li><em>Performance Testing:</em> How fast does the app respond under load?</li>
+    <li><em>Security Testing:</em> Is data protected from unauthorised access?</li>
+    <li><em>Usability Testing:</em> Is the UI intuitive for users?</li>
+    <li><em>Compatibility Testing:</em> Does it work on all supported browsers/OS?</li>
+    <li><em>Accessibility Testing:</em> Is it usable by people with disabilities?</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q39</span>
+  <span class="q-label">What is Regression Testing and when is it performed?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Regression Testing</strong> verifies that new code changes have not broken existing functionality. It is performed:</p>
+  <ul>
+    <li>After every bug fix (to ensure the fix didn't introduce new issues)</li>
+    <li>After adding new features</li>
+    <li>After code refactoring</li>
+    <li>Before every production release</li>
+    <li>After Salesforce platform upgrades in my current project</li>
+  </ul>
+  <p>In my projects, I've <strong>automated the core regression suite</strong> using Selenium C# so it can be triggered automatically via Azure DevOps pipelines after each deployment — reducing manual regression effort by 65%+.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q40</span>
+  <span class="q-label">What is the difference between Smoke Testing and Sanity Testing?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Smoke Testing:</strong> A surface-level test performed on a new build to verify it is stable enough for further testing. It covers basic functionality — can we log in? Can we navigate key pages? If smoke fails, the build is rejected.</p>
+  <p><strong>Sanity Testing:</strong> A focused, narrow test performed after a bug fix or minor change to verify that the specific fix works correctly — without running the full regression. It's a quick check before a re-release.</p>
+  <div class="tip-box"><strong>Memory aid:</strong> Smoke = "Does the app smoke (catch fire)?" — broad check. Sanity = "Is this fix sane/sensible?" — narrow check.</div>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q41</span>
+  <span class="q-label">What is Risk-Based Testing? How do you prioritise test cases?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Risk-Based Testing (RBT)</strong> prioritises testing based on the likelihood and impact of failure. The goal is to allocate testing effort to areas of highest risk.</p>
+  <p><strong>My prioritisation approach:</strong></p>
+  <ul>
+    <li><strong>Business impact:</strong> Core revenue/business flows (e.g., patient admission in healthcare) → highest priority</li>
+    <li><strong>Defect history:</strong> Modules with most historical defects → higher coverage</li>
+    <li><strong>Complexity:</strong> Complex integrations and data transformations → thorough testing</li>
+    <li><strong>Change impact:</strong> Recently modified code → regression focus</li>
+    <li><strong>Frequency of use:</strong> Features used by 80% of users → always in scope</li>
+  </ul>
+  <p>I use <strong>heat maps and defect trend data</strong> from Azure DevOps to make this data-driven rather than subjective.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q42</span>
+  <span class="q-label">What information does a good bug report contain?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <ul>
+    <li><strong>Bug ID:</strong> Unique identifier</li>
+    <li><strong>Summary:</strong> Concise one-line description</li>
+    <li><strong>Severity:</strong> Critical / High / Medium / Low</li>
+    <li><strong>Priority:</strong> P1 / P2 / P3 / P4</li>
+    <li><strong>Environment:</strong> Browser, OS, build version</li>
+    <li><strong>Steps to Reproduce:</strong> Numbered, precise steps</li>
+    <li><strong>Expected Result:</strong> What should happen</li>
+    <li><strong>Actual Result:</strong> What actually happened</li>
+    <li><strong>Screenshots / Logs / Videos:</strong> Evidence</li><strong>Test Data Used:</strong> Specific data that triggered the bug</li>
+    <li><strong>Assignee:</strong> Developer responsible</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q43</span>
+  <span class="q-label">What is the difference between Severity and Priority?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Severity</strong> — the technical impact of the defect on the system. Set by the QA engineer. (High = system crash; Low = UI typo)</p>
+  <p><strong>Priority</strong> — the business urgency of fixing the defect. Set by the Product Owner / Business. (High = must fix before release; Low = can wait)</p>
+  <div class="scenario">
+    <strong>High Severity, Low Priority:</strong> An error on the company's "About Us" page that throws an exception — system-level issue but no business impact.<br><br>
+    <strong>Low Severity, High Priority:</strong> The company CEO's name is misspelled on the home page — cosmetic but must fix before the press release tomorrow.
+  </div>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q44</span>
+  <span class="q-label">What is Exploratory Testing and when do you use it?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Exploratory Testing</strong> is simultaneous test design and execution — the tester learns about the system while testing it, using experience and intuition to find defects that scripted tests miss.</p>
+  <p><strong>When I use it:</strong></p>
+  <ul>
+    <li>When a new feature lands and test cases aren't fully written yet</li>
+    <li>After a major release to "tour" the application and find unexpected interactions</li>
+    <li>When time is limited and I need to find the most impactful bugs fast</li>
+    <li>To supplement automated testing — automation finds known unknowns; exploration finds unknown unknowns</li>
+  </ul>
+  <p>I use <strong>session-based testing</strong> — time-boxed (e.g., 60-minute) sessions with a defined charter to keep exploration focused.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q45</span>
+  <span class="q-label">What is a Requirement Traceability Matrix (RTM)?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>An <strong>RTM</strong> maps each business requirement to one or more test cases, ensuring full test coverage. It has columns like: Requirement ID | Requirement Description | Test Case ID | Test Case Status.</p>
+  <p>It helps answer: "Do we have tests for every requirement?" and "Which requirements are at risk?" I maintain RTMs in Azure DevOps linking user stories to test cases, giving stakeholders traceability from business need all the way to test result.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q46</span>
+  <span class="q-label">What is UAT and what is your role in it?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>UAT (User Acceptance Testing)</strong> is the final phase of testing where actual business users validate the software meets their needs before go-live.</p>
+  <p><strong>My role in UAT:</strong></p>
+  <ul>
+    <li>Prepare UAT test scenarios in business-friendly language (no technical jargon)</li>
+    <li>Set up and support the UAT environment</li>
+    <li>Facilitate UAT sessions — guiding users through scenarios</li>
+    <li>Log defects found during UAT and track resolution</li>
+    <li>Obtain sign-off documentation from business stakeholders</li>
+    <li>At Revamp Consulting, I participated directly in client demos and UAT sign-off sessions</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q47</span>
+  <span class="q-label">What is Integration Testing and what are the approaches?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Integration Testing</strong> verifies that different modules/components work correctly together.</p>
+  <p><strong>Approaches:</strong></p>
+  <ul>
+    <li><strong>Big Bang:</strong> All components integrated at once and tested — simple but hard to isolate failures</li>
+    <li><strong>Top-Down:</strong> Start from top-level modules, use stubs for lower-level — follows user flow</li>
+    <li><strong>Bottom-Up:</strong> Start from lower-level modules, use drivers for upper — good for testing core logic first</li>
+    <li><strong>Sandwich (Hybrid):</strong> Combination of top-down and bottom-up</li>
+  </ul>
+  <p>In my Salesforce project, integration testing validates data flows between Salesforce modules and backend healthcare systems.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q48</span>
+  <span class="q-label">What is a Test Plan? What sections does it contain?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>A <strong>Test Plan</strong> is a document outlining the testing approach, scope, resources, and schedule for a project. Key sections:</p>
+  <ul>
+    <li><strong>Objective:</strong> Purpose of testing</li>
+    <li><strong>Scope:</strong> In-scope and out-of-scope features</li>
+    <li><strong>Test Strategy:</strong> Testing levels, types, and approaches</li>
+    <li><strong>Entry/Exit Criteria:</strong> When to start and stop testing</li>
+    <li><strong>Resource Plan:</strong> Team members and responsibilities</li>
+    <li><strong>Test Schedule:</strong> Timeline and milestones</li>
+    <li><strong>Risk & Mitigation:</strong> Identified risks and contingency plans</li>
+    <li><strong>Tools:</strong> Tools to be used</li>
+    <li><strong>Deliverables:</strong> Test reports, metrics</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q49</span>
+  <span class="q-label">What is the difference between Black Box, White Box, and Grey Box Testing?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Black Box Testing:</strong> Tester has no knowledge of internal code. Tests based on requirements and expected behaviour. Examples: functional testing, UAT.</p>
+  <p><strong>White Box Testing:</strong> Tester knows the internal code/logic. Tests code paths, branches, conditions. Examples: unit testing, code coverage analysis.</p>
+  <p><strong>Grey Box Testing:</strong> Partial knowledge of internals. Tester uses knowledge of architecture/data flow to design better tests while still testing from a user perspective. Examples: integration testing with DB access, API testing.</p>
+  <p>As a QA Lead I primarily do <strong>black and grey box</strong> testing — I have enough system knowledge to design more targeted tests, but I primarily validate from the user/business perspective.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q50</span>
+  <span class="q-label">How do you handle a "Cannot Reproduce" defect?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <ul>
+    <li>Verify the defect was reported with <strong>complete steps to reproduce, test data, and environment details</strong></li>
+    <li>Try to reproduce it myself in the <strong>same environment and data state</strong></li>
+    <li>Check if the <strong>test data or environment has changed</strong> since the defect was reported</li>
+    <li>Try reproducing in a <strong>different browser or machine</strong></li>
+    <li>Review <strong>application logs</strong> to find evidence the error occurred</li>
+    <li>If still can't reproduce, mark as "Cannot Reproduce" and schedule a <strong>joint session with the reporter</strong> to watch them reproduce it live</li>
+    <li>Never close a defect as invalid without due diligence — it may reappear in production</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q51</span>
+  <span class="q-label">What are Entry and Exit Criteria in testing?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Entry Criteria</strong> — conditions that must be met before testing begins:</p>
+  <ul>
+    <li>Test cases written and reviewed</li>
+    <li>Test environment set up and stable</li>
+    <li>Build deployed and smoke test passed</li>
+    <li>Test data ready</li>
+  </ul>
+  <p><strong>Exit Criteria</strong> — conditions that must be met before testing ends:</p>
+  <ul>
+    <li>All planned test cases executed</li>
+    <li>No open Critical/High severity defects</li>
+    <li>Test coverage meets agreed threshold</li>
+    <li>Test summary report prepared and signed off</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q52</span>
+  <span class="q-label">What is Mobile Testing and have you done any?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Mobile Testing</strong> verifies that applications work correctly on mobile devices — covering functionality, usability, compatibility across devices/OS versions, performance, and installation/upgrade.</p>
+  <p>My resume highlights mobile testing as part of my core skill set. While my current project is primarily web-based (Salesforce), I've performed <strong>mobile compatibility testing</strong> — verifying the Salesforce Lightning interface across mobile browsers and the Salesforce mobile app. Key checks include responsive design, touch interactions, and session behaviour on mobile networks.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q53</span>
+  <span class="q-label">What is Shift-Left Testing?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Shift-Left Testing</strong> means involving QA earlier in the development lifecycle — shifting quality activities to the left on the timeline. Instead of testing only after development is complete, QA participates from requirements and design.</p>
+  <p><strong>How I practice shift-left:</strong></p>
+  <ul>
+    <li>Participating in backlog refinement and sprint planning</li>
+    <li>Writing BDD scenarios before development starts — makes acceptance criteria testable and unambiguous</li>
+    <li>Reviewing designs and wireframes for testability issues</li>
+    <li>Collaborating with devs on unit test coverage</li>
+    <li>This directly reduces the cost of defects — a bug found in design costs 1x; in production it costs 100x</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q54</span>
+  <span class="q-label">What is End-to-End Testing? Give a practical example from your project.</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>End-to-End (E2E) Testing</strong> validates complete user workflows from start to finish across all integrated components of the system.</p>
+  <div class="scenario">
+    <strong>Healthcare Salesforce project example:</strong><br>
+    E2E test — Patient Appointment Workflow:<br>
+    1. Log into Salesforce as a care coordinator<br>
+    2. Search for a patient record<br>
+    3. Create a new appointment<br>
+    4. Assign a physician and time slot<br>
+    5. Confirm appointment — triggers email notification<br>
+    6. Verify the appointment appears in the physician's calendar<br>
+    7. Complete the appointment and verify status update in the patient record<br>
+    8. Validate the billing record is created in the backend system
+  </div>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q55</span>
+  <span class="q-label">How do you write effective test cases?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>A good test case is <strong>clear, reusable, and maintainable</strong>. My checklist:</p>
+  <ul>
+    <li><strong>Unique Test Case ID</strong> — for traceability</li>
+    <li><strong>Descriptive title</strong> — states what's being tested and expected behaviour</li>
+    <li><strong>Pre-conditions:</strong> System state required before execution</li>
+    <li><strong>Step-by-step actions:</strong> Precise, unambiguous, one action per step</li>
+    <li><strong>Test Data:</strong> Specific data values to use</li>
+    <li><strong>Expected Result:</strong> Exact, verifiable outcome</li>
+    <li><strong>Actual Result:</strong> Filled during execution</li>
+    <li><strong>Pass/Fail Status</strong></li>
+    <li>Cover positive, negative, and boundary scenarios</li>
+    <li>Keep them <strong>independent</strong> — one test case should not depend on another's result</li>
+  </ul>
+</div>
+</div>
+
+<!-- Q56-Q80 continued -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q56</span>
+  <span class="q-label">What is Test Data Management and why is it important?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Test Data Management (TDM)</strong> is the process of creating, managing, and maintaining data used during testing. It's critical because incorrect or missing test data is one of the most common causes of false test results.</p>
+  <p>In my healthcare project:</p>
+  <ul>
+    <li>We <strong>never use real patient data</strong> — we create synthetic PHI-compliant test data</li>
+    <li>I maintain a test data catalogue documenting data for each test scenario</li>
+    <li>We reset/refresh test data between test cycles to ensure test independence</li>
+    <li>SQL queries are used to verify database state after automated tests</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q57</span>
+  <span class="q-label">What is Defect Leakage and how do you minimise it?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Defect Leakage</strong> = defects that are not caught during testing and escape to production. It's a key QA metric I track.</p>
+  <p><strong>Defect Leakage % = (Bugs found in production / Total bugs found) × 100</strong></p>
+  <p><strong>How I minimise it:</strong></p>
+  <ul>
+    <li>Strong regression coverage — automated suite runs on every deployment</li>
+    <li>Risk-based testing to focus on high-probability failure areas</li>
+    <li>BDD acceptance criteria reviewed before development starts</li>
+    <li>Exploratory testing sessions before each release</li>
+    <li>Root cause analysis on every escaped defect to prevent recurrence</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q58</span>
+  <span class="q-label">What QA metrics do you track and report?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-lead">Leadership</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <ul>
+    <li><strong>Test Execution Rate:</strong> % of planned test cases executed</li>
+    <li><strong>Pass/Fail Rate:</strong> % of test cases passing per sprint</li>
+    <li><strong>Defect Density:</strong> Defects per feature/module</li>
+    <li><strong>Defect Leakage Rate:</strong> Production bugs vs. total bugs</li>
+    <li><strong>Automation Coverage %:</strong> % of test cases automated</li>
+    <li><strong>Automation ROI:</strong> Effort hours saved by automation</li>
+    <li><strong>Defect Removal Efficiency:</strong> Defects found before production / total defects</li>
+    <li><strong>Mean Time to Detection (MTTD):</strong> How quickly defects are found</li>
+    <li><strong>Defect Age:</strong> Average time defects remain open</li>
+    <li><strong>Sprint Velocity (QA tasks):</strong> Test cases executed per sprint</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q59</span>
+  <span class="q-label">What is the difference between Test Strategy and Test Plan?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Test Strategy</strong> — high-level, project/organisational level document defining the overall testing approach. It answers WHY and HOW broadly. It's typically written by the QA Manager/Lead and rarely changes. Examples: testing levels, types, tools, standards.</p>
+  <p><strong>Test Plan</strong> — project-specific, sprint/release level document. It answers WHAT, WHEN, WHO, and WHERE for a specific testing effort. It's written for each project/release and includes schedule, scope, resources, risks.</p>
+  <p>Think of strategy as the "company's QA constitution" and the test plan as the "project-specific execution plan."</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q60</span>
+  <span class="q-label">What is your experience with HP ALM / Quality Center?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>I used <strong>HP ALM (Application Lifecycle Management) / Quality Center</strong> extensively during my time at <strong>Revamp Consulting (2015–2018)</strong>. Key activities:</p>
+  <ul>
+    <li>Creating and maintaining test cases and test sets in the Test Lab</li>
+    <li>Logging and tracking defects with complete lifecycle management</li>
+    <li>Linking test cases to requirements for traceability</li>
+    <li>Generating test execution reports and defect dashboards</li>
+    <li>Managing test configurations for multiple environments</li>
+  </ul>
+  <p>At Capgemini I transitioned to <strong>Azure DevOps</strong>, which I now use for all test management, defect tracking, and CI/CD pipeline integration.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q61</span>
+  <span class="q-label">What are the types of testing in SDLC levels?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <ul>
+    <li><strong>Unit Testing:</strong> Developer tests individual functions/methods. Tools: NUnit, JUnit, MSTest</li>
+    <li><strong>Integration Testing:</strong> Testing interactions between modules. Done by developers + QA</li>
+    <li><strong>System Testing:</strong> Testing the complete integrated application. Primary QA responsibility</li>
+    <li><strong>Acceptance Testing (UAT):</strong> Business users validate against requirements</li>
+  </ul>
+  <p>In my current project, I own <strong>System and Integration Testing</strong>, provide test assets and support for UAT, and collaborate with devs on integration test design.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q62</span>
+  <span class="q-label">What is Pair Testing?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Pair Testing</strong> is when two people — often a developer and a tester, or two testers — work together on the same machine to test a feature simultaneously. Inspired by pair programming.</p>
+  <p><strong>Benefits I've experienced:</strong></p>
+  <ul>
+    <li>Finds more defects than solo testing — two perspectives catch more</li>
+    <li>Excellent for knowledge transfer — I use it heavily when mentoring junior engineers</li>
+    <li>Breaks down the dev-QA silo — developers gain empathy for testing challenges</li>
+    <li>Speeds up complex exploratory testing sessions</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q63</span>
+  <span class="q-label">How do you estimate testing effort for a sprint?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-lead">Leadership</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>I use a combination of approaches:</p>
+  <ul>
+    <li><strong>Story Points / Complexity-based:</strong> Each user story gets a QA effort estimate (e.g., 2/4/8 hours based on complexity)</li>
+    <li><strong>Historical data:</strong> Similar features in past sprints serve as a benchmark</li>
+    <li><strong>Test case count:</strong> Estimate test cases per story × average execution time</li>
+    <li><strong>Test type overhead:</strong> Add time for regression, automation script updates, and defect retest</li>
+    <li><strong>Buffer for unknowns:</strong> 10–15% buffer for environment issues and ad-hoc testing</li>
+  </ul>
+  <p>I present estimates during <strong>sprint planning</strong> and flag when testing scope exceeds sprint capacity — this is when I negotiate scope deferral with the PO.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q64</span>
+  <span class="q-label">What is Acceptance Criteria and how do you ensure it's testable?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Acceptance Criteria (AC)</strong> are the conditions that a user story must satisfy to be accepted by the PO/business. I ensure AC is testable by:</p>
+  <ul>
+    <li>Applying the <strong>SMART criteria</strong> — Specific, Measurable, Achievable, Relevant, Time-bound</li>
+    <li>Rewriting vague criteria: "The page should load quickly" → "The page must load in under 3 seconds under 100 concurrent users"</li>
+    <li>Using <strong>Given-When-Then (BDD Gherkin) format</strong> to make criteria executable as tests</li>
+    <li>Challenging ACs that say "should" instead of "must" — ambiguous language breeds missed defects</li>
+    <li>Validating AC in backlog refinement before development starts</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q65</span>
+  <span class="q-label">What is a Test Summary Report and what does it contain?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>A <strong>Test Summary Report</strong> is prepared at the end of a testing cycle summarising the testing activities and results. Contents:</p>
+  <ul>
+    <li>Test scope and objectives</li>
+    <li>Total test cases: planned / executed / passed / failed / blocked</li>
+    <li>Defect summary: total / open / closed / deferred by severity</li>
+    <li>Test coverage achieved</li>
+    <li>Automation execution results</li>
+    <li>Out-of-scope items and reasons</li>
+    <li>Key risks and open issues</li>
+    <li>QA sign-off recommendation (Go / No-Go)</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q66</span>
+  <span class="q-label">What is the difference between Re-testing and Regression Testing?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Re-testing (Defect Verification):</strong> Tests the specific defect that was fixed to confirm it is now resolved. Only the test case(s) related to that defect are re-executed.</p>
+  <p><strong>Regression Testing:</strong> Tests the broader application to ensure the bug fix has not inadvertently broken other working functionality. Covers areas potentially impacted by the code change.</p>
+  <p>Both are performed after a bug fix — re-testing first, then regression.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q67</span>
+  <span class="q-label">What is Performance Testing? Have you done any?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Performance Testing</strong> evaluates system behaviour under load. Types:</p>
+  <ul>
+    <li><strong>Load Testing:</strong> Normal expected load</li>
+    <li><strong>Stress Testing:</strong> Beyond normal capacity to find breaking point</li>
+    <li><strong>Spike Testing:</strong> Sudden increase in load</li>
+    <li><strong>Endurance Testing (Soak):</strong> Sustained load over time to find memory leaks</li>
+    <li><strong>Volume Testing:</strong> Large amounts of data</li>
+  </ul>
+  <p>Tools: JMeter, Gatling, k6. While performance testing is outside my primary scope in the current project, I collaborate with the performance testing team to provide business-critical user journeys for their scripts and review results.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q68</span>
+  <span class="q-label">What is Security Testing from a QA perspective?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>From a QA perspective, security testing involves checking that the application protects data and functionality from threats:</p>
+  <ul>
+    <li><strong>Authentication & Authorisation:</strong> Can users access only what they're allowed to?</li>
+    <li><strong>SQL Injection:</strong> Does the app sanitise inputs? (e.g., entering SQL in a form field)</li>
+    <li><strong>XSS (Cross-Site Scripting):</strong> Can scripts be injected via input fields?</li>
+    <li><strong>Session Management:</strong> Does the session expire correctly? Is session token secure?</li>
+    <li><strong>Data encryption:</strong> Is sensitive data (PHI in healthcare) encrypted in transit and at rest?</li>
+    <li><strong>OWASP Top 10:</strong> Standard security risk checklist I reference</li>
+  </ul>
+  <p>In healthcare, PHI protection and HIPAA compliance make security testing especially important.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q69</span>
+  <span class="q-label">What is Compatibility Testing?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Compatibility Testing</strong> verifies that the application works correctly across different environments:</p>
+  <ul>
+    <li><strong>Browser Compatibility:</strong> Chrome, Firefox, Edge, Safari</li>
+    <li><strong>OS Compatibility:</strong> Windows, macOS, Linux</li>
+    <li><strong>Device Compatibility:</strong> Desktop, tablet, mobile</li>
+    <li><strong>Network Compatibility:</strong> Different network speeds</li>
+    <li><strong>Database Compatibility:</strong> Multiple DB versions</li>
+  </ul>
+  <p>For my Salesforce project, we test primarily on <strong>Chrome and Edge</strong> as defined in the client's browser support matrix, with spot checks on Firefox. Selenium's cross-browser capability is ideal for this.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q70</span>
+  <span class="q-label">What is Root Cause Analysis in defect management?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Root Cause Analysis (RCA)</strong> is the process of identifying the fundamental reason why a defect occurred — not just fixing the symptom. I use it especially for high-severity production defects.</p>
+  <p><strong>My RCA process:</strong></p>
+  <ul>
+    <li>Gather facts: when, where, how did it occur?</li>
+    <li>Use the <strong>5 Whys technique</strong> — keep asking "Why?" until the root cause is found</li>
+    <li>Categorise root cause: requirements gap? Code logic error? Missing test case? Environment issue?</li>
+    <li>Define corrective actions: fix the process, not just the defect</li>
+    <li>Document and share — RCA findings inform future test case additions and process improvements</li>
+  </ul>
+</div>
+</div>
+
+<!-- Q71-Q80 -->
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q71</span>
+  <span class="q-label">What is an API? Why is it important to test APIs?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>An <strong>API (Application Programming Interface)</strong> is a contract that allows different software components to communicate. REST APIs use HTTP methods (GET, POST, PUT, DELETE) and return JSON/XML.</p>
+  <p><strong>Why API testing is important:</strong></p>
+  <ul>
+    <li>APIs are the backbone of microservices and integration — defects here impact multiple consumers</li>
+    <li>API testing is faster and more stable than UI testing — less flaky, runs without a browser</li>
+    <li>Catches issues early — API tests can run before UI is even built</li>
+    <li>Validates business logic independent of UI presentation</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q72</span>
+  <span class="q-label">What is the difference between JIRA and Azure DevOps for test management?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>I've used both extensively:</p>
+  <ul>
+    <li><strong>JIRA:</strong> At Revamp Consulting. Excellent for agile project management, defect tracking, sprint boards. For test management, typically needs a plugin like Zephyr or Xray. Very customisable.</li>
+    <li><strong>Azure DevOps:</strong> At Capgemini. All-in-one platform — test plans, test cases, defect tracking, CI/CD pipelines, repos, boards. Native integration between test results and pipeline runs is very powerful. Test execution reports are built in.</li>
+  </ul>
+  <p>For a team already using Microsoft stack (as my current project does), <strong>Azure DevOps is more cohesive</strong> — no plugin needed, and linking test runs to pipeline executions is seamless.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q73</span>
+  <span class="q-label">What is a Test Execution Report vs a Test Summary Report?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Test Execution Report</strong> — a daily/sprint-level operational report showing test progress: how many cases ran today, pass/fail counts, blocked cases, new defects found. Used by the team internally to track progress.</p>
+  <p><strong>Test Summary Report</strong> — an end-of-cycle document for stakeholders, covering the entire testing cycle. It includes overall quality assessment, defect analysis, coverage, risks, and a go/no-go recommendation. More comprehensive and formal.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q74</span>
+  <span class="q-label">What is Accessibility Testing and have you done it?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Accessibility Testing</strong> ensures the application is usable by people with disabilities — visual impairments, motor disabilities, hearing impairments. It follows <strong>WCAG (Web Content Accessibility Guidelines)</strong> standards.</p>
+  <p>Key checks: keyboard-only navigation, screen reader compatibility (ARIA labels), colour contrast ratios, alt text on images, form field labels, focus indicators.</p>
+  <p>In my healthcare project, accessibility is a compliance requirement — healthcare applications in the U.S. must meet <strong>Section 508</strong> standards. I perform accessibility checks using browser DevTools and the <strong>axe</strong> accessibility testing tool.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q75</span>
+  <span class="q-label">How do you handle test environment issues (environment down, data issues)?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-lead">Leadership</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <ul>
+    <li><strong>Immediately communicate</strong> — raise it in the standup or Slack channel; don't silently wait</li>
+    <li><strong>Escalate with specifics:</strong> What's broken, since when, impact on sprint</li>
+    <li><strong>Pivot to unblocked work:</strong> Redirect the team to test cases that don't need the blocked environment</li>
+    <li><strong>Track as a blocked item</strong> in Azure DevOps with time stamps for reporting purposes</li>
+    <li><strong>Work with DevOps/infra team</strong> to establish SLA for environment restoration</li>
+    <li><strong>Post-incident:</strong> Add environment health checks to the CI/CD pipeline</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q76</span>
+  <span class="q-label">What is the testing pyramid?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p>The <strong>Testing Pyramid</strong> (Mike Cohn) describes the ideal distribution of test types:</p>
+  <ul>
+    <li><strong>Bottom (most) — Unit Tests:</strong> Fast, cheap, isolated. Developers write these. Highest volume.</li>
+    <li><strong>Middle — Integration/API Tests:</strong> Test component interactions. Medium volume.</li>
+    <li><strong>Top (least) — UI/E2E Tests:</strong> Slowest, most expensive, most fragile. Selenium tests live here. Lowest volume.</li>
+  </ul>
+  <p>The message: don't build an "ice cream cone" (inverted pyramid) — too many slow E2E tests and not enough fast unit tests. In my projects I aim for ~60-70% automation at API/integration level and use UI automation for critical E2E flows only.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q77</span>
+  <span class="q-label">What is meant by "Flaky Tests" and how do you handle them?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Flaky tests</strong> are automated tests that pass and fail inconsistently without any code change — they erode trust in the automation suite.</p>
+  <p><strong>Common causes and my fixes:</strong></p>
+  <ul>
+    <li><strong>Timing/synchronisation issues:</strong> Replace Thread.Sleep with explicit waits (WebDriverWait)</li>
+    <li><strong>Test data conflicts:</strong> Ensure tests use isolated, pre-seeded data and clean up after themselves</li>
+    <li><strong>Environment instability:</strong> Retry mechanism + environment health checks</li>
+    <li><strong>Hardcoded waits:</strong> Remove all Thread.Sleep — use dynamic waits</li>
+    <li><strong>Order-dependent tests:</strong> Make each test fully independent</li>
+  </ul>
+  <p>I tag flaky tests as "quarantined" and track them in a tech-debt backlog to fix systematically.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q78</span>
+  <span class="q-label">What is Cross-Browser Testing and how do you manage it?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Cross-Browser Testing</strong> verifies that the application behaves consistently across different web browsers.</p>
+  <p><strong>My approach with Selenium C#:</strong></p>
+  <div class="code-block">
+<span class="cm">// DriverFactory.cs - supporting multiple browsers</span>
+<span class="kw">public static</span> <span class="cl">IWebDriver</span> <span class="fn">CreateDriver</span>(<span class="cl">string</span> browser)
+{
+    <span class="kw">return</span> browser.ToLower() <span class="kw">switch</span>
+    {
+        <span class="str">"chrome"</span>  =&gt; <span class="kw">new</span> <span class="cl">ChromeDriver</span>(),
+        <span class="str">"firefox"</span> =&gt; <span class="kw">new</span> <span class="cl">FirefoxDriver</span>(),
+        <span class="str">"edge"</span>    =&gt; <span class="kw">new</span> <span class="cl">EdgeDriver</span>(),
+        _ =&gt; <span class="kw">throw new</span> <span class="cl">ArgumentException</span>(<span class="str">$"Browser {browser} not supported"</span>)
+    };
+}
+</div>
+  <p>The browser is configured via an app.config or environment variable, and Azure DevOps pipelines can run the same test suite against multiple browsers in parallel.</p>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q79</span>
+  <span class="q-label">What is a Test Stub vs a Test Driver vs a Mock?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-adv">Advanced</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <ul>
+    <li><strong>Stub:</strong> A dummy module that replaces a lower-level component not yet developed. It provides pre-programmed responses. Used in top-down integration testing.</li>
+    <li><strong>Driver:</strong> A dummy module that replaces an upper-level component to call the module being tested. Used in bottom-up integration testing.</li>
+    <li><strong>Mock:</strong> A programmable object that records interactions and can verify that specific methods were called with specific parameters. More powerful than stubs — used in unit testing. Tools: Moq (C#), Mockito (Java).</li>
+  </ul>
+</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q80</span>
+  <span class="q-label">How do you ensure Quality in an Agile project?</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-inter">Intermediate</span><span class="tag tag-lead">Leadership</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <ul>
+    <li><strong>BDD from the start:</strong> Write Gherkin scenarios before sprint begins — clarity on acceptance criteria</li>
+    <li><strong>Definition of Done includes QA sign-off:</strong> No story is "done" unless QA has signed off</li>
+    <li><strong>Continuous Integration:</strong> Automated tests run on every commit via Azure Pipelines</li>
+    <li><strong>Three Amigos:</strong> BA + Dev + QA review each story together before development — catches ambiguity early</li>
+    <li><strong>Sprint-by-sprint regression:</strong> No deferred regression — automate and run it every sprint</li>
+    <li><strong>Retrospectives:</strong> Continuously improve the process — root-cause escaped defects</li>
+    <li><strong>Metrics-driven:</strong> Track defect leakage and automation coverage sprint-over-sprint</li>
+  </ul>
+</div>
+</div>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: SELENIUM BASICS                                    -->
+<!-- ============================================================ -->
+<section class="section" id="selenium-basics">
+<div class="section-header">
+  <div class="section-icon">🤖</div>
+  <div>
+    <div class="section-title">Selenium WebDriver Fundamentals</div>
+    <div style="color:var(--text-muted);font-size:14px">Architecture · Locators · Waits · Actions · Assertions</div>
+  </div>
+  <div class="section-count">Q81–Q130</div>
+</div>
+
+<div class="qa-card" onclick="toggle(this)">
+<div class="qa-header">
+  <span class="q-num">Q81</span>
+  <span class="q-label">What is Selenium? Explain its architecture.</span>
+  <span class="q-toggle">▼</span>
+</div>
+<div class="qa-body">
+  <div class="tags"><span class="tag tag-basic">Basic</span></div>
+  <div class="answer-label">✦ Model Answer</div>
+  <p><strong>Selenium</strong> is an open-source framework for automating web browsers. It consists of:</p>
+  <ul>
+    <li><strong>Selenium WebDriver:</strong> Directly communicates with the browser via browser drivers (ChromeDriver, GeckoDriver). Most widely used component.</li>
+    <li><strong>Selenium Grid:</strong> Enables parallel test execution on multiple machines and browsers</li>
+    <li><strong>Selenium IDE:</strong> Browser extension for record-and-playback (prototype/demo use)</li>
+  </ul>
+  <p><strong>Architecture flow:</strong> Test Script → Selenium WebDriver (Language Bindings) → Browser Driver (ChromeDriver) → Browser (Chrome) → Application under test → Response back</p>
+  <p>WebDriver uses the <strong>W3C WebDriver protocol</strong> (replaced the JSON Wire Protocol). Commands are sent as HTTP requests to the browser driver.</p>
+</div>
+</div>
+
+</section>
+</div>
 </body>
+
+<script>
+  // Attach accessible header-only toggles and remove inline onclick handlers
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.qa-card').forEach(card => {
+      // remove any existing inline handlers to avoid double behaviour
+      card.removeAttribute('onclick');
+
+      const header = card.querySelector('.qa-header');
+      const toggleIcon = header ? header.querySelector('.q-toggle') : null;
+
+      if (!header) return;
+
+      // make header keyboard focusable
+      header.setAttribute('tabindex', '0');
+      header.setAttribute('role', 'button');
+      header.setAttribute('aria-expanded', card.classList.contains('open') ? 'true' : 'false');
+
+      const toggleCard = () => {
+        const isOpen = card.classList.toggle('open');
+        header.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (toggleIcon) {
+          // keep the visual caret consistent (CSS .qa-card.open .q-toggle handles rotation),
+          // but update text for screen readers
+          toggleIcon.setAttribute('aria-hidden', 'true');
+        }
+      };
+
+      header.addEventListener('click', (e) => {
+        toggleCard();
+      });
+
+      header.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleCard();
+        }
+      });
+
+      // Prevent clicks inside qa-body from toggling when they bubble (if any inline onclick remained)
+      const body = card.querySelector('.qa-body');
+      if (body) {
+        body.addEventListener('click', (e) => {
+          e.stopPropagation();
+        });
+      }
+    });
+  });
+</script>
 </html>
