@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playwright Automation Guide for QA Testers</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            background: #f6f8fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2EAD33 0%, #1a7a1f 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        nav {
+            background: #24292e;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        nav ul {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            list-style: none;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #79b8ff;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .beginner {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .intermediate {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .advanced {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        h2 {
+            color: #24292e;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid #e1e4e8;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: #0366d6;
+            margin: 1.5rem 0 0.75rem;
+        }
+
+        h4 {
+            color: #24292e;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .example {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .example-header {
+            background: #f1f3f5;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            border-bottom: 1px solid #e1e4e8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .file-tag {
+            background: #24292e;
+            color: #fff;
+            padding: 0.2rem 0.6rem;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            font-weight: normal;
+        }
+
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1rem;
+            overflow-x: auto;
+            font-size: 0.88rem;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+        }
+
+        code {
+            background: #f1f3f5;
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            font-family: "SF Mono", Monaco, Consolas, monospace;
+            font-size: 0.9em;
+            color: #d63384;
+        }
+
+        pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+
+        .tip {
+            background: #e7f3ff;
+            border-left: 4px solid #0366d6;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .tip strong {
+            color: #0366d6;
+        }
+
+        .warning {
+            background: #fff8e1;
+            border-left: 4px solid #f9a825;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .success {
+            background: #e8f5e9;
+            border-left: 4px solid #2EAD33;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        ul,
+        ol {
+            margin-left: 1.5rem;
+        }
+
+        li {
+            margin: 0.3rem 0;
+        }
+
+        .browser-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .browser-card {
+            border: 1px solid #e1e4e8;
+            border-radius: 6px;
+            padding: 1.25rem;
+            background: #fafbfc;
+        }
+
+        .browser-card h4 {
+            color: #0366d6;
+            margin-bottom: 0.5rem;
+        }
+
+        kbd {
+            background: #24292e;
+            color: white;
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            font-family: monospace;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th,
+        td {
+            border: 1px solid #d1d5da;
+            padding: 0.6rem;
+            text-align: left;
+        }
+
+        th {
+            background: #f1f3f5;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #586069;
+            font-size: 0.9rem;
+        }
+
+        .cmd {
+            display: block;
+            background: #1e1e1e;
+            color: #4ec9b0;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 0.5rem 0;
+        }
+
+        .cmd::before {
+            content: "$ ";
+            color: #808080;
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            section {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🎭 Playwright Automation Guide</h1>
+        <p>For QA Testers • Beginner → Intermediate → Advanced • Cross-Browser Testing</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#what">What is Playwright?</a></li>
+            <li><a href="#setup">Setup</a></li>
+            <li><a href="#beginner">Beginner</a></li>
+            <li><a href="#intermediate">Intermediate</a></li>
+            <li><a href="#advanced">Advanced</a></li>
+            <li><a href="#browsers">Cross-Browser</a></li>
+            <li><a href="#debugging">Debugging</a></li>
+            <li><a href="#cicd">CI/CD</a></li>
+        </ul>
+    </nav>
+
+    <main>
+
+        <!-- ============ WHAT IS PLAYWRIGHT ============ -->
+        <section id="what">
+            <h2>What is Playwright?</h2>
+            <p>Playwright is Microsoft's end-to-end testing framework. It drives real browsers (Chromium, Firefox,
+                WebKit) to automate user flows — clicks, form fills, navigation, API calls — and verify that your web
+                app behaves correctly.</p>
+
+            <h3>Why QA teams pick Playwright</h3>
+            <ul>
+                <li><strong>Auto-waiting</strong> — no more <code>sleep(5)</code>; it waits for elements automatically
+                </li>
+                <li><strong>One API, three browsers</strong> — Chrome, Firefox, and Safari engines out of the box</li>
+                <li><strong>Fast & parallel</strong> — tests run in isolated browser contexts simultaneously</li>
+                <li><strong>Trace viewer</strong> — visual timeline of every action, screenshots, network calls</li>
+                <li><strong>Codegen</strong> — record your clicks and it writes the test code for you</li>
+                <li><strong>Network interception</strong> — mock APIs, throttle, block requests</li>
+                <li><strong>Mobile emulation</strong> — test responsive design with device profiles</li>
+            </ul>
+        </section>
+
+        <!-- ============ SETUP ============ -->
+        <section id="setup">
+            <h2>🛠️ Setup</h2>
+
+            <h3>Prerequisites</h3>
+            <ul>
+                <li><strong>Node.js 18+</strong> — download from <a href="https://nodejs.org" target="_blank"
+                        rel="noopener">nodejs.org</a></li>
+                <li>A code editor (VS Code recommended — has an official Playwright extension)</li>
+                <li>Terminal / Command Prompt</li>
+            </ul>
+
+            <h3>Install Playwright in 3 commands</h3>
+            <span class="cmd">mkdir my-qa-project &amp;&amp; cd my-qa-project</span>
+            <span class="cmd">npm init playwright@latest</span>
+            <span class="cmd">npx playwright test</span>
+
+            <p>The init command asks:</p>
+            <ol>
+                <li>TypeScript or JavaScript? → <strong>TypeScript</strong> (recommended)</li>
+                <li>Tests folder name? → <strong>tests</strong></li>
+                <li>Add GitHub Actions? → <strong>Yes</strong> (useful for CI)</li>
+                <li>Install browsers? → <strong>Yes</strong> (downloads Chromium, Firefox, WebKit ~300MB)</li>
+            </ol>
+
+            <h3>Project structure after init</h3>
+            <pre><code>my-qa-project/
+├── tests/                  ← your test files (*.spec.ts)
+│   └── example.spec.ts
+├── tests-examples/         ← demo tests (can delete)
+├── playwright.config.ts    ← main config (browsers, timeouts, reporters)
+├── package.json
+└── .github/workflows/      ← CI pipeline (if you said yes)</code></pre>
+
+            <h3>VS Code extension (recommended)</h3>
+            <p>Install <strong>Playwright Test for VSCode</strong> by Microsoft. You'll get:</p>
+            <ul>
+                <li>Run individual tests from a gutter icon next to each test</li>
+                <li>Record new tests with one click</li>
+                <li>Step-through debugging with breakpoints</li>
+                <li>Pick locators by hovering elements in the browser</li>
+            </ul>
+
+            <div class="tip">
+                <strong>💡 Quick start:</strong> This guide ships with ready-to-run test files in the
+                <code>tests/</code> folder. Copy the whole project folder, run <code>npm install</code>, then
+                <code>npx playwright test</code>.
+            </div>
+        </section>
+
+        <!-- ============ BEGINNER ============ -->
+        <section id="beginner">
+            <span class="level-badge beginner">BEGINNER</span>
+            <h2>1. Beginner Examples</h2>
+
+            <h3>1.1 Your first test — navigate and check title</h3>
+            <div class="example">
+                <div class="example-header">
+                    <span>Goal: open a page and verify the title</span>
+                    <span class="file-tag">tests/beginner/01-first-test.spec.ts</span>
+                </div>
+                <pre><code>import { test, expect } from '@playwright/test';
+
+test('has correct title', async ({ page }) =&gt; {
+    await page.goto('https://playwright.dev/');
+    await expect(page).toHaveTitle(/Playwright/);
+});</code></pre>
+            </div>
+            <p>Run it: <code>npx playwright test 01-first-test</code></p>
+
+            <h3>1.2 Click a link and verify navigation</h3>
+            <div class="example">
+                <div class="example-header">
+                    <span>Goal: click "Get started" and check the new heading appears</span>
+                    <span class="file-tag">tests/beginner/02-click-link.spec.ts</span>
+                </div>
+                <pre><code>import { test, expect } from '@playwright/test';
+
+test('get started link', async ({ page }) =&gt; {
+    await page.goto('https://playwright.dev/');
+    await page.getByRole('link', { name: 'Get started' }).click();
+    await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+});</code></pre>
+            </div>
+
+            <h3>1.3 Fill a form</h3>
+            <div class="example">
+                <div class="example-header">
+                    <span>Goal: fill inputs and submit a login form</span>
+                    <span class="file-tag">tests/beginner/03-fill-form.spec.ts</span>
+                </div>
+                <pre><code>import { test, expect } from '@playwright/test';
+
+test('login form', async ({ page }) =&gt; {
+    await page.goto('https://the-internet.herokuapp.com/login');
+
+    await page.getByLabel('Username').fill('tomsmith');
+    await page.getByLabel('Password').fill('SuperSecretPassword!');
+    await page.getByRole('button', { name: 'Login' }).click();
+
+    await expect(page.getByText('You logged into a secure area!')).toBeVisible();
+});</code></pre>
+            </div>
+
+            <h3>1.4 Locators — the right way to find elements</h3>
+            <p>Playwright recommends <strong>user-facing locators</strong> (role, label, text) over CSS selectors.
+                They're more resilient when markup changes.</p>
+            <table>
+                <tr>
+                    <th>Locator</th>
+                    <th>Example</th>
+                    <th>When to use</th>
+                </tr>
+                <tr>
+                    <td><code>getByRole</code></td>
+                    <td><code>getByRole('button', { name: 'Submit' })</code></td>
+                    <td>Buttons, links, headings — 80% of cases</td>
+                </tr>
+                <tr>
+                    <td><code>getByLabel</code></td>
+                    <td><code>getByLabel('Email')</code></td>
+                    <td>Form inputs with labels</td>
+                </tr>
+                <tr>
+                    <td><code>getByPlaceholder</code></td>
+                    <td><code>getByPlaceholder('Search...')</code></td>
+                    <td>Inputs with only placeholders</td>
+                </tr>
+                <tr>
+                    <td><code>getByText</code></td>
+                    <td><code>getByText('Welcome back')</code></td>
+                    <td>Visible text on page</td>
+                </tr>
+                <tr>
+                    <td><code>getByTestId</code></td>
+                    <td><code>getByTestId('submit-btn')</code></td>
+                    <td>When devs add <code>data-testid</code> attributes</td>
+                </tr>
+                <tr>
+                    <td><code>locator</code></td>
+                    <td><code>locator('.my-class')</code></td>
+                    <td>Last resort — CSS/XPath</td>
+                </tr>
+            </table>
+
+            <h3>1.5 Common assertions (<code>expect</code>)</h3>
+            <div class="example">
+                <div class="example-header">Cheat sheet</div>
+                <pre><code>// Visibility
+await expect(locator).toBeVisible();
+await expect(locator).toBeHidden();
+
+// Text content
+await expect(locator).toHaveText('Exact text');
+await expect(locator).toContainText('partial');
+
+// Attributes & values
+await expect(locator).toHaveValue('input value');
+await expect(locator).toHaveAttribute('href', '/home');
+await expect(locator).toBeEnabled();
+await expect(locator).toBeChecked();
+
+// Counts
+await expect(page.getByRole('listitem')).toHaveCount(5);
+
+// Page-level
+await expect(page).toHaveURL(/.*dashboard/);
+await expect(page).toHaveTitle('Dashboard');</code></pre>
+            </div>
+
+            <div class="tip">
+                <strong>💡 Auto-retry:</strong> Every <code>expect</code> automatically retries for up to 5 seconds. No
+                need to write <code>waitForTimeout</code> — Playwright waits until the element is ready.
+            </div>
+        </section>
+
+        <!-- ============ INTERMEDIATE ============ -->
+        <section id="intermediate">
+            <span class="level-badge intermediate">INTERMEDIATE</span>
+            <h2>2. Intermediate Examples</h2>
+
+            <h3>2.1 Page Object Model (POM)</h3>
+            <p>Wrap each page's interactions into a class. Makes tests readable and easy to maintain when the UI
+                changes.</p>
+            <div class="example">
+                <div class="example-header">
+                    <span>The page object</span>
+                    <span class="file-tag">tests/intermediate/pages/LoginPage.ts</span>
+                </div>
+                <pre><code>import { Page, Locator } from '@playwright/test';
+
+export class LoginPage {
+    readonly page: Page;
+    readonly username: Locator;
+    readonly password: Locator;
+    readonly submit: Locator;
+    readonly flash: Locator;
+
+    constructor(page: Page) {
+        this.page = page;
+        this.username = page.getByLabel('Username');
+        this.password = page.getByLabel('Password');
+        this.submit   = page.getByRole('button', { name: 'Login' });
+        this.flash    = page.locator('#flash');
+    }
+
+    async goto() {
+        await this.page.goto('https://the-internet.herokuapp.com/login');
+    }
+
+    async login(user: string, pass: string) {
+        await this.username.fill(user);
+        await this.password.fill(pass);
+        await this.submit.click();
+    }
+}</code></pre>
+            </div>
+            <div class="example">
+                <div class="example-header">
+                    <span>The test using the POM</span>
+                    <span class="file-tag">tests/intermediate/01-pom.spec.ts</span>
+                </div>
+                <pre><code>import { test, expect } from '@playwright/test';
+import { LoginPage } from './pages/LoginPage';
+
+test('successful login via POM', async ({ page }) =&gt; {
+    const login = new LoginPage(page);
+    await login.goto();
+    await login.login('tomsmith', 'SuperSecretPassword!');
+    await expect(login.flash).toContainText('You logged into a secure area!');
+});</code></pre>
+            </div>
+
+            <h3>2.2 Hooks — <code>beforeEach</code> / <code>afterEach</code></h3>
+            <div class="example">
+                <div class="example-header">
+                    <span class="file-tag">tests/intermediate/02-hooks.spec.ts</span>
+                </div>
+                <pre><code>import { test, expect } from '@playwright/test';
+
+test.describe('Dashboard suite', () =&gt; {
+    test.beforeEach(async ({ page }) =&gt; {
+        await page.goto('https://example.com/login');
+        await page.getByLabel('Email').fill('qa@test.com');
+        await page.getByLabel('Password').fill('pass123');
+        await page.getByRole('button', { name: 'Sign in' }).click();
+    });
+
+    test('shows user name', async ({ page }) =&gt; {
+        await expect(page.getByTestId('user-name')).toHaveText('QA Tester');
+    });
+
+    test('shows notifications', async ({ page }) =&gt; {
+        await expect(page.getByRole('button', { name: /notifications/i })).toBeVisible();
+    });
+});</code></pre>
+            </div>
+
+            <h3>2.3 API testing (no browser needed)</h3>
+            <div class="example">
+                <div class="example-header">
+                    <span class="file-tag">tests/intermediate/03-api.spec.ts</span>
+                </div>
+                <pre><code>import { test, expect } from '@playwright/test';
+
+test('GET request returns users', async ({ request }) =&gt; {
+    const res = await request.get('https://reqres.in/api/users?page=2');
+    expect(res.status()).toBe(200);
+
+    const body = await res.json();
+    expect(body.data.length).toBeGreaterThan(0);
+    expect(body.data[0]).toHaveProperty('email');
+});
+
+test('POST creates a user', async ({ request }) =&gt; {
+    const res = await request.post('https://reqres.in/api/users', {
+        data: { name: 'QA Bot', job: 'Tester' }
+    });
+    expect(res.status()).toBe(201);
+    const body = await res.json();
+    expect(body.name).toBe('QA Bot');
+});</code></pre>
+            </div>
+
+            <h3>2.4 Reusing authentication state</h3>
+            <p>Log in once, save the session, reuse it across all tests — huge time-saver.</p>
+            <div class="example">
+                <div class="example-header">
+                    <span>Global setup</span>
+                    <span class="file-tag">auth.setup.ts</span>
+                </div>
+                <pre><code>import { test as setup } from '@playwright/test';
+
+const authFile = 'playwright/.auth/user.json';
+
+setup('authenticate', async ({ page }) =&gt; {
+    await page.goto('https://example.com/login');
+    await page.getByLabel('Email').fill('qa@test.com');
+    await page.getByLabel('Password').fill('pass123');
+    await page.getByRole('button', { name: 'Sign in' }).click();
+    await page.waitForURL('**/dashboard');
+    await page.context().storageState({ path: authFile });
+});</code></pre>
+            </div>
+
+            <h3>2.5 File upload & download</h3>
+            <div class="example">
+                <div class="example-header">
+                    <span class="file-tag">tests/intermediate/04-files.spec.ts</span>
+                </div>
+                <pre><code>import { test, expect } from '@playwright/test';
+import path from 'path';
+
+test('upload a file', async ({ page }) =&gt; {
+    await page.goto('https://the-internet.herokuapp.com/upload');
+    await page.setInputFiles('#file-upload', path.join(__dirname, 'sample.txt'));
+    await page.click('#file-submit');
+    await expect(page.locator('#uploaded-files')).toContainText('sample.txt');
+});
+
+test('download a file', async ({ page }) =&gt; {
+    await page.goto('https://the-internet.herokuapp.com/download');
+    const downloadPromise = page.waitForEvent('download');
+    await page.getByRole('link', { name: /\.txt$/ }).first().click();
+    const download = await downloadPromise;
+    await download.saveAs('/tmp/' + download.suggestedFilename());
+});</code></pre>
+            </div>
+
+            <h3>2.6 Handling dialogs, new tabs, iframes</h3>
+            <div class="example">
+                <div class="example-header">Common patterns</div>
+                <pre><code>// JavaScript alert/confirm/prompt
+page.on('dialog', dialog =&gt; dialog.accept());
+await page.getByRole('button', { name: 'Delete' }).click();
+
+// New tab opens
+const [newTab] = await Promise.all([
+    page.context().waitForEvent('page'),
+    page.getByRole('link', { name: 'Open in new tab' }).click(),
+]);
+await newTab.waitForLoadState();
+
+// Iframe
+const frame = page.frameLocator('#my-iframe');
+await frame.getByRole('button', { name: 'Inside frame' }).click();</code></pre>
+            </div>
+        </section>
+
+        <!-- ============ ADVANCED ============ -->
+        <section id="advanced">
+            <span class="level-badge advanced">ADVANCED</span>
+            <h2>3. Advanced Examples</h2>
+
+            <h3>3.1 Network interception & API mocking</h3>
+            <p>Mock backend responses to test edge cases (errors, slow responses, empty data) without needing a real
+                broken backend.</p>
+            <div class="example">
+                <div class="example-header">
+                    <span class="file-tag">tests/advanced/01-mocking.spec.ts</span>
+                </div>
+                <pre><code>import { test, expect } from '@playwright/test';
+
+test('shows empty state when API returns no users', async ({ page }) =&gt; {
+    // Intercept the API before navigation
+    await page.route('**/api/users', route =&gt; {
+        route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify({ data: [] }),
+        });
+    });
+
+    await page.goto('https://my-app.com/users');
+    await expect(page.getByText('No users found')).toBeVisible();
+});
+
+test('shows error banner when API fails', async ({ page }) =&gt; {
+    await page.route('**/api/users', route =&gt; route.fulfill({ status: 500 }));
+    await page.goto('https://my-app.com/users');
+    await expect(page.getByRole('alert')).toContainText('Something went wrong');
+});</code></pre>
+            </div>
+
+            <h3>3.2 Visual regression testing</h3>
+            <div class="example">
+                <div class="example-header">
+                    <span class="file-tag">tests/advanced/02-visual.spec.ts</span>
+                </div>
+                <pre><code>import { test, expect } from '@playwright/test';
+
+test('homepage visual snapshot', async ({ page }) =&gt; {
+    await page.goto('https://playwright.dev/');
+    await expect(page).toHaveScreenshot('homepage.png', {
+        maxDiffPixelRatio: 0.01,   // allow 1% difference
+        fullPage: true,
+    });
+});
+
+test('button component snapshot', async ({ page }) =&gt; {
+    await page.goto('https://my-app.com/components');
+    await expect(page.getByRole('button', { name: 'Primary' }))
+        .toHaveScreenshot('primary-button.png');
+});</code></pre>
+            </div>
+            <p>First run creates a baseline image. Later runs compare against it. Update with
+                <code>npx playwright test --update-snapshots</code>.</p>
+
+            <h3>3.3 Mobile emulation</h3>
+            <div class="example">
+                <div class="example-header">
+                    <span>In <code>playwright.config.ts</code> add mobile projects</span>
+                </div>
+                <pre><code>import { defineConfig, devices } from '@playwright/test';
+
+export default defineConfig({
+    projects: [
+        { name: 'chromium',     use: { ...devices['Desktop Chrome'] } },
+        { name: 'firefox',      use: { ...devices['Desktop Firefox'] } },
+        { name: 'webkit',       use: { ...devices['Desktop Safari'] } },
+        { name: 'Mobile Chrome', use: { ...devices['Pixel 5'] } },
+        { name: 'Mobile Safari', use: { ...devices['iPhone 13'] } },
+    ],
+});</code></pre>
+            </div>
+
+            <h3>3.4 Custom fixtures</h3>
+            <p>Build reusable "ingredients" — a logged-in user, a pre-seeded todo list, an admin session.</p>
+            <div class="example">
+                <div class="example-header">
+                    <span class="file-tag">tests/advanced/fixtures.ts</span>
+                </div>
+                <pre><code>import { test as base } from '@playwright/test';
+import { LoginPage } from '../intermediate/pages/LoginPage';
+
+type MyFixtures = {
+    loginPage: LoginPage;
+    loggedInPage: LoginPage;
+};
+
+export const test = base.extend&lt;MyFixtures&gt;({
+    loginPage: async ({ page }, use) =&gt; {
+        const login = new LoginPage(page);
+        await login.goto();
+        await use(login);
+    },
+    loggedInPage: async ({ page }, use) =&gt; {
+        const login = new LoginPage(page);
+        await login.goto();
+        await login.login('tomsmith', 'SuperSecretPassword!');
+        await use(login);
+    },
+});
+
+export { expect } from '@playwright/test';</code></pre>
+            </div>
+            <div class="example">
+                <div class="example-header">Using the fixture</div>
+                <pre><code>import { test, expect } from './fixtures';
+
+test('logged-in user sees welcome', async ({ loggedInPage }) =&gt; {
+    await expect(loggedInPage.flash).toContainText('secure area');
+});</code></pre>
+            </div>
+
+            <h3>3.5 Parallel execution & sharding</h3>
+            <p>Playwright runs tests in parallel by default. For big suites, split across machines:</p>
+            <span class="cmd">npx playwright test --shard=1/4</span>
+            <span class="cmd">npx playwright test --shard=2/4</span>
+            <p>Each CI machine runs 1/4 of the tests simultaneously.</p>
+
+            <h3>3.6 Accessibility testing</h3>
+            <p>Install the Axe plugin:</p>
+            <span class="cmd">npm i -D @axe-core/playwright</span>
+            <div class="example">
+                <div class="example-header">
+                    <span class="file-tag">tests/advanced/03-a11y.spec.ts</span>
+                </div>
+                <pre><code>import { test, expect } from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
+
+test('home page has no a11y violations', async ({ page }) =&gt; {
+    await page.goto('https://playwright.dev/');
+    const results = await new AxeBuilder({ page }).analyze();
+    expect(results.violations).toEqual([]);
+});</code></pre>
+            </div>
+        </section>
+
+        <!-- ============ CROSS-BROWSER ============ -->
+        <section id="browsers">
+            <h2>🌐 Cross-Browser Testing</h2>
+            <p>Playwright ships with three browser engines. Configure which ones run in
+                <code>playwright.config.ts</code>.</p>
+
+            <div class="browser-grid">
+                <div class="browser-card">
+                    <h4>🟢 Chromium</h4>
+                    <p>Powers Chrome & Edge. Fastest, most features, great DevTools integration.</p>
+                    <span class="cmd">npx playwright test --project=chromium</span>
+                </div>
+                <div class="browser-card">
+                    <h4>🦊 Firefox</h4>
+                    <p>Mozilla's Gecko engine. Catches CSS & JS quirks Chrome doesn't.</p>
+                    <span class="cmd">npx playwright test --project=firefox</span>
+                </div>
+                <div class="browser-card">
+                    <h4>🧭 WebKit</h4>
+                    <p>Safari's engine (works on Windows/Linux too). Essential if you have iOS users.</p>
+                    <span class="cmd">npx playwright test --project=webkit</span>
+                </div>
+                <div class="browser-card">
+                    <h4>📱 Mobile</h4>
+                    <p>Emulate iPhone, Pixel, iPad — real viewport + touch + user-agent.</p>
+                    <span class="cmd">npx playwright test --project="Mobile Chrome"</span>
+                </div>
+            </div>
+
+            <h3>Running across all browsers at once</h3>
+            <span class="cmd">npx playwright test</span>
+            <p>Without <code>--project</code>, every test runs in every configured browser. If you have 10 tests × 3
+                browsers = 30 test runs.</p>
+
+            <h3>Headed mode (see the browser)</h3>
+            <span class="cmd">npx playwright test --headed</span>
+
+            <h3>Slow motion (great for demos & debugging)</h3>
+            <span class="cmd">npx playwright test --headed --slow-mo=1000</span>
+        </section>
+
+        <!-- ============ DEBUGGING ============ -->
+        <section id="debugging">
+            <h2>🔍 Debugging & Reports</h2>
+
+            <h3>1. UI Mode (best for writing tests)</h3>
+            <span class="cmd">npx playwright test --ui</span>
+            <p>Opens a GUI where you can pick tests, step through actions, inspect the DOM at each step, and watch them
+                run live.</p>
+
+            <h3>2. Debug mode (Playwright Inspector)</h3>
+            <span class="cmd">npx playwright test --debug</span>
+            <p>Pauses at each line, lets you step through, and suggests locators.</p>
+
+            <h3>3. Codegen (record tests by clicking)</h3>
+            <span class="cmd">npx playwright codegen https://my-app.com</span>
+            <p>Opens a browser — every action you perform gets turned into test code in real-time.</p>
+
+            <h3>4. Trace Viewer (post-mortem for failures)</h3>
+            <span class="cmd">npx playwright show-trace trace.zip</span>
+            <p>After a test fails in CI, download the trace and view the full timeline: screenshots at every step,
+                console logs, network calls, DOM snapshots.</p>
+
+            <h3>5. HTML Report</h3>
+            <span class="cmd">npx playwright show-report</span>
+            <p>After any run, this opens a polished HTML report with pass/fail, durations, screenshots, videos, and
+                traces for failures.</p>
+
+            <div class="tip">
+                <strong>💡 Pro tip:</strong> Enable <code>trace: 'retain-on-failure'</code> and
+                <code>video: 'retain-on-failure'</code> in <code>playwright.config.ts</code>. You'll only capture
+                artifacts when tests fail, keeping CI fast.
+            </div>
+        </section>
+
+        <!-- ============ CI/CD ============ -->
+        <section id="cicd">
+            <h2>⚙️ CI/CD with GitHub Actions</h2>
+            <p>If you chose "Add GitHub Actions" during setup, you already have a workflow file. Here's a
+                production-ready version:</p>
+
+            <div class="example">
+                <div class="example-header">
+                    <span class="file-tag">.github/workflows/playwright.yml</span>
+                </div>
+                <pre><code>name: Playwright Tests
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+    - name: Install dependencies
+      run: npm ci
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps
+    - name: Run tests
+      run: npx playwright test
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30</code></pre>
+            </div>
+
+            <h3>Running tests on a schedule</h3>
+            <p>Add this to run every morning at 6 AM UTC (smoke tests against production):</p>
+            <pre><code>on:
+  schedule:
+    - cron: '0 6 * * *'</code></pre>
+        </section>
+
+        <!-- ============ QUICK REFERENCE ============ -->
+        <section>
+            <h2>📋 Command Cheat Sheet</h2>
+            <table>
+                <tr>
+                    <th>Command</th>
+                    <th>What it does</th>
+                </tr>
+                <tr>
+                    <td><code>npx playwright test</code></td>
+                    <td>Run all tests in all browsers</td>
+                </tr>
+                <tr>
+                    <td><code>npx playwright test login</code></td>
+                    <td>Run tests matching "login"</td>
+                </tr>
+                <tr>
+                    <td><code>npx playwright test --project=chromium</code></td>
+                    <td>One browser only</td>
+                </tr>
+                <tr>
+                    <td><code>npx playwright test --headed</code></td>
+                    <td>Show the browser</td>
+                </tr>
+                <tr>
+                    <td><code>npx playwright test --ui</code></td>
+                    <td>Interactive UI mode</td>
+                </tr>
+                <tr>
+                    <td><code>npx playwright test --debug</code></td>
+                    <td>Debug mode with inspector</td>
+                </tr>
+                <tr>
+                    <td><code>npx playwright codegen URL</code></td>
+                    <td>Record a test by clicking</td>
+                </tr>
+                <tr>
+                    <td><code>npx playwright show-report</code></td>
+                    <td>View last HTML report</td>
+                </tr>
+                <tr>
+                    <td><code>npx playwright install</code></td>
+                    <td>Install/update browsers</td>
+                </tr>
+                <tr>
+                    <td><code>npx playwright test --update-snapshots</code></td>
+                    <td>Refresh visual baselines</td>
+                </tr>
+            </table>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>🎭 Open <code>PLAYWRIGHT_GUIDE.html</code> in any browser. The <code>tests/</code> folder has every example
+            ready to run.</p>
+    </footer>
+
+</body>
+
+</html>
