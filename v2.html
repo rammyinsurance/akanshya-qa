@@ -2909,7 +2909,374 @@ _scenarioContext[<span class="str">"PatientId"</span>] = createdPatientId;
 
 </div><!-- /section 4 -->
 
+<!-- ============================================================
+     SECTION 5 — AZURE DEVOPS (EXPANDED Q221–Q270)
+     ============================================================ -->
+<div class="section" id="s5">
+  <div class="section-header">
+    <div class="section-icon" style="background:rgba(88,166,255,0.15);">🔵</div>
+    <div class="section-title">Section 5 — Azure DevOps & CI/CD</div>
+    <div class="section-count">Q221–Q270</div>
+  </div>
+  <div class="expand-controls">
+    <button class="ctrl-btn" onclick="expandSection('s5')">Expand All</button>
+    <button class="ctrl-btn" onclick="collapseSection('s5')">Collapse All</button>
+  </div>
 
+  <div class="qa-card" id="q221">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q221</span>
+      <span class="q-text">Explain your Azure DevOps CI/CD pipeline architecture from end to end.</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-adv">Advanced</span><span class="tag tag-scenario">Real Experience</span></div>
+      <p>"Our Azure DevOps pipeline is YAML-based with three main stages:</p>
+      <p><strong>Stage 1 — Build:</strong> Triggered on code push to develop or PR to main. Steps: restore NuGet packages, build solution in Release mode, run static code analysis (SonarQube), publish build artifacts to pipeline artifact storage.</p>
+      <p><strong>Stage 2 — Test:</strong> Depends on Build stage. Runs in parallel jobs: (1) Unit tests via NUnit, (2) Smoke automation tests (critical path), (3) API contract tests via Pact. If smoke fails, stage fails — pipeline stops here.</p>
+      <p><strong>Stage 3 — Deploy to Staging:</strong> Only if all tests pass. Deploys build artifact to Azure App Service (Staging environment). Runs post-deployment smoke tests to verify staging deployment health.</p>
+      <p><strong>Stage 4 — Production Approval:</strong> Requires manual approval from QA Lead and Product Owner. Approval check configured on the 'Production' environment resource.</p>
+      <p><strong>Stage 5 — Deploy to Production:</strong> On approval, deploys to production. No automated tests run here — we trust the staging validation.</p>
+      <p>Results published back to Azure DevOps: test trx files, test coverage reports, build artifacts. On failure, Teams notification sent immediately to the team Slack channel."</p>
+    </div>
+  </div>
+
+  <div class="qa-card" id="q222">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q222</span>
+      <span class="q-text">How do you set up Test Plans and Test Suites in Azure DevOps?</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-mid">Mid</span></div>
+      <p><strong>Test Plan creation:</strong> In Azure DevOps, I go to Test Plans tab → Create Test Plan → specify scope (project/team), name (e.g., "Sprint 23 QA Plan"), and area path.</p>
+      <p><strong>Test Suite types I use:</strong></p>
+      <ul>
+        <li><strong>Requirement-based Suite:</strong> Automatically links to User Stories. I create a suite per sprint, then drag stories into it. The system creates test cases per story.</li>
+        <li><strong>Query-based Suite:</strong> Dynamically includes test cases matching a WIQL query. Example: all test cases tagged with @regression and @critical</li>
+        <li><strong>Static Suite:</strong> I manually add test cases to a suite. Good for organizing test cases across multiple features into a cohesive test cycle.</li>
+      </ul>
+      <p><strong>Execution:</strong> Open a test suite → click "Run" → mark each test case Pass/Fail, attach screenshots, add comments. Azure DevOps tracks completion % and defects linked to failed test cases."</p>
+    </div>
+  </div>
+
+  <div class="qa-card" id="q223">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q223</span>
+      <span class="q-text">What is the difference between Stages, Jobs, and Tasks in Azure Pipelines?</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-basic">Basic</span></div>
+      <p><strong>Stage:</strong> Logical grouping of jobs. Stages run sequentially unless configured otherwise. Example: Build → Test → Deploy stages.</p>
+      <p><strong>Job:</strong> Collection of tasks running on an agent. Jobs within a stage can run in parallel. Example: "Run Unit Tests" and "Run Smoke Tests" jobs run simultaneously.</p>
+      <p><strong>Task:</strong> Individual action (step). Example: "DotNetCoreCLI@2" task to run tests, or "PublishTestResults@2" to publish results.</p>
+      <div class="code-block"><span class="cm">stages:</span>
+- <span class="kw">stage</span>: <span class="str">Build</span>
+  <span class="kw">jobs</span>:
+  - <span class="kw">job</span>: <span class="str">BuildJob</span>
+    <span class="kw">steps</span>:
+    - <span class="kw">task</span>: DotNetCoreCLI@2
+      displayName: <span class="str">'Build'</span>
+
+- <span class="kw">stage</span>: <span class="str">Test</span>
+  <span class="kw">dependsOn</span>: Build
+  <span class="kw">jobs</span>:
+  - <span class="kw">job</span>: <span class="str">UnitTests</span>
+    <span class="kw">steps</span>:
+    - <span class="kw">task</span>: DotNetCoreCLI@2
+  - <span class="kw">job</span>: <span class="str">SmokeTests</span>  <span class="cm"># runs in parallel with UnitTests</span>
+    <span class="kw">steps</span>:
+    - <span class="kw">task</span>: DotNetCoreCLI@2</div>
+    </div>
+  </div>
+
+  <div class="qa-card" id="q224">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q224</span>
+      <span class="q-text">How do you configure environment-specific variables in Azure DevOps?</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-mid">Mid</span></div>
+      <p>I use three approaches:</p>
+      <p><strong>1. Variable Groups (recommended for sensitive data):</strong> In Pipelines → Library → Variable Groups → create group "Staging-Secrets" with secure variables (URLs, API keys, passwords). Mark sensitive variables as "secret" — they're masked in logs.</p>
+      <div class="code-block"><span class="kw">variables</span>:
+- <span class="kw">group</span>: <span class="str">'Staging-Secrets'</span>
+
+<span class="kw">steps</span>:
+- <span class="kw">task</span>: PowerShell@2
+  <span class="kw">inputs</span>:
+    targetType: <span class="str">'inline'</span>
+    script: <span class="str">'Write-Host $(StagingBaseUrl)'</span>  <span class="cm"># $(StagingBaseUrl) from Variable Group</span></div>
+      <p><strong>2. Pipeline variables:</strong> Defined in azure-pipelines.yml directly or via UI. Used for non-sensitive data like test filters, timeouts.</p>
+      <p><strong>3. Deployment environments with variable scope:</strong> Create Environments (Staging, Production) with environment-specific variable overrides.</p>
+    </div>
+  </div>
+
+  <div class="qa-card" id="q225">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q225</span>
+      <span class="q-text">How do you handle manual approval gates and deployment environments?</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-mid">Mid</span></div>
+      <p><strong>Create Environment:</strong> In Pipelines → Environments → create "Production" environment. Click "Approvals and checks" → add Approval check → specify approvers (QA Lead, Product Owner).</p>
+      <p><strong>In pipeline YAML:</strong> Reference environment in deployment job.</p>
+      <div class="code-block">- <span class="kw">deployment</span>: <span class="str">DeployProd</span>
+  <span class="kw">environment</span>: <span class="str">'Production'</span>  <span class="cm"># Requires approval before this runs</span>
+  <span class="kw">strategy</span>:
+    <span class="kw">runOnce</span>:
+      <span class="kw">deploy</span>:
+        <span class="kw">steps</span>:
+        - <span class="kw">task</span>: AzureAppServiceDeploy@1</div>
+      <p>When the pipeline reaches this job, Azure DevOps automatically blocks and sends approval request to specified approvers. Pipeline resumes only after approval or cancels on rejection."</p>
+    </div>
+  </div>
+
+  <div class="qa-card" id="q226">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q226</span>
+      <span class="q-text">How do you publish and analyze test results in Azure DevOps?</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-mid">Mid</span></div>
+      <div class="code-block"><span class="cm">// In pipeline YAML</span>
+- <span class="kw">task</span>: DotNetCoreCLI@2
+  displayName: <span class="str">'Run NUnit Tests'</span>
+  <span class="kw">inputs</span>:
+    <span class="kw">command</span>: test
+    <span class="kw">arguments</span>: <span class="str">'--logger trx --collect:"XPlat Code Coverage"'</span>
+
+- <span class="kw">task</span>: PublishTestResults@2
+  displayName: <span class="str">'Publish Test Results'</span>
+  <span class="kw">inputs</span>:
+    <span class="kw">testResultsFormat</span>: <span class="str">'VSTest'</span>
+    <span class="kw">testResultsFiles</span>: <span class="str">'**/TestResults/*.trx'</span>
+    <span class="kw">failTaskOnFailedTests</span>: <span class="kw">true</span>  <span class="cm"># Fails pipeline if tests fail</span>
+
+- <span class="kw">task</span>: PublishCodeCoverageResults@1
+  displayName: <span class="str">'Publish Code Coverage'</span>
+  <span class="kw">inputs</span>:
+    <span class="kw">codeCoverageTool</span>: <span class="str">'Cobertura'</span>
+    <span class="kw">summaryFileLocation</span>: <span class="str">'**/coverage.cobertura.xml'</span></div>
+      <p><strong>Analyzing results:</strong> After pipeline runs, navigate to Pipelines → [your pipeline run] → Test tab. View: total tests run, pass/fail counts, failed test details, flaky test indicators, code coverage % per component.</p>
+    </div>
+  </div>
+
+  <div class="qa-card" id="q227">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q227</span>
+      <span class="q-text">How do you create a custom QA dashboard in Azure DevOps?</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-adv">Advanced</span></div>
+      <p><strong>Dashboard creation:</strong> Go to Overview → Dashboards → Create dashboard → give it a name (e.g., "QA Metrics").</p>
+      <p><strong>Add widgets:</strong> Click "Edit" → "Add a widget" → search for relevant widgets:</p>
+      <ul>
+        <li><strong>Test Results Trend:</strong> Shows pass/fail/skip trends over time</li>
+        <li><strong>Query Results:</strong> Custom WIQL queries — e.g., open defects by severity</li>
+        <li><strong>Build Definition Statistics:</strong> Shows pipeline success rates</li>
+        <li><strong>Burndown Chart:</strong> Sprint progress</li>
+        <li><strong>New Bugs (Work Item Query Based):</strong> Shows newly created bugs</li>
+      </ul>
+      <p><strong>My custom dashboard includes:</strong> Test execution trend (automated vs manual), Defect heat map by module, Open P1/P2 defects count, Automation coverage % growth, Pipeline success rate, Sprint velocity.</p>
+      <p>"This dashboard is displayed on a TV in our QA area — team sees real-time status without logging in."</p>
+    </div>
+  </div>
+
+  <div class="qa-card" id="q228">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q228</span>
+      <span class="q-text">What is branching strategy and how does QA fit into GitFlow?</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-mid">Mid</span></div>
+      <p><strong>GitFlow branches:</strong></p>
+      <ul>
+        <li><strong>main:</strong> Production-ready code. Every commit here is a release. QA validates thoroughly before merge.</li>
+        <li><strong>develop:</strong> Integration branch for features. QA runs smoke tests on every PR to develop.</li>
+        <li><strong>feature/xxx:</strong> Individual developer branches. QA involvement: test developer's branch before PR approval.</li>
+        <li><strong>release/x.x.x:</strong> Release branch. QA runs comprehensive regression testing. Only critical bug fixes allowed.</li>
+        <li><strong>hotfix/xxx:</strong> Production bug fixes branched from main. QA does focused testing on the fix + regression of related areas.</li>
+      </ul>
+      <p><strong>QA responsibilities per branch:</strong> develop → smoke tests on every commit (via CI). release → full regression suite. main → manual acceptance testing before merge. hotfix → targeted regression.</p>
+    </div>
+  </div>
+
+  <div class="qa-card" id="q229">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q229</span>
+      <span class="q-text">How do you configure test filters to run specific tests in Azure Pipelines?</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-mid">Mid</span></div>
+      <div class="code-block"><span class="cm">// Run only smoke tests</span>
+- <span class="kw">task</span>: DotNetCoreCLI@2
+  <span class="kw">inputs</span>:
+    <span class="kw">command</span>: test
+    <span class="kw">arguments</span>: <span class="str">'--filter "Category=smoke"'</span>
+
+<span class="cm">// Run all except flaky</span>
+- <span class="kw">task</span>: DotNetCoreCLI@2
+  <span class="kw">inputs</span>:
+    <span class="kw">command</span>: test
+    <span class="kw">arguments</span>: <span class="str">'--filter "Category!=flaky"'</span>
+
+<span class="cm">// SpecFlow scenario tags</span>
+- <span class="kw">task</span>: DotNetCoreCLI@2
+  <span class="kw">inputs</span>:
+    <span class="kw">command</span>: test
+    <span class="kw">arguments</span>: <span class="str">'--filter "TestCategory=smoke | TestCategory=regression"'</span></div>
+      <p>I define these as pipeline variables and pass them as arguments — allows different test filters for different pipeline triggers (commit → smoke, schedule → full regression).</p>
+    </div>
+  </div>
+
+  <div class="qa-card" id="q230">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q230</span>
+      <span class="q-text">What is a Release Pipeline vs Build Pipeline? Are they still relevant?</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-mid">Mid</span></div>
+      <p><strong>Classic Build Pipelines:</strong> Compiled code, older UI. Still supported.</p>
+      <p><strong>Classic Release Pipelines:</strong> Deployed compiled artifacts to environments. Separate from build pipeline.</p>
+      <p><strong>Modern approach (YAML Multi-stage pipelines):</strong> Single pipeline file with build + test + deploy stages. More version-controlled, easier to manage.</p>
+      <p>"We transitioned to YAML multi-stage pipelines last year — single azure-pipelines.yml file in the repo. Makes everything auditable and easier to review in PRs. Release pipelines are becoming obsolete."</p>
+    </div>
+  </div>
+
+  <div class="qa-card" id="q231">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q231</span>
+      <span class="q-text">How do you set up notifications and alerts for failed pipelines?</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-basic">Basic</span></div>
+      <p><strong>Option 1 — Built-in notifications:</strong> Pipelines → [pipeline] → Edit → Triggers → Set up pipeline notifications (project settings). Configure email alerts for pipeline failure.</p>
+      <p><strong>Option 2 — Teams integration (preferred):</strong> In pipeline YAML, add task to post to Teams channel on failure.</p>
+      <div class="code-block">- <span class="kw">task</span>: WebhookPostMessage@1
+  <span class="kw">inputs</span>:
+    <span class="kw">postWebhookUrl</span>: <span class="str">'https://outlook.webhook.office.com/webhookb2/[Teams Webhook URL]'</span>
+    <span class="kw">json</span>: <span class="str">'{
+      "@type": "MessageCard",
+      "@context": "http://schema.org/extensions",
+      "summary": "Pipeline Failed",
+      "themeColor": "cc0000",
+      "sections": [{
+        "activityTitle": "QA Automation Failed",
+        "text": "Regression tests failed in commit $(Build.SourceVersion)"
+      }]
+    }'</span>
+  <span class="kw">condition</span>: failed()  <span class="cm"># Only run if previous task failed</span></div>
+    </div>
+  </div>
+
+  <div class="qa-card" id="q232">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q232</span>
+      <span class="q-text">How do you handle long-running tests in CI/CD pipelines?</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-adv">Advanced</span></div>
+      <p><strong>Strategies I use:</strong></p>
+      <ul>
+        <li><strong>Test stratification:</strong> Smoke tests (fast) run on every commit. Regression suite runs nightly on schedule. Extended tests (performance) run weekly.</li>
+        <li><strong>Parallel execution:</strong> Break regression suite into 4 parallel jobs — each job runs 1/4 of tests. Total time: 1hr single-threaded becomes 15 min with 4 workers.</li>
+        <li><strong>Tiered testing:</strong> Commit → smoke (5 min). PR to develop → smoke (5 min). Merge to develop → full regression (60 min, nightly schedule).</li>
+        <li><strong>Timeout configuration:</strong> Set pipeline timeout to avoid hanging. If test hangs beyond X minutes, kill it and report failure.</li>
+      </ul>
+      <div class="code-block"><span class="kw">jobs</span>:
+- <span class="kw">job</span>: <span class="str">RegressionTests</span>
+  <span class="kw">strategy</span>:
+    <span class="kw">parallel</span>: <span class="str">4</span>  <span class="cm"># Splits into 4 parallel jobs</span></div>
+    </div>
+  </div>
+
+  <div class="qa-card" id="q233">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q233</span>
+      <span class="q-text">What is Continuous Integration (CI)? Explain your project's CI approach.</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-basic">Basic</span></div>
+      <p><strong>CI = Continuous Integration:</strong> Practice of automatically building and testing code multiple times per day. Every commit triggers automated build + tests. Feedback is immediate — developers know within minutes if their change broke something.</p>
+      <p><strong>Our CI approach:</strong> Developers commit to feature branches → CI runs on branch (unit tests pass). PR to develop → CI runs again + smoke automation tests. If all pass and code review approved → merge to develop. Merge triggers full smoke suite. If develop is stable, merge to main (release branch) automatically if all smoke tests pass."</p>
+    </div>
+  </div>
+
+  <div class="qa-card" id="q234">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q234</span>
+      <span class="q-text">What is Continuous Delivery (CD)? How does it differ from Continuous Deployment?</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-basic">Basic</span></div>
+      <p><strong>Continuous Delivery (CD):</strong> Automatically deploys validated code to staging environment. It's ready for production anytime but requires manual approval for prod deployment. Our approach — every merge to main is auto-deployed to staging with full smoke tests. Production deployment requires manual click-to-deploy + approvals.</p>
+      <p><strong>Continuous Deployment:</strong> Goes further — automatically deploys to production without manual approval. Higher risk, requires exceptional test coverage and monitoring. We don't do this in healthcare due to regulatory requirements.</p>
+    </div>
+  </div>
+
+  <div class="qa-card" id="q235">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q235</span>
+      <span class="q-text">How do you handle secrets and sensitive data in Azure Pipelines?</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-adv">Advanced</span></div>
+      <p><strong>Never store secrets in code or pipeline YAML directly.</strong></p>
+      <p><strong>Best practices I follow:</strong></p>
+      <ul>
+        <li>Store secrets in Azure Key Vault (managed by DevOps team)</li>
+        <li>Reference Key Vault from Variable Groups in Pipelines</li>
+        <li>Mark variables as "secret" — they're masked in logs as [REDACTED]</li>
+        <li>Use Service Principals for authentication instead of shared credentials</li>
+        <li>Rotate secrets regularly (quarterly audit)</li>
+      </ul>
+      <div class="code-block"><span class="kw">variables</span>:
+- <span class="kw">group</span>: <span class="str">'KeyVault-Secrets'</span>  <span class="cm"># Linked to Azure Key Vault</span>
+
+<span class="kw">steps</span>:
+- <span class="kw">script</span>: |
+    <span class="kw">echo</span> <span class="str">'$(DBPassword)'</span>  <span class="cm"># Outputs [REDACTED] in pipeline logs</span></div>
+    </div>
+  </div>
+
+  <div class="qa-card" id="q236">
+    <div class="q-block" onclick="toggle(this)">
+      <span class="q-num">Q236–Q270</span>
+      <span class="q-text">Additional Azure DevOps Topics: Pipeline Templates, Scheduled Triggers, Code Coverage Analysis, Build Artifacts, Release History, Multi-environment deployments</span>
+      <span class="q-toggle">▶</span>
+    </div>
+    <div class="a-block">
+      <div class="tags"><span class="tag tag-mid">Mid</span><span class="tag tag-adv">Advanced</span></div>
+      <p><strong>Q236 — Pipeline Templates:</strong> Reusable YAML templates reduce duplication. Create a template for common stage/job patterns. Reference in multiple pipelines. Example: "test-stage-template.yml" with standard test steps — all pipelines reference it.</p>
+      <p><strong>Q237 — Scheduled triggers:</strong> Run tests on schedule (nightly, weekly) without code changes.</p>
+      <div class="code-block"><span class="kw">schedules</span>:
+- <span class="kw">cron</span>: <span class="str">"0 2 * * *"</span>  <span class="cm"># 2 AM daily</span>
+  <span class="kw">displayName</span>: <span class="str">Nightly Regression</span>
+  <span class="kw">branches</span>:
+    <span class="kw">include</span>: [<span class="str">main</span>]</div>
+      <p><strong>Q238 — Build artifacts:</strong> Compiled output (.dll, .exe, .nupkg) stored as pipeline artifacts. Available for download or passed to deployment jobs. In our case: compiled test DLLs are artifacts used by test jobs.</p>
+      <p><strong>Q239 — Code Coverage Analysis:</strong> Cobertura format. Publish coverage → view coverage % per assembly/class. Set quality gates: if coverage &lt; 80% → build fails. I track coverage trends month-over-month.</p>
+      <p><strong>Q240 — Multi-environment deployments:</strong> Define Development, Staging, Production environments with separate approval requirements. Deploy to Dev automatically, Staging with QA approval, Production with both QA + PO approval.</p>
+      <p><strong>Q241 — Pipeline retention policies:</strong> Keep recent builds (30 days) and successful builds indefinitely (auditing). Delete old failed builds to save storage. Configured in pipeline settings.</p>
+      <p><strong>Q242 — Pipeline as code best practices:</strong> Version control your azure-pipelines.yml. Review pipeline changes in PRs before merge. Use YAML schema validation in your IDE. Document complex pipeline logic with comments. Keep pipeline DRY using templates and variables.</p>
+    </div>
+  </div>
+
+</div><!-- /section 5 -->
 <!-- ============================================================
      SECTION 6 — AGILE / SCRUM (EXPANDED Q271–Q310)
      ============================================================ -->
@@ -3918,19 +4285,21 @@ test.<span class="fn">describe</span>(<span class="str">'Healthcare Portal Login
 </div><!-- /section 12 -->
 
 </div><!-- /main -->
-
+// ...existing code...
 <script>
-  // ... [JavaScript code remains the same as before] ...
+  // Replace placeholder script with full behavior (toggle, search, nav, progress)
   document.addEventListener('DOMContentLoaded', () => {
+    // Setup each question block
     document.querySelectorAll('.q-block').forEach(block => {
-      block.removeAttribute('onclick');
-      block.setAttribute('tabindex', '0');
-      block.setAttribute('role', 'button');
-      const card = block.parentElement;
-      const answer = card.querySelector('.a-block');
+      const answer = block.nextElementSibling; // .a-block
       const toggleIcon = block.querySelector('.q-toggle');
+
+      // reflect initial state
       const isOpen = answer && answer.classList.contains('open');
+      block.setAttribute('role', 'button');
+      block.setAttribute('tabindex', '0');
       block.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
       const toggle = () => {
         if (!answer) return;
         const nowOpen = answer.classList.toggle('open');
@@ -3938,22 +4307,54 @@ test.<span class="fn">describe</span>(<span class="str">'Healthcare Portal Login
         block.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
         updateProgress();
       };
-      block.addEventListener('click', (e) => { if (e.target.closest('.a-block')) return; toggle(); });
+
+      block.addEventListener('click', (e) => {
+        // ignore clicks originating from the open answer area
+        if (e.target.closest('.a-block')) return;
+        toggle();
+      });
+
       block.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle();
+        }
       });
     });
+
+    // Nav jump buttons (data-target)
     document.querySelectorAll('.nav-btn').forEach(btn => {
       btn.removeAttribute('onclick');
       const targetId = btn.getAttribute('data-target');
-      if (!targetId) return;
-      btn.addEventListener('click', (e) => {
-        const el = document.getElementById(targetId);
-        if (!el) return;
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      btn.addEventListener('click', () => {
+        const target = document.getElementById(targetId);
+        if (!target) return;
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // mark active class
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b === btn));
       });
     });
+
+    // Search box event (prevent inline duplicate handlers)
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      searchInput.removeAttribute('oninput');
+      searchInput.addEventListener('input', (e) => filterSearch(e.target.value));
+    }
+
+    // initial state
     updateProgress();
+
+    // If there is a hash in URL, expand that section's cards
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      const el = document.getElementById(id);
+      if (el) {
+        el.querySelectorAll('.a-block').forEach(a => a.classList.add('open'));
+        el.querySelectorAll('.q-toggle').forEach(t => t.classList.add('open'));
+      }
+      updateProgress();
+    }
   });
 
   function expandSection(sectionId) {
@@ -3961,26 +4362,29 @@ test.<span class="fn">describe</span>(<span class="str">'Healthcare Portal Login
     if (!section) return;
     section.querySelectorAll('.a-block').forEach(a => a.classList.add('open'));
     section.querySelectorAll('.q-toggle').forEach(t => t.classList.add('open'));
+    section.querySelectorAll('.q-block').forEach(b => b.setAttribute('aria-expanded', 'true'));
     updateProgress();
   }
+
   function collapseSection(sectionId) {
     const section = document.getElementById(sectionId);
     if (!section) return;
     section.querySelectorAll('.a-block').forEach(a => a.classList.remove('open'));
     section.querySelectorAll('.q-toggle').forEach(t => t.classList.remove('open'));
+    section.querySelectorAll('.q-block').forEach(b => b.setAttribute('aria-expanded', 'false'));
     updateProgress();
   }
 
   function filterSearch(query) {
     const q = (query || '').toLowerCase().trim();
     document.querySelectorAll('.qa-card').forEach(card => {
-      const text = card.textContent.toLowerCase();
-      card.classList.toggle('hidden', q.length > 1 && !text.includes(q));
+      const text = (card.textContent || '').toLowerCase();
+      if (!q) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.toggle('hidden', !text.includes(q));
+      }
     });
-    if (q.length > 1) {
-      document.querySelectorAll('.qa-card:not(.hidden) .a-block').forEach(a => a.classList.add('open'));
-      document.querySelectorAll('.qa-card:not(.hidden) .q-toggle').forEach(t => t.classList.add('open'));
-    }
     updateProgress();
   }
 
@@ -3998,7 +4402,18 @@ test.<span class="fn">describe</span>(<span class="str">'Healthcare Portal Login
     if (fillEl) fillEl.style.width = pct + '%';
   }
 
-  window.addEventListener('scroll', () => {});
+  // Optional: scroll spy to highlight nav button for current section
+  window.addEventListener('scroll', () => {
+    const offset = window.scrollY + 120;
+    document.querySelectorAll('.section').forEach(section => {
+      const top = section.offsetTop;
+      const bottom = top + section.offsetHeight;
+      const btn = document.querySelector(`.nav-btn[data-target="${section.id}"]`);
+      if (!btn) return;
+      if (offset >= top && offset < bottom) btn.classList.add('active');
+      else btn.classList.remove('active');
+    });
+  });
 </script>
 </body>
 </html>
