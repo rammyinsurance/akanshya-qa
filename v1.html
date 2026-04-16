@@ -348,18 +348,18 @@
 <!-- NAV -->
 <div class="sticky-nav">
   <span>Jump to:</span>
-  <button class="nav-btn" onclick="scrollTo('s1')">HR / Intro</button>
-  <button class="nav-btn" onclick="scrollTo('s2')">Manual QA</button>
-  <button class="nav-btn" onclick="scrollTo('s3')">Selenium C#</button>
-  <button class="nav-btn" onclick="scrollTo('s4')">BDD / SpecFlow</button>
-  <button class="nav-btn" onclick="scrollTo('s5')">Azure DevOps</button>
-  <button class="nav-btn" onclick="scrollTo('s6')">Agile / Scrum</button>
-  <button class="nav-btn" onclick="scrollTo('s7')">QA Leadership</button>
-  <button class="nav-btn" onclick="scrollTo('s8')">Salesforce QA</button>
-  <button class="nav-btn" onclick="scrollTo('s9')">SQL / API</button>
-  <button class="nav-btn" onclick="scrollTo('s10')">Playwright</button>
-  <button class="nav-btn" onclick="scrollTo('s11')">Scenarios</button>
-  <button class="nav-btn" onclick="scrollTo('s12')">Metrics / ROI</button>
+  <button class="nav-btn" data-target="s1">HR / Intro</button>
+  <button class="nav-btn" data-target="s2">Manual QA</button>
+  <button class="nav-btn" data-target="s3">Selenium C#</button>
+  <button class="nav-btn" data-target="s4">BDD / SpecFlow</button>
+  <button class="nav-btn" data-target="s5">Azure DevOps</button>
+  <button class="nav-btn" data-target="s6">Agile / Scrum</button>
+  <button class="nav-btn" data-target="s7">QA Leadership</button>
+  <button class="nav-btn" data-target="s8">Salesforce QA</button>
+  <button class="nav-btn" data-target="s9">SQL / API</button>
+  <button class="nav-btn" data-target="s10">Playwright</button>
+  <button class="nav-btn" data-target="s11">Scenarios</button>
+  <button class="nav-btn" data-target="s12">Metrics / ROI</button>
 </div>
 
 <!-- SEARCH -->
@@ -868,7 +868,7 @@
     </div>
   </div>
 
-</div><!-- /section 1 -->
+</div>
 
 <!-- ============================================================
      SECTION 2 — MANUAL QA
@@ -2813,24 +2813,24 @@ test.<span class="fn">describe</span>(<span class="str">'Healthcare Portal Login
   test(<span class="str">'should login with valid credentials'</span>, <span class="kw">async</span> ({ page }) => {
     <span class="kw">await</span> page.<span class="fn">goto</span>(<span class="str">'https://portal.hospital.com/login'</span>);
     
-    <span class="kw">await</span> page.<span class="fn">fill</span>(<span class="str">'#username'</span>, <span class="str">'nurse.jones@hospital.com'</span>);
-    <span class="kw">await</span> page.<span class="fn">fill</span>(<span class="str">'#password'</span>, <span class="str">'Secure@123'</span>);
+    <span class="kw">await</span> page.<span class="fn">fill</span>(<span class="str">'#username'</span>, <span class="str">"nurse.jones@hospital.com"</span>);
+    <span class="kw">await</span> page.<span class="fn">fill</span>(<span class="str">'#password'</span>, <span class="str">"Secure@123"</span>);
     <span class="kw">await</span> page.<span class="fn">click</span>(<span class="str">'button[type="submit"]'</span>);
     
     <span class="cm">// Auto-wait — no need for explicit waits</span>
     <span class="kw">await</span> expect(page).<span class="fn">toHaveURL</span>(<span class="str">/dashboard/</span>);
     <span class="kw">await</span> expect(page.<span class="fn">locator</span>(<span class="str">'.welcome-msg'</span>))
-      .<span class="fn">toContainText</span>(<span class="str">'Welcome, Nurse Jones'</span>);
+      .<span class="fn">toContainText</span>(<span class="str">"Welcome, Nurse Jones"</span>);
   });
   
   test(<span class="str">'should show error for invalid credentials'</span>, <span class="kw">async</span> ({ page }) => {
     <span class="kw">await</span> page.<span class="fn">goto</span>(<span class="str">'https://portal.hospital.com/login'</span>);
-    <span class="kw">await</span> page.<span class="fn">fill</span>(<span class="str">'#username'</span>, <span class="str">'wrong@test.com'</span>);
-    <span class="kw">await</span> page.<span class="fn">fill</span>(<span class="str">'#password'</span>, <span class="str">'wrongpass'</span>);
+    <span class="kw">await</span> page.<span class="fn">fill</span>(<span class="str">'#username'</span>, <span class="str">"wrong@test.com"</span>);
+    <span class="kw">await</span> page.<span class="fn">fill</span>(<span class="str">'#password'</span>, <span class="str">"wrongpass"</span>);
     <span class="kw">await</span> page.<span class="fn">click</span>(<span class="str">'button[type="submit"]'</span>);
     
     <span class="kw">await</span> expect(page.<span class="fn">locator</span>(<span class="str">'.error-msg'</span>))
-      .<span class="fn">toHaveText</span>(<span class="str">'Invalid username or password'</span>);
+      .<span class="fn">toHaveText</span>(<span class="str">"Invalid username or password"</span>);
   });
 });</div>
     </div>
@@ -2903,7 +2903,7 @@ test.<span class="fn">describe</span>(<span class="str">'Healthcare Portal Login
       <span class="q-toggle">▶</span>
     </div>
     <div class="a-block">
-      <div class="tags"><span class="tag tag-scenario">Scenario</span><span class="tag tag-adv">Critical</span></div>
+      <div class="tags"><span class="tag tag-scenario">Scenario</span><span class="tag-adv">Critical</span></div>
       <p><strong>Immediate actions:</strong></p>
       <ul>
         <li><strong>Triage</strong> — Are failures due to automation breakage (locator changes) or actual product defects? This distinction is critical.</li>
@@ -3138,44 +3138,83 @@ test.<span class="fn">describe</span>(<span class="str">'Healthcare Portal Login
 </div><!-- /main -->
 
 <script>
-  // Toggle answer
-  function toggle(qBlock) {
-    const card = qBlock.parentElement;
-    const answerBlock = card.querySelector('.a-block');
-    const toggle = qBlock.querySelector('.q-toggle');
-    const isOpen = answerBlock.classList.contains('open');
-    answerBlock.classList.toggle('open');
-    toggle.classList.toggle('open');
-    updateProgress();
-  }
+  // Initialize interactive behaviour after DOM ready
+  document.addEventListener('DOMContentLoaded', () => {
+    // Setup question toggles (remove inline onclick usage)
+    document.querySelectorAll('.q-block').forEach(block => {
+      block.removeAttribute('onclick');
+      block.setAttribute('tabindex', '0');
+      block.setAttribute('role', 'button');
 
-  // Expand/collapse section
+      const card = block.parentElement;
+      const answer = card.querySelector('.a-block');
+      const toggleIcon = block.querySelector('.q-toggle');
+
+      // reflect initial state
+      const isOpen = answer && answer.classList.contains('open');
+      block.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+      const toggle = () => {
+        if (!answer) return;
+        const nowOpen = answer.classList.toggle('open');
+        if (toggleIcon) toggleIcon.classList.toggle('open', nowOpen);
+        block.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
+        updateProgress();
+      };
+
+      block.addEventListener('click', (e) => {
+        // ignore clicks originating from interactive children (if any)
+        if (e.target.closest('.a-block')) return;
+        toggle();
+      });
+
+      block.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggle();
+        }
+      });
+    });
+
+    // Setup nav jump buttons (use data-target to avoid naming conflicts)
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.removeAttribute('onclick');
+      const targetId = btn.getAttribute('data-target');
+      if (!targetId) return;
+      btn.addEventListener('click', (e) => {
+        const el = document.getElementById(targetId);
+        if (!el) return;
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Run initial progress calc
+    updateProgress();
+  });
+
+  // Expand/collapse section (kept for existing expand-controls inline buttons)
   function expandSection(sectionId) {
     const section = document.getElementById(sectionId);
+    if (!section) return;
     section.querySelectorAll('.a-block').forEach(a => a.classList.add('open'));
     section.querySelectorAll('.q-toggle').forEach(t => t.classList.add('open'));
     updateProgress();
   }
   function collapseSection(sectionId) {
     const section = document.getElementById(sectionId);
+    if (!section) return;
     section.querySelectorAll('.a-block').forEach(a => a.classList.remove('open'));
     section.querySelectorAll('.q-toggle').forEach(t => t.classList.remove('open'));
     updateProgress();
   }
 
-  // Scroll to section
-  function scrollTo(id) {
-    document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
   // Search filter
   function filterSearch(query) {
-    const q = query.toLowerCase();
+    const q = (query || '').toLowerCase().trim();
     document.querySelectorAll('.qa-card').forEach(card => {
       const text = card.textContent.toLowerCase();
       card.classList.toggle('hidden', q.length > 1 && !text.includes(q));
     });
-    // If results, expand them
     if (q.length > 1) {
       document.querySelectorAll('.qa-card:not(.hidden) .a-block').forEach(a => a.classList.add('open'));
       document.querySelectorAll('.qa-card:not(.hidden) .q-toggle').forEach(t => t.classList.add('open'));
@@ -3185,17 +3224,22 @@ test.<span class="fn">describe</span>(<span class="str">'Healthcare Portal Login
 
   // Progress tracker
   function updateProgress() {
-    const total = document.querySelectorAll('.qa-card:not(.hidden)').length;
-    const opened = document.querySelectorAll('.qa-card:not(.hidden) .a-block.open').length;
+    const visibleCards = document.querySelectorAll('.qa-card:not(.hidden)');
+    const total = visibleCards.length;
+    let opened = 0;
+    visibleCards.forEach(card => {
+      if (card.querySelector('.a-block')?.classList.contains('open')) opened++;
+    });
     const pct = total > 0 ? Math.round((opened / total) * 100) : 0;
-    document.getElementById('progressPct').textContent = pct + '%';
-    document.getElementById('progressFill').style.width = pct + '%';
+    const pctEl = document.getElementById('progressPct');
+    const fillEl = document.getElementById('progressFill');
+    if (pctEl) pctEl.textContent = pct + '%';
+    if (fillEl) fillEl.style.width = pct + '%';
   }
 
-  // Scroll progress
+  // (optional) keep window scroll handling if needed elsewhere
   window.addEventListener('scroll', () => {
-    const docH = document.documentElement.scrollHeight - window.innerHeight;
-    const scrolled = Math.round((window.scrollY / docH) * 100);
+    // placeholder for future scroll-related UI updates
   });
 </script>
 </body>
