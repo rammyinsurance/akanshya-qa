@@ -27,1041 +27,516 @@
       --yellow: #fbbf24;
       --pink: #f472b6;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── Hero ─────────────────────────────────────── */
-    .hero {
-      position: relative;
-      padding: 80px 40px 60px;
-      text-align: center;
-      overflow: hidden;
-      border-bottom: 1px solid var(--border);
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 600px 400px at 30% 20%, #f9731612 0%, transparent 70%),
-        radial-gradient(ellipse 500px 350px at 70% 60%, #22d3ee0a 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-badge {
-      display: inline-block;
-      padding: 6px 16px;
-      border-radius: 100px;
-      background: var(--accent-dim);
-      border: 1px solid #f9731644;
-      color: var(--accent);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      font-weight: 900;
-      color: var(--text-heading);
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    .hero { position: relative; padding: 80px 40px 60px; text-align: center; overflow: hidden; border-bottom: 1px solid var(--border); }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 600px 400px at 30% 20%, #f9731612 0%, transparent 70%), radial-gradient(ellipse 500px 350px at 70% 60%, #22d3ee0a 0%, transparent 70%); pointer-events: none; }
+    .hero-badge { display: inline-block; padding: 6px 16px; border-radius: 100px; background: var(--accent-dim); border: 1px solid #f9731644; color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 24px; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900; color: var(--text-heading); letter-spacing: -0.02em; line-height: 1.15; }
     .hero h1 span { color: var(--accent); }
-    .hero p {
-      max-width: 600px;
-      margin: 20px auto 0;
-      color: var(--text-muted);
-      font-size: 1.05rem;
-    }
-
-    /* ── Meta cards row ───────────────────────────── */
-    .meta-row {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding: 32px 40px 0;
-    }
-    .meta-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 28px;
-      min-width: 200px;
-      text-align: center;
-    }
-    .meta-card .label {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-    .meta-card .value {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
-      color: var(--accent2);
-    }
-
-    /* ── Layout ───────────────────────────────────── */
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 48px 32px 80px;
-    }
-
-    /* ── Flow diagram ─────────────────────────────── */
+    .hero p { max-width: 600px; margin: 20px auto 0; color: var(--text-muted); font-size: 1.05rem; }
+    .meta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; padding: 32px 40px 0; }
+    .meta-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 28px; min-width: 200px; text-align: center; }
+    .meta-card .label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 6px; }
+    .meta-card .value { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: var(--accent2); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 48px 32px 80px; }
     .flow-section { margin-bottom: 56px; }
-    .flow-section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: var(--text-heading);
-      margin-bottom: 28px;
-    }
-    .flow-steps {
-      display: flex;
-      gap: 0;
-      align-items: center;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-    .flow-step {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 22px;
-      text-align: center;
-      min-width: 130px;
-      position: relative;
-    }
-    .flow-step .num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--accent);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-bottom: 4px;
-    }
-    .flow-step .name {
-      font-weight: 600;
-      font-size: 0.88rem;
-      color: var(--text-heading);
-    }
-    .flow-arrow {
-      color: var(--text-muted);
-      font-size: 1.2rem;
-      padding: 0 6px;
-      user-select: none;
-    }
-
-    /* ── Structure diagram ────────────────────────── */
+    .flow-section h2, .structure-section h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--text-heading); margin-bottom: 28px; }
+    .flow-steps { display: flex; gap: 0; align-items: center; flex-wrap: wrap; justify-content: center; }
+    .flow-step { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 22px; text-align: center; min-width: 130px; }
+    .flow-step .num { font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+    .flow-step .name { font-weight: 600; font-size: 0.88rem; color: var(--text-heading); }
+    .flow-arrow { color: var(--text-muted); font-size: 1.2rem; padding: 0 6px; user-select: none; }
     .structure-section { margin-bottom: 56px; }
-    .structure-section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: var(--text-heading);
-      margin-bottom: 28px;
-    }
-    .tree {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 28px 32px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      line-height: 2;
-      overflow-x: auto;
-    }
-    .tree .folder { color: var(--accent2); }
-    .tree .file { color: var(--text); }
-    .tree .comment { color: var(--text-muted); font-style: italic; }
-
-    /* ── Code sections ────────────────────────────── */
-    .file-section {
-      margin-bottom: 48px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      background: var(--bg-card);
-    }
-    .file-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 16px 24px;
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(135deg, var(--bg-card), #181c24);
-      cursor: pointer;
-      user-select: none;
-      transition: background 0.2s;
-    }
+    .tree { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 28px 32px; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 2; overflow-x: auto; }
+    .tree .folder { color: var(--accent2); } .tree .file { color: var(--text); } .tree .comment { color: var(--text-muted); font-style: italic; }
+    .file-section { margin-bottom: 48px; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: var(--bg-card); }
+    .file-header { display: flex; align-items: center; gap: 12px; padding: 16px 24px; border-bottom: 1px solid var(--border); background: linear-gradient(135deg, var(--bg-card), #181c24); cursor: pointer; user-select: none; transition: background 0.2s; }
     .file-header:hover { background: #181c24; }
-    .file-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
+    .file-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; }
     .file-icon.page { background: var(--accent-dim); color: var(--accent); border: 1px solid #f9731633; }
     .file-icon.test { background: var(--green-dim); color: var(--green); border: 1px solid #34d39933; }
     .file-icon.util { background: var(--purple-dim); color: var(--purple); border: 1px solid #a78bfa33; }
     .file-icon.config { background: var(--accent2-dim); color: var(--accent2); border: 1px solid #22d3ee33; }
-
-    .file-name {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: var(--text-heading);
-    }
-    .file-desc {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-left: auto;
-    }
-    .file-toggle {
-      margin-left: 12px;
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      transition: transform 0.3s;
-    }
+    .file-name { font-family: 'JetBrains Mono', monospace; font-size: 0.92rem; font-weight: 600; color: var(--text-heading); }
+    .file-desc { font-size: 0.8rem; color: var(--text-muted); margin-left: auto; }
+    .file-toggle { margin-left: 12px; color: var(--text-muted); font-size: 1.1rem; transition: transform 0.3s; }
     .file-section.collapsed .file-toggle { transform: rotate(-90deg); }
     .file-section.collapsed .code-wrapper { display: none; }
-
-    .code-wrapper {
-      overflow-x: auto;
-      background: var(--bg-code);
-    }
-    pre {
-      padding: 24px 28px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
-      line-height: 1.85;
-      overflow-x: auto;
-      tab-size: 2;
-      color: var(--text);
-    }
-
-    /* Syntax highlighting */
-    .kw { color: var(--pink); }
-    .str { color: var(--green); }
-    .cmt { color: var(--text-muted); font-style: italic; }
-    .fn { color: var(--accent2); }
-    .num { color: var(--yellow); }
-    .cls { color: var(--accent); }
-    .prop { color: var(--purple); }
-    .par { color: #8b95a8; }
-    .op { color: #8b95a8; }
-
-    /* ── Questions section ────────────────────────── */
-    .questions-section {
-      margin-top: 64px;
-      padding-top: 48px;
-      border-top: 1px solid var(--border);
-    }
-    .questions-section > h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: var(--text-heading);
-      margin-bottom: 36px;
-      text-align: center;
-    }
-    .q-category {
-      margin-bottom: 36px;
-    }
-    .q-category h3 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--accent);
-      margin-bottom: 16px;
-      padding-left: 16px;
-      border-left: 3px solid var(--accent);
-    }
-    .q-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .q-list li {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 20px;
-      font-size: 0.9rem;
-      line-height: 1.6;
-      display: flex;
-      gap: 12px;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .q-list li:hover {
-      border-color: var(--border-accent);
-      background: #171a22;
-    }
-    .q-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--accent2);
-      flex-shrink: 0;
-      padding-top: 2px;
-    }
-
-    /* ── Setup section ────────────────────────────── */
-    .setup-section {
-      margin-top: 64px;
-      padding-top: 48px;
-      border-top: 1px solid var(--border);
-    }
-    .setup-section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: var(--text-heading);
-      margin-bottom: 24px;
-    }
-    .setup-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .setup-step {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 24px;
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-    }
-    .setup-step .step-num {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: var(--accent-dim);
-      border: 1px solid #f9731644;
-      color: var(--accent);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .setup-step code {
-      background: var(--bg-code);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 2px 8px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      color: var(--accent2);
-    }
-    .setup-step .step-title {
-      font-weight: 600;
-      color: var(--text-heading);
-      margin-bottom: 4px;
-    }
-
-    /* ── Footer ───────────────────────────────────── */
-    .footer {
-      text-align: center;
-      padding: 40px;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 0.8rem;
-    }
-
-    /* ── Responsive ───────────────────────────────── */
-    @media (max-width: 700px) {
-      .hero { padding: 48px 20px 40px; }
-      .container { padding: 32px 16px 60px; }
-      .meta-row { padding: 24px 16px 0; }
-      .flow-steps { flex-direction: column; gap: 8px; }
-      .flow-arrow { transform: rotate(90deg); }
-      pre { padding: 16px; font-size: 0.72rem; }
-      .file-desc { display: none; }
-    }
+    .code-wrapper { overflow-x: auto; background: var(--bg-code); }
+    pre { padding: 24px 28px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; line-height: 1.85; overflow-x: auto; tab-size: 2; color: var(--text); }
+    .kw { color: var(--pink); } .str { color: var(--green); } .cmt { color: var(--text-muted); font-style: italic; } .fn { color: var(--accent2); } .num { color: var(--yellow); } .cls { color: var(--accent); } .prop { color: var(--purple); } .par { color: #8b95a8; } .op { color: #8b95a8; }
+    .questions-section { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--border); }
+    .questions-section > h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--text-heading); margin-bottom: 12px; text-align: center; }
+    .questions-section > .subtitle { text-align: center; color: var(--text-muted); margin-bottom: 36px; font-size: 0.92rem; }
+    .q-category { margin-bottom: 36px; }
+    .q-category h3 { font-size: 1.05rem; font-weight: 700; color: var(--accent); margin-bottom: 16px; padding-left: 16px; border-left: 3px solid var(--accent); }
+    .q-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .qa-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.2s; }
+    .qa-card:hover { border-color: var(--border-accent); }
+    .qa-card.open { border-color: #f9731644; }
+    .qa-question { display: flex; gap: 12px; padding: 16px 20px; cursor: pointer; user-select: none; align-items: flex-start; transition: background 0.2s; }
+    .qa-question:hover { background: #171a22; }
+    .q-num { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--accent2); flex-shrink: 0; padding-top: 3px; min-width: 28px; }
+    .q-text { font-size: 0.9rem; line-height: 1.6; color: var(--text-heading); flex: 1; }
+    .q-toggle { color: var(--text-muted); font-size: 0.85rem; flex-shrink: 0; transition: transform 0.3s; padding-top: 3px; }
+    .qa-card.open .q-toggle { transform: rotate(180deg); }
+    .qa-answer { display: none; padding: 0 20px 20px 60px; font-size: 0.88rem; line-height: 1.75; color: var(--text); border-top: 1px solid var(--border); }
+    .qa-card.open .qa-answer { display: block; padding-top: 16px; }
+    .qa-answer code { background: var(--bg-code); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--accent2); }
+    .qa-answer .ans-code { display: block; background: var(--bg-code); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; margin: 10px 0; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; line-height: 1.7; overflow-x: auto; white-space: pre; color: var(--text); }
+    .qa-answer strong { color: var(--text-heading); font-weight: 600; }
+    .qa-answer em { color: var(--accent); font-style: normal; }
+    .qa-controls { display: flex; gap: 12px; justify-content: center; margin-bottom: 32px; }
+    .qa-controls button { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; padding: 8px 20px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; }
+    .qa-controls button:hover { border-color: var(--accent); color: var(--accent); }
+    .setup-section { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--border); }
+    .setup-section h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--text-heading); margin-bottom: 24px; }
+    .setup-steps { display: flex; flex-direction: column; gap: 16px; }
+    .setup-step { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; display: flex; gap: 16px; align-items: flex-start; }
+    .setup-step .step-num { width: 30px; height: 30px; border-radius: 50%; background: var(--accent-dim); border: 1px solid #f9731644; color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .setup-step code { background: var(--bg-code); border: 1px solid var(--border); border-radius: 6px; padding: 2px 8px; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--accent2); }
+    .setup-step .step-title { font-weight: 600; color: var(--text-heading); margin-bottom: 4px; }
+    .footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; }
+    @media (max-width: 700px) { .hero { padding: 48px 20px 40px; } .container { padding: 32px 16px 60px; } .meta-row { padding: 24px 16px 0; } .flow-steps { flex-direction: column; gap: 8px; } .flow-arrow { transform: rotate(90deg); } pre { padding: 16px; font-size: 0.72rem; } .file-desc { display: none; } .qa-answer { padding-left: 20px; } }
   </style>
 </head>
 <body>
-
-  <!-- ══════════════════════ HERO ══════════════════════ -->
   <header class="hero">
     <div class="hero-badge">Playwright Training Assignment</div>
     <h1>Orange HRM <span>Automation</span></h1>
-    <p>End-to-end test suite using Page Object Model — add &amp; verify a dependent, with full review prep.</p>
+    <p>End-to-end test suite using Page Object Model &mdash; add &amp; verify a dependent, with full review prep.</p>
   </header>
-
   <div class="meta-row">
-    <div class="meta-card">
-      <div class="label">Framework</div>
-      <div class="value">Playwright + Node.js</div>
-    </div>
-    <div class="meta-card">
-      <div class="label">Pattern</div>
-      <div class="value">Page Object Model</div>
-    </div>
-    <div class="meta-card">
-      <div class="label">Deadline</div>
-      <div class="value">20 Apr 2026</div>
-    </div>
-    <div class="meta-card">
-      <div class="label">Files</div>
-      <div class="value">7 files</div>
-    </div>
+    <div class="meta-card"><div class="label">Framework</div><div class="value">Playwright + Node.js</div></div>
+    <div class="meta-card"><div class="label">Pattern</div><div class="value">Page Object Model</div></div>
+    <div class="meta-card"><div class="label">Deadline</div><div class="value">20 Apr 2026</div></div>
+    <div class="meta-card"><div class="label">Files</div><div class="value">7 files</div></div>
   </div>
-
   <div class="container">
-
-    <!-- ══════════════════ TEST FLOW ═════════════════ -->
     <section class="flow-section">
       <h2>Test Flow</h2>
       <div class="flow-steps">
-        <div class="flow-step"><div class="num">Step 1</div><div class="name">Open Login</div></div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-step"><div class="num">Step 2</div><div class="name">Login</div></div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-step"><div class="num">Step 3</div><div class="name">My Info</div></div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-step"><div class="num">Step 4</div><div class="name">Dependents</div></div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-step"><div class="num">Step 5</div><div class="name">Add Dependent</div></div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-step"><div class="num">Step 6</div><div class="name">Verify</div></div>
-        <span class="flow-arrow">→</span>
+        <div class="flow-step"><div class="num">Step 1</div><div class="name">Open Login</div></div><span class="flow-arrow">&rarr;</span>
+        <div class="flow-step"><div class="num">Step 2</div><div class="name">Login</div></div><span class="flow-arrow">&rarr;</span>
+        <div class="flow-step"><div class="num">Step 3</div><div class="name">My Info</div></div><span class="flow-arrow">&rarr;</span>
+        <div class="flow-step"><div class="num">Step 4</div><div class="name">Dependents</div></div><span class="flow-arrow">&rarr;</span>
+        <div class="flow-step"><div class="num">Step 5</div><div class="name">Add Dependent</div></div><span class="flow-arrow">&rarr;</span>
+        <div class="flow-step"><div class="num">Step 6</div><div class="name">Verify</div></div><span class="flow-arrow">&rarr;</span>
         <div class="flow-step"><div class="num">Step 7</div><div class="name">Logout</div></div>
       </div>
     </section>
-
-    <!-- ══════════════════ STRUCTURE ═════════════════ -->
     <section class="structure-section">
       <h2>Project Structure</h2>
-      <div class="tree">
-<span class="folder">playwright-orangehrm/</span>
-├── <span class="folder">pages/</span>                      <span class="comment">── Page Object Model classes</span>
-│   ├── <span class="file">LoginPage.js</span>             <span class="comment">── Login locators &amp; actions</span>
-│   ├── <span class="file">DashboardPage.js</span>         <span class="comment">── Sidebar nav &amp; logout</span>
-│   └── <span class="file">DependentsPage.js</span>        <span class="comment">── Add, verify, delete dependents</span>
-├── <span class="folder">tests/</span>
-│   └── <span class="file">dependents.spec.js</span>       <span class="comment">── Main E2E test</span>
-├── <span class="folder">utils/</span>
-│   └── <span class="file">testData.js</span>              <span class="comment">── Credentials &amp; test data</span>
-├── <span class="file">playwright.config.js</span>         <span class="comment">── Playwright configuration</span>
-└── <span class="file">package.json</span>                 <span class="comment">── Dependencies &amp; scripts</span>
-      </div>
+      <div class="tree"><span class="folder">playwright-orangehrm/</span>
+&#9500;&#9472;&#9472; <span class="folder">pages/</span>                      <span class="comment">&#9472;&#9472; Page Object Model classes</span>
+&#9474;   &#9500;&#9472;&#9472; <span class="file">LoginPage.js</span>             <span class="comment">&#9472;&#9472; Login locators &amp; actions</span>
+&#9474;   &#9500;&#9472;&#9472; <span class="file">DashboardPage.js</span>         <span class="comment">&#9472;&#9472; Sidebar nav &amp; logout</span>
+&#9474;   &#9492;&#9472;&#9472; <span class="file">DependentsPage.js</span>        <span class="comment">&#9472;&#9472; Add, verify, delete dependents</span>
+&#9500;&#9472;&#9472; <span class="folder">tests/</span>
+&#9474;   &#9492;&#9472;&#9472; <span class="file">dependents.spec.js</span>       <span class="comment">&#9472;&#9472; Main E2E test</span>
+&#9500;&#9472;&#9472; <span class="folder">utils/</span>
+&#9474;   &#9492;&#9472;&#9472; <span class="file">testData.js</span>              <span class="comment">&#9472;&#9472; Credentials &amp; test data</span>
+&#9500;&#9472;&#9472; <span class="file">playwright.config.js</span>         <span class="comment">&#9472;&#9472; Playwright configuration</span>
+&#9492;&#9472;&#9472; <span class="file">package.json</span>                 <span class="comment">&#9472;&#9472; Dependencies &amp; scripts</span></div>
     </section>
 
-    <!-- ══════════════════ CODE FILES ════════════════ -->
+    <!-- CODE FILES - collapsed by default for this version to focus on Q&A -->
+    <div class="file-section collapsed" id="file-login"><div class="file-header" onclick="toggleFile('file-login')"><div class="file-icon page">PG</div><div class="file-name">pages/LoginPage.js</div><div class="file-desc">Login page locators &amp; actions</div><div class="file-toggle">&#9660;</div></div><div class="code-wrapper"><pre>class LoginPage {
+  constructor(page) {
+    this.page = page;
+    this.usernameInput = page.locator('input[name="username"]');
+    this.passwordInput = page.locator('input[name="password"]');
+    this.loginButton   = page.locator('button[type="submit"]');
+    this.errorMessage  = page.locator(".oxd-alert-content--error");
+    this.brandingLogo  = page.locator(".orangehrm-login-branding img");
+  }
 
-    <!-- ── LoginPage.js ──────────────────────────── -->
-    <div class="file-section" id="file-login">
-      <div class="file-header" onclick="toggleFile('file-login')">
-        <div class="file-icon page">PG</div>
-        <div class="file-name">pages/LoginPage.js</div>
-        <div class="file-desc">Login page locators &amp; actions</div>
-        <div class="file-toggle">▼</div>
-      </div>
-      <div class="code-wrapper"><pre><span class="cmt">/**
- * Page Object Model for the OrangeHRM Login Page.
- *
- * Encapsulates all locators and actions related to the login screen.
- */</span>
-<span class="kw">class</span> <span class="cls">LoginPage</span> <span class="par">{</span>
-  <span class="cmt">/**
-   * @param {import('@playwright/test').Page} page
-   */</span>
-  <span class="fn">constructor</span><span class="par">(</span>page<span class="par">)</span> <span class="par">{</span>
-    <span class="kw">this</span>.page <span class="op">=</span> page<span class="op">;</span>
+  async navigate() {
+    await this.page.goto("/web/index.php/auth/login");
+    await this.brandingLogo.waitFor({ state: "visible" });
+  }
 
-    <span class="cmt">// --- Locators ---</span>
-    <span class="kw">this</span>.<span class="prop">usernameInput</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">'input[name="username"]'</span><span class="par">)</span><span class="op">;</span>
-    <span class="kw">this</span>.<span class="prop">passwordInput</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">'input[name="password"]'</span><span class="par">)</span><span class="op">;</span>
-    <span class="kw">this</span>.<span class="prop">loginButton</span>   <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">'button[type="submit"]'</span><span class="par">)</span><span class="op">;</span>
-    <span class="kw">this</span>.<span class="prop">errorMessage</span>  <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">".oxd-alert-content--error"</span><span class="par">)</span><span class="op">;</span>
-    <span class="kw">this</span>.<span class="prop">brandingLogo</span>  <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">".orangehrm-login-branding img"</span><span class="par">)</span><span class="op">;</span>
-  <span class="par">}</span>
+  async login(username, password) {
+    await this.usernameInput.fill(username);
+    await this.passwordInput.fill(password);
+    await this.loginButton.click();
+  }
 
-  <span class="cmt">// --- Actions ---</span>
+  async getErrorMessage() {
+    await this.errorMessage.waitFor({ state: "visible" });
+    return this.errorMessage.textContent();
+  }
+}
+module.exports = { LoginPage };</pre></div></div>
 
-  <span class="cmt">/** Navigate to the login page. */</span>
-  <span class="kw">async</span> <span class="fn">navigate</span><span class="par">()</span> <span class="par">{</span>
-    <span class="kw">await</span> <span class="kw">this</span>.page.<span class="fn">goto</span><span class="par">(</span><span class="str">"/web/index.php/auth/login"</span><span class="par">)</span><span class="op">;</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">brandingLogo</span>.<span class="fn">waitFor</span><span class="par">({</span> <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span> <span class="par">})</span><span class="op">;</span>
-  <span class="par">}</span>
+    <div class="file-section collapsed" id="file-dashboard"><div class="file-header" onclick="toggleFile('file-dashboard')"><div class="file-icon page">PG</div><div class="file-name">pages/DashboardPage.js</div><div class="file-desc">Dashboard navigation &amp; logout</div><div class="file-toggle">&#9660;</div></div><div class="code-wrapper"><pre>class DashboardPage {
+  constructor(page) {
+    this.page = page;
+    this.sidebarMyInfo    = page.locator('a.oxd-main-menu-item', { hasText: "My Info" });
+    this.userDropdown     = page.locator(".oxd-userdropdown-tab");
+    this.logoutLink       = page.locator('a[href="/web/index.php/auth/logout"]');
+    this.dashboardHeading = page.locator("h6", { hasText: "Dashboard" });
+  }
 
-  <span class="cmt">/**
-   * Perform login with provided credentials.
-   * @param {string} username
-   * @param {string} password
-   */</span>
-  <span class="kw">async</span> <span class="fn">login</span><span class="par">(</span>username<span class="op">,</span> password<span class="par">)</span> <span class="par">{</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">usernameInput</span>.<span class="fn">fill</span><span class="par">(</span>username<span class="par">)</span><span class="op">;</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">passwordInput</span>.<span class="fn">fill</span><span class="par">(</span>password<span class="par">)</span><span class="op">;</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">loginButton</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
-  <span class="par">}</span>
+  async waitForDashboard() {
+    await this.dashboardHeading.waitFor({ state: "visible", timeout: 15000 });
+  }
 
-  <span class="cmt">/** Returns the error message text if login fails. */</span>
-  <span class="kw">async</span> <span class="fn">getErrorMessage</span><span class="par">()</span> <span class="par">{</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">errorMessage</span>.<span class="fn">waitFor</span><span class="par">({</span> <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span> <span class="par">})</span><span class="op">;</span>
-    <span class="kw">return</span> <span class="kw">this</span>.<span class="prop">errorMessage</span>.<span class="fn">textContent</span><span class="par">()</span><span class="op">;</span>
-  <span class="par">}</span>
-<span class="par">}</span>
+  async navigateToMyInfo() {
+    await this.sidebarMyInfo.click();
+    await this.page.waitForURL("**/viewPersonalDetails/**", { timeout: 15000 });
+  }
 
-<span class="kw">module</span>.<span class="prop">exports</span> <span class="op">=</span> <span class="par">{</span> <span class="cls">LoginPage</span> <span class="par">}</span><span class="op">;</span></pre></div>
-    </div>
+  async logout() {
+    await this.userDropdown.click();
+    await this.logoutLink.waitFor({ state: "visible" });
+    await this.logoutLink.click();
+    await this.page.waitForURL("**/auth/login", { timeout: 15000 });
+  }
+}
+module.exports = { DashboardPage };</pre></div></div>
 
-    <!-- ── DashboardPage.js ──────────────────────── -->
-    <div class="file-section" id="file-dashboard">
-      <div class="file-header" onclick="toggleFile('file-dashboard')">
-        <div class="file-icon page">PG</div>
-        <div class="file-name">pages/DashboardPage.js</div>
-        <div class="file-desc">Dashboard navigation &amp; logout</div>
-        <div class="file-toggle">▼</div>
-      </div>
-      <div class="code-wrapper"><pre><span class="cmt">/**
- * Page Object Model for the OrangeHRM Dashboard Page.
- *
- * Handles top-level navigation (sidebar menu items) and logout.
- */</span>
-<span class="kw">class</span> <span class="cls">DashboardPage</span> <span class="par">{</span>
-  <span class="cmt">/**
-   * @param {import('@playwright/test').Page} page
-   */</span>
-  <span class="fn">constructor</span><span class="par">(</span>page<span class="par">)</span> <span class="par">{</span>
-    <span class="kw">this</span>.page <span class="op">=</span> page<span class="op">;</span>
+    <div class="file-section collapsed" id="file-dependents"><div class="file-header" onclick="toggleFile('file-dependents')"><div class="file-icon page">PG</div><div class="file-name">pages/DependentsPage.js</div><div class="file-desc">Add, verify &amp; delete dependents</div><div class="file-toggle">&#9660;</div></div><div class="code-wrapper"><pre>class DependentsPage {
+  constructor(page) {
+    this.page = page;
+    this.dependentsTab        = page.locator('a[href*="viewDependents"]', { hasText: "Dependents" });
+    this.addButton            = page.locator("button", { hasText: "Add" });
+    this.saveButton           = page.locator('button[type="submit"]', { hasText: "Save" });
+    this.nameInput            = page.locator('.oxd-form .oxd-input-group:has(label:text("Name")) input');
+    this.relationshipDropdown = page.locator('.oxd-form .oxd-input-group:has(label:text("Relationship")) .oxd-select-text');
+    this.dateOfBirthInput     = page.locator('.oxd-form .oxd-input-group:has(label:text("Date of Birth")) input');
+    this.tableRows            = page.locator(".oxd-table .oxd-table-body .oxd-table-row");
+    this.toastMessage         = page.locator(".oxd-toast");
+    this.deleteCheckbox       = page.locator(".oxd-table-body .oxd-table-row .oxd-checkbox-input");
+    this.deleteSelectedButton = page.locator("button", { hasText: "Delete Selected" });
+    this.confirmDeleteButton  = page.locator(".orangehrm-modal-footer button", { hasText: "Yes, Delete" });
+  }
 
-    <span class="cmt">// --- Locators ---</span>
-    <span class="kw">this</span>.<span class="prop">sidebarMyInfo</span>    <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">'a.oxd-main-menu-item'</span><span class="op">,</span>
-                              <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"My Info"</span> <span class="par">})</span><span class="op">;</span>
-    <span class="kw">this</span>.<span class="prop">userDropdown</span>     <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">".oxd-userdropdown-tab"</span><span class="par">)</span><span class="op">;</span>
-    <span class="kw">this</span>.<span class="prop">logoutLink</span>       <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
-      <span class="str">'a[href="/web/index.php/auth/logout"]'</span><span class="par">)</span><span class="op">;</span>
-    <span class="kw">this</span>.<span class="prop">dashboardHeading</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">"h6"</span><span class="op">,</span>
-                              <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"Dashboard"</span> <span class="par">})</span><span class="op">;</span>
-  <span class="par">}</span>
+  async navigateToDependentsTab() {
+    await this.dependentsTab.click();
+    await this.page.waitForURL("**/viewDependents/**", { timeout: 15000 });
+    await this.addButton.waitFor({ state: "visible", timeout: 10000 });
+  }
 
-  <span class="cmt">/** Wait until the dashboard is fully loaded. */</span>
-  <span class="kw">async</span> <span class="fn">waitForDashboard</span><span class="par">()</span> <span class="par">{</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">dashboardHeading</span>.<span class="fn">waitFor</span><span class="par">({</span>
-      <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span><span class="op">,</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">15000</span>
-    <span class="par">})</span><span class="op">;</span>
-  <span class="par">}</span>
+  async getDependentCount() {
+    await this.page.waitForTimeout(1000);
+    return await this.tableRows.count();
+  }
 
-  <span class="cmt">/** Click "My Info" in the left sidebar. */</span>
-  <span class="kw">async</span> <span class="fn">navigateToMyInfo</span><span class="par">()</span> <span class="par">{</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">sidebarMyInfo</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
-    <span class="kw">await</span> <span class="kw">this</span>.page.<span class="fn">waitForURL</span><span class="par">(</span><span class="str">"**/viewPersonalDetails/**"</span><span class="op">,</span>
-      <span class="par">{</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">15000</span> <span class="par">})</span><span class="op">;</span>
-  <span class="par">}</span>
+  async addDependent(name, relationship, dateOfBirth) {
+    await this.addButton.click();
+    await this.nameInput.waitFor({ state: "visible", timeout: 5000 });
+    await this.nameInput.fill(name);
+    await this.relationshipDropdown.click();
+    const option = this.page.locator('.oxd-select-dropdown .oxd-select-option', { hasText: relationship });
+    await option.click();
+    if (dateOfBirth) {
+      await this.dateOfBirthInput.clear();
+      await this.dateOfBirthInput.fill(dateOfBirth);
+      await this.page.keyboard.press("Escape");
+    }
+    await this.saveButton.click();
+    await this.toastMessage.waitFor({ state: "visible", timeout: 10000 });
+  }
 
-  <span class="cmt">/** Perform logout via the user dropdown. */</span>
-  <span class="kw">async</span> <span class="fn">logout</span><span class="par">()</span> <span class="par">{</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">userDropdown</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">logoutLink</span>.<span class="fn">waitFor</span><span class="par">({</span> <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span> <span class="par">})</span><span class="op">;</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">logoutLink</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
-    <span class="kw">await</span> <span class="kw">this</span>.page.<span class="fn">waitForURL</span><span class="par">(</span><span class="str">"**/auth/login"</span><span class="op">,</span>
-      <span class="par">{</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">15000</span> <span class="par">})</span><span class="op">;</span>
-  <span class="par">}</span>
-<span class="par">}</span>
+  async isDependentPresent(name) {
+    await this.page.waitForTimeout(1000);
+    const row = this.page.locator(`.oxd-table-body .oxd-table-row .oxd-table-cell:has-text("${name}")`);
+    return (await row.count()) > 0;
+  }
 
-<span class="kw">module</span>.<span class="prop">exports</span> <span class="op">=</span> <span class="par">{</span> <span class="cls">DashboardPage</span> <span class="par">}</span><span class="op">;</span></pre></div>
-    </div>
+  async deleteFirstDependent() {
+    await this.deleteCheckbox.first().click();
+    await this.deleteSelectedButton.click();
+    await this.confirmDeleteButton.waitFor({ state: "visible" });
+    await this.confirmDeleteButton.click();
+    await this.toastMessage.waitFor({ state: "visible", timeout: 10000 });
+  }
+}
+module.exports = { DependentsPage };</pre></div></div>
 
-    <!-- ── DependentsPage.js ─────────────────────── -->
-    <div class="file-section" id="file-dependents">
-      <div class="file-header" onclick="toggleFile('file-dependents')">
-        <div class="file-icon page">PG</div>
-        <div class="file-name">pages/DependentsPage.js</div>
-        <div class="file-desc">Add, verify &amp; delete dependents</div>
-        <div class="file-toggle">▼</div>
-      </div>
-      <div class="code-wrapper"><pre><span class="cmt">/**
- * Page Object Model for the OrangeHRM Dependents tab
- * under My Info → Dependents.
- */</span>
-<span class="kw">class</span> <span class="cls">DependentsPage</span> <span class="par">{</span>
-  <span class="fn">constructor</span><span class="par">(</span>page<span class="par">)</span> <span class="par">{</span>
-    <span class="kw">this</span>.page <span class="op">=</span> page<span class="op">;</span>
+    <div class="file-section collapsed" id="file-testdata"><div class="file-header" onclick="toggleFile('file-testdata')"><div class="file-icon util">UT</div><div class="file-name">utils/testData.js</div><div class="file-desc">Credentials &amp; test data</div><div class="file-toggle">&#9660;</div></div><div class="code-wrapper"><pre>const TestData = {
+  credentials: { username: "Admin", password: "admin123" },
+  urls: {
+    login:     "/web/index.php/auth/login",
+    dashboard: "/web/index.php/dashboard/index",
+    myInfo:    "/web/index.php/pim/viewPersonalDetails",
+  },
+  dependent: { name: "John Doe", relationship: "Child", dateOfBirth: "2015-06-15" },
+};
+module.exports = { TestData };</pre></div></div>
 
-    <span class="cmt">// --- Tab Locator ---</span>
-    <span class="kw">this</span>.<span class="prop">dependentsTab</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
-      <span class="str">'a[href*="viewDependents"]'</span><span class="op">,</span> <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"Dependents"</span> <span class="par">})</span><span class="op">;</span>
+    <div class="file-section collapsed" id="file-spec"><div class="file-header" onclick="toggleFile('file-spec')"><div class="file-icon test">TS</div><div class="file-name">tests/dependents.spec.js</div><div class="file-desc">Main E2E test</div><div class="file-toggle">&#9660;</div></div><div class="code-wrapper"><pre>const { test, expect } = require("@playwright/test");
+const { LoginPage }      = require("../pages/LoginPage");
+const { DashboardPage }  = require("../pages/DashboardPage");
+const { DependentsPage } = require("../pages/DependentsPage");
+const { TestData }       = require("../utils/testData");
 
-    <span class="cmt">// --- Form Locators ---</span>
-    <span class="kw">this</span>.<span class="prop">addButton</span>    <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">"button"</span><span class="op">,</span> <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"Add"</span> <span class="par">})</span><span class="op">;</span>
-    <span class="kw">this</span>.<span class="prop">saveButton</span>   <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
-      <span class="str">'button[type="submit"]'</span><span class="op">,</span> <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"Save"</span> <span class="par">})</span><span class="op">;</span>
-    <span class="kw">this</span>.<span class="prop">cancelButton</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">"button"</span><span class="op">,</span> <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"Cancel"</span> <span class="par">})</span><span class="op">;</span>
+test.describe("OrangeHRM - Dependents Management", () => {
+  let loginPage, dashboardPage, dependentsPage;
 
-    <span class="cmt">// Form fields inside .oxd-form</span>
-    <span class="kw">this</span>.<span class="prop">nameInput</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
-      <span class="str">'.oxd-form .oxd-input-group:has(label:text("Name")) input'</span><span class="par">)</span><span class="op">;</span>
-    <span class="kw">this</span>.<span class="prop">relationshipDropdown</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
-      <span class="str">'.oxd-form .oxd-input-group:has(label:text("Relationship")) .oxd-select-text'</span><span class="par">)</span><span class="op">;</span>
-    <span class="kw">this</span>.<span class="prop">dateOfBirthInput</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
-      <span class="str">'.oxd-form .oxd-input-group:has(label:text("Date of Birth")) input'</span><span class="par">)</span><span class="op">;</span>
+  test.beforeEach(async ({ page }) => {
+    loginPage      = new LoginPage(page);
+    dashboardPage  = new DashboardPage(page);
+    dependentsPage = new DependentsPage(page);
+  });
 
-    <span class="cmt">// --- Table Locators ---</span>
-    <span class="kw">this</span>.<span class="prop">dependentsTable</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">".oxd-table"</span><span class="par">)</span><span class="op">;</span>
-    <span class="kw">this</span>.<span class="prop">tableRows</span>       <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
-      <span class="str">".oxd-table .oxd-table-body .oxd-table-row"</span><span class="par">)</span><span class="op">;</span>
-    <span class="kw">this</span>.<span class="prop">toastMessage</span>    <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">".oxd-toast"</span><span class="par">)</span><span class="op">;</span>
+  test("should add a dependent and verify, then logout", async ({ page }) => {
+    await test.step("Open the login page", async () => {
+      await loginPage.navigate();
+      await expect(loginPage.usernameInput).toBeVisible();
+    });
+    await test.step("Login with valid credentials", async () => {
+      await loginPage.login(TestData.credentials.username, TestData.credentials.password);
+      await dashboardPage.waitForDashboard();
+      await expect(dashboardPage.dashboardHeading).toBeVisible();
+    });
+    await test.step("Click My Info from the sidebar", async () => {
+      await dashboardPage.navigateToMyInfo();
+      await expect(page).toHaveURL(/viewPersonalDetails/);
+    });
+    await test.step("Click the Dependents tab", async () => {
+      await dependentsPage.navigateToDependentsTab();
+      await expect(page).toHaveURL(/viewDependents/);
+    });
+    const initialCount = await dependentsPage.getDependentCount();
+    await test.step("Add a new dependent", async () => {
+      await dependentsPage.addDependent(
+        TestData.dependent.name,
+        TestData.dependent.relationship,
+        TestData.dependent.dateOfBirth
+      );
+    });
+    await test.step("Verify dependent in the table", async () => {
+      const isPresent = await dependentsPage.isDependentPresent(TestData.dependent.name);
+      expect(isPresent).toBeTruthy();
+      const newCount = await dependentsPage.getDependentCount();
+      expect(newCount).toBeGreaterThan(initialCount);
+    });
+    await test.step("Perform logout", async () => {
+      await dashboardPage.logout();
+      await expect(loginPage.usernameInput).toBeVisible();
+    });
+  });
+});</pre></div></div>
 
-    <span class="cmt">// --- Delete Locators ---</span>
-    <span class="kw">this</span>.<span class="prop">deleteCheckbox</span>      <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
-      <span class="str">".oxd-table-body .oxd-table-row .oxd-checkbox-input"</span><span class="par">)</span><span class="op">;</span>
-    <span class="kw">this</span>.<span class="prop">deleteSelectedButton</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
-      <span class="str">"button"</span><span class="op">,</span> <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"Delete Selected"</span> <span class="par">})</span><span class="op">;</span>
-    <span class="kw">this</span>.<span class="prop">confirmDeleteButton</span>  <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
-      <span class="str">".orangehrm-modal-footer button"</span><span class="op">,</span>
-      <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"Yes, Delete"</span> <span class="par">})</span><span class="op">;</span>
-  <span class="par">}</span>
+    <div class="file-section collapsed" id="file-config"><div class="file-header" onclick="toggleFile('file-config')"><div class="file-icon config">CF</div><div class="file-name">playwright.config.js</div><div class="file-desc">Playwright configuration</div><div class="file-toggle">&#9660;</div></div><div class="code-wrapper"><pre>const { defineConfig, devices } = require("@playwright/test");
+module.exports = defineConfig({
+  testDir: "./tests",
+  fullyParallel: false,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 1 : 0,
+  workers: 1,
+  reporter: [["html", { open: "never" }], ["list"]],
+  timeout: 60000,
+  expect: { timeout: 10000 },
+  use: {
+    baseURL: "https://opensource-demo.orangehrmlive.com",
+    trace: "on-first-retry",
+    screenshot: "only-on-failure",
+    video: "retain-on-failure",
+    actionTimeout: 15000,
+    navigationTimeout: 30000,
+  },
+  projects: [{ name: "chromium", use: { ...devices["Desktop Chrome"] } }],
+});</pre></div></div>
 
-  <span class="cmt">/** Navigate to the Dependents tab within My Info. */</span>
-  <span class="kw">async</span> <span class="fn">navigateToDependentsTab</span><span class="par">()</span> <span class="par">{</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">dependentsTab</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
-    <span class="kw">await</span> <span class="kw">this</span>.page.<span class="fn">waitForURL</span><span class="par">(</span><span class="str">"**/viewDependents/**"</span><span class="op">,</span>
-      <span class="par">{</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">15000</span> <span class="par">})</span><span class="op">;</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">addButton</span>.<span class="fn">waitFor</span><span class="par">({</span>
-      <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span><span class="op">,</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">10000</span>
-    <span class="par">})</span><span class="op">;</span>
-  <span class="par">}</span>
+    <div class="file-section collapsed" id="file-package"><div class="file-header" onclick="toggleFile('file-package')"><div class="file-icon config">PK</div><div class="file-name">package.json</div><div class="file-desc">Dependencies &amp; npm scripts</div><div class="file-toggle">&#9660;</div></div><div class="code-wrapper"><pre>{
+  "name": "playwright-orangehrm-assignment",
+  "version": "1.0.0",
+  "description": "Playwright POM Assignment - Orange HRM",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug"
+  },
+  "devDependencies": { "@playwright/test": "^1.44.0" }
+}</pre></div></div>
 
-  <span class="cmt">/** Get the count of dependents currently in the table. */</span>
-  <span class="kw">async</span> <span class="fn">getDependentCount</span><span class="par">()</span> <span class="par">{</span>
-    <span class="kw">await</span> <span class="kw">this</span>.page.<span class="fn">waitForTimeout</span><span class="par">(</span><span class="num">1000</span><span class="par">)</span><span class="op">;</span>
-    <span class="kw">return</span> <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">tableRows</span>.<span class="fn">count</span><span class="par">()</span><span class="op">;</span>
-  <span class="par">}</span>
-
-  <span class="cmt">/**
-   * Add a new dependent.
-   * @param {string} name
-   * @param {string} relationship  - "Child", "Spouse", or "Other"
-   * @param {string} [dateOfBirth] - YYYY-MM-DD (optional)
-   */</span>
-  <span class="kw">async</span> <span class="fn">addDependent</span><span class="par">(</span>name<span class="op">,</span> relationship<span class="op">,</span> dateOfBirth<span class="par">)</span> <span class="par">{</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">addButton</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
-
-    <span class="cmt">// Fill the name</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">nameInput</span>.<span class="fn">waitFor</span><span class="par">({</span> <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span><span class="op">,</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">5000</span> <span class="par">})</span><span class="op">;</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">nameInput</span>.<span class="fn">fill</span><span class="par">(</span>name<span class="par">)</span><span class="op">;</span>
-
-    <span class="cmt">// Select relationship from dropdown</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">relationshipDropdown</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
-    <span class="kw">const</span> option <span class="op">=</span> <span class="kw">this</span>.page.<span class="fn">locator</span><span class="par">(</span>
-      <span class="str">`.oxd-select-dropdown .oxd-select-option`</span><span class="op">,</span>
-      <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> relationship <span class="par">}</span>
-    <span class="par">)</span><span class="op">;</span>
-    <span class="kw">await</span> option.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
-
-    <span class="cmt">// Fill date of birth if provided</span>
-    <span class="kw">if</span> <span class="par">(</span>dateOfBirth<span class="par">)</span> <span class="par">{</span>
-      <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">dateOfBirthInput</span>.<span class="fn">clear</span><span class="par">()</span><span class="op">;</span>
-      <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">dateOfBirthInput</span>.<span class="fn">fill</span><span class="par">(</span>dateOfBirth<span class="par">)</span><span class="op">;</span>
-      <span class="kw">await</span> <span class="kw">this</span>.page.keyboard.<span class="fn">press</span><span class="par">(</span><span class="str">"Escape"</span><span class="par">)</span><span class="op">;</span>
-    <span class="par">}</span>
-
-    <span class="cmt">// Save &amp; wait for success toast</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">saveButton</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">toastMessage</span>.<span class="fn">waitFor</span><span class="par">({</span>
-      <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span><span class="op">,</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">10000</span>
-    <span class="par">})</span><span class="op">;</span>
-  <span class="par">}</span>
-
-  <span class="cmt">/** Check whether a dependent with the given name exists. */</span>
-  <span class="kw">async</span> <span class="fn">isDependentPresent</span><span class="par">(</span>name<span class="par">)</span> <span class="par">{</span>
-    <span class="kw">await</span> <span class="kw">this</span>.page.<span class="fn">waitForTimeout</span><span class="par">(</span><span class="num">1000</span><span class="par">)</span><span class="op">;</span>
-    <span class="kw">const</span> row <span class="op">=</span> <span class="kw">this</span>.page.<span class="fn">locator</span><span class="par">(</span>
-      <span class="str">`.oxd-table-body .oxd-table-row .oxd-table-cell:has-text("${</span>name<span class="str">}")`</span>
-    <span class="par">)</span><span class="op">;</span>
-    <span class="kw">return</span> <span class="par">(</span><span class="kw">await</span> row.<span class="fn">count</span><span class="par">())</span> <span class="op">&gt;</span> <span class="num">0</span><span class="op">;</span>
-  <span class="par">}</span>
-
-  <span class="cmt">/** Delete the first dependent using checkbox + Delete Selected. */</span>
-  <span class="kw">async</span> <span class="fn">deleteFirstDependent</span><span class="par">()</span> <span class="par">{</span>
-    <span class="kw">const</span> firstCheckbox <span class="op">=</span> <span class="kw">this</span>.<span class="prop">deleteCheckbox</span>.<span class="fn">first</span><span class="par">()</span><span class="op">;</span>
-    <span class="kw">await</span> firstCheckbox.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">deleteSelectedButton</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">confirmDeleteButton</span>.<span class="fn">waitFor</span><span class="par">({</span> <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span> <span class="par">})</span><span class="op">;</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">confirmDeleteButton</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
-    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">toastMessage</span>.<span class="fn">waitFor</span><span class="par">({</span>
-      <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span><span class="op">,</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">10000</span>
-    <span class="par">})</span><span class="op">;</span>
-  <span class="par">}</span>
-<span class="par">}</span>
-
-<span class="kw">module</span>.<span class="prop">exports</span> <span class="op">=</span> <span class="par">{</span> <span class="cls">DependentsPage</span> <span class="par">}</span><span class="op">;</span></pre></div>
-    </div>
-
-    <!-- ── testData.js ───────────────────────────── -->
-    <div class="file-section" id="file-testdata">
-      <div class="file-header" onclick="toggleFile('file-testdata')">
-        <div class="file-icon util">UT</div>
-        <div class="file-name">utils/testData.js</div>
-        <div class="file-desc">Credentials &amp; test data</div>
-        <div class="file-toggle">▼</div>
-      </div>
-      <div class="code-wrapper"><pre><span class="cmt">/**
- * Test data and constants used across the test suite.
- */</span>
-<span class="kw">const</span> <span class="cls">TestData</span> <span class="op">=</span> <span class="par">{</span>
-  <span class="prop">credentials</span><span class="op">:</span> <span class="par">{</span>
-    <span class="prop">username</span><span class="op">:</span> <span class="str">"Admin"</span><span class="op">,</span>
-    <span class="prop">password</span><span class="op">:</span> <span class="str">"admin123"</span><span class="op">,</span>
-  <span class="par">}</span><span class="op">,</span>
-
-  <span class="prop">urls</span><span class="op">:</span> <span class="par">{</span>
-    <span class="prop">login</span><span class="op">:</span>     <span class="str">"/web/index.php/auth/login"</span><span class="op">,</span>
-    <span class="prop">dashboard</span><span class="op">:</span> <span class="str">"/web/index.php/dashboard/index"</span><span class="op">,</span>
-    <span class="prop">myInfo</span><span class="op">:</span>    <span class="str">"/web/index.php/pim/viewPersonalDetails"</span><span class="op">,</span>
-  <span class="par">}</span><span class="op">,</span>
-
-  <span class="prop">dependent</span><span class="op">:</span> <span class="par">{</span>
-    <span class="prop">name</span><span class="op">:</span>         <span class="str">"John Doe"</span><span class="op">,</span>
-    <span class="prop">relationship</span><span class="op">:</span> <span class="str">"Child"</span><span class="op">,</span>
-    <span class="prop">dateOfBirth</span><span class="op">:</span>  <span class="str">"2015-06-15"</span><span class="op">,</span>
-  <span class="par">}</span><span class="op">,</span>
-<span class="par">}</span><span class="op">;</span>
-
-<span class="kw">module</span>.<span class="prop">exports</span> <span class="op">=</span> <span class="par">{</span> <span class="cls">TestData</span> <span class="par">}</span><span class="op">;</span></pre></div>
-    </div>
-
-    <!-- ── dependents.spec.js ────────────────────── -->
-    <div class="file-section" id="file-spec">
-      <div class="file-header" onclick="toggleFile('file-spec')">
-        <div class="file-icon test">TS</div>
-        <div class="file-name">tests/dependents.spec.js</div>
-        <div class="file-desc">Main E2E test</div>
-        <div class="file-toggle">▼</div>
-      </div>
-      <div class="code-wrapper"><pre><span class="cmt">// @ts-check</span>
-<span class="kw">const</span> <span class="par">{</span> test<span class="op">,</span> expect <span class="par">}</span> <span class="op">=</span> <span class="fn">require</span><span class="par">(</span><span class="str">"@playwright/test"</span><span class="par">)</span><span class="op">;</span>
-<span class="kw">const</span> <span class="par">{</span> <span class="cls">LoginPage</span> <span class="par">}</span>      <span class="op">=</span> <span class="fn">require</span><span class="par">(</span><span class="str">"../pages/LoginPage"</span><span class="par">)</span><span class="op">;</span>
-<span class="kw">const</span> <span class="par">{</span> <span class="cls">DashboardPage</span> <span class="par">}</span>  <span class="op">=</span> <span class="fn">require</span><span class="par">(</span><span class="str">"../pages/DashboardPage"</span><span class="par">)</span><span class="op">;</span>
-<span class="kw">const</span> <span class="par">{</span> <span class="cls">DependentsPage</span> <span class="par">}</span> <span class="op">=</span> <span class="fn">require</span><span class="par">(</span><span class="str">"../pages/DependentsPage"</span><span class="par">)</span><span class="op">;</span>
-<span class="kw">const</span> <span class="par">{</span> <span class="cls">TestData</span> <span class="par">}</span>       <span class="op">=</span> <span class="fn">require</span><span class="par">(</span><span class="str">"../utils/testData"</span><span class="par">)</span><span class="op">;</span>
-
-<span class="cmt">/**
- * Orange HRM – Add Dependent &amp; Verify (End-to-End)
- *
- * Flow:
- *   1. Open login page
- *   2. Login with valid credentials
- *   3. Navigate to My Info
- *   4. Click the Dependents tab
- *   5. Add a new dependent
- *   6. Verify the dependent was added
- *   7. Logout
- */</span>
-test.<span class="fn">describe</span><span class="par">(</span><span class="str">"OrangeHRM – Dependents Management"</span><span class="op">,</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
-  <span class="cmt">/** @type {LoginPage} */</span>
-  <span class="kw">let</span> loginPage<span class="op">;</span>
-  <span class="cmt">/** @type {DashboardPage} */</span>
-  <span class="kw">let</span> dashboardPage<span class="op">;</span>
-  <span class="cmt">/** @type {DependentsPage} */</span>
-  <span class="kw">let</span> dependentsPage<span class="op">;</span>
-
-  test.<span class="fn">beforeEach</span><span class="par">(</span><span class="kw">async</span> <span class="par">({</span> page <span class="par">})</span> <span class="op">=&gt;</span> <span class="par">{</span>
-    loginPage      <span class="op">=</span> <span class="kw">new</span> <span class="cls">LoginPage</span><span class="par">(</span>page<span class="par">)</span><span class="op">;</span>
-    dashboardPage  <span class="op">=</span> <span class="kw">new</span> <span class="cls">DashboardPage</span><span class="par">(</span>page<span class="par">)</span><span class="op">;</span>
-    dependentsPage <span class="op">=</span> <span class="kw">new</span> <span class="cls">DependentsPage</span><span class="par">(</span>page<span class="par">)</span><span class="op">;</span>
-  <span class="par">})</span><span class="op">;</span>
-
-  test<span class="par">(</span><span class="str">"should add a dependent and verify, then logout"</span><span class="op">,</span>
-    <span class="kw">async</span> <span class="par">({</span> page <span class="par">})</span> <span class="op">=&gt;</span> <span class="par">{</span>
-
-    <span class="cmt">// ── Step 1: Open Login Page ──────────────────────</span>
-    <span class="kw">await</span> test.<span class="fn">step</span><span class="par">(</span><span class="str">"Open the login page"</span><span class="op">,</span> <span class="kw">async</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
-      <span class="kw">await</span> loginPage.<span class="fn">navigate</span><span class="par">()</span><span class="op">;</span>
-      <span class="kw">await</span> <span class="fn">expect</span><span class="par">(</span>loginPage.<span class="prop">usernameInput</span><span class="par">)</span>.<span class="fn">toBeVisible</span><span class="par">()</span><span class="op">;</span>
-    <span class="par">})</span><span class="op">;</span>
-
-    <span class="cmt">// ── Step 2: Login ────────────────────────────────</span>
-    <span class="kw">await</span> test.<span class="fn">step</span><span class="par">(</span><span class="str">"Login with valid credentials"</span><span class="op">,</span> <span class="kw">async</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
-      <span class="kw">await</span> loginPage.<span class="fn">login</span><span class="par">(</span>
-        <span class="cls">TestData</span>.<span class="prop">credentials</span>.<span class="prop">username</span><span class="op">,</span>
-        <span class="cls">TestData</span>.<span class="prop">credentials</span>.<span class="prop">password</span>
-      <span class="par">)</span><span class="op">;</span>
-      <span class="kw">await</span> dashboardPage.<span class="fn">waitForDashboard</span><span class="par">()</span><span class="op">;</span>
-      <span class="kw">await</span> <span class="fn">expect</span><span class="par">(</span>dashboardPage.<span class="prop">dashboardHeading</span><span class="par">)</span>.<span class="fn">toBeVisible</span><span class="par">()</span><span class="op">;</span>
-    <span class="par">})</span><span class="op">;</span>
-
-    <span class="cmt">// ── Step 3: Navigate to My Info ──────────────────</span>
-    <span class="kw">await</span> test.<span class="fn">step</span><span class="par">(</span><span class="str">"Click My Info from the sidebar"</span><span class="op">,</span> <span class="kw">async</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
-      <span class="kw">await</span> dashboardPage.<span class="fn">navigateToMyInfo</span><span class="par">()</span><span class="op">;</span>
-      <span class="kw">await</span> <span class="fn">expect</span><span class="par">(</span>page<span class="par">)</span>.<span class="fn">toHaveURL</span><span class="par">(</span><span class="str">/viewPersonalDetails/</span><span class="par">)</span><span class="op">;</span>
-    <span class="par">})</span><span class="op">;</span>
-
-    <span class="cmt">// ── Step 4: Click Dependents Tab ─────────────────</span>
-    <span class="kw">await</span> test.<span class="fn">step</span><span class="par">(</span><span class="str">"Click the Dependents tab"</span><span class="op">,</span> <span class="kw">async</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
-      <span class="kw">await</span> dependentsPage.<span class="fn">navigateToDependentsTab</span><span class="par">()</span><span class="op">;</span>
-      <span class="kw">await</span> <span class="fn">expect</span><span class="par">(</span>page<span class="par">)</span>.<span class="fn">toHaveURL</span><span class="par">(</span><span class="str">/viewDependents/</span><span class="par">)</span><span class="op">;</span>
-    <span class="par">})</span><span class="op">;</span>
-
-    <span class="cmt">// ── Step 5: Record count &amp; Add dependent ─────────</span>
-    <span class="kw">const</span> initialCount <span class="op">=</span>
-      <span class="kw">await</span> dependentsPage.<span class="fn">getDependentCount</span><span class="par">()</span><span class="op">;</span>
-
-    <span class="kw">await</span> test.<span class="fn">step</span><span class="par">(</span><span class="str">"Add a new dependent"</span><span class="op">,</span> <span class="kw">async</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
-      <span class="kw">await</span> dependentsPage.<span class="fn">addDependent</span><span class="par">(</span>
-        <span class="cls">TestData</span>.<span class="prop">dependent</span>.<span class="prop">name</span><span class="op">,</span>
-        <span class="cls">TestData</span>.<span class="prop">dependent</span>.<span class="prop">relationship</span><span class="op">,</span>
-        <span class="cls">TestData</span>.<span class="prop">dependent</span>.<span class="prop">dateOfBirth</span>
-      <span class="par">)</span><span class="op">;</span>
-    <span class="par">})</span><span class="op">;</span>
-
-    <span class="cmt">// ── Step 6: Verify dependent was added ───────────</span>
-    <span class="kw">await</span> test.<span class="fn">step</span><span class="par">(</span><span class="str">"Verify dependent in the table"</span><span class="op">,</span> <span class="kw">async</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
-      <span class="kw">const</span> isPresent <span class="op">=</span>
-        <span class="kw">await</span> dependentsPage.<span class="fn">isDependentPresent</span><span class="par">(</span>
-          <span class="cls">TestData</span>.<span class="prop">dependent</span>.<span class="prop">name</span>
-        <span class="par">)</span><span class="op">;</span>
-      <span class="fn">expect</span><span class="par">(</span>isPresent<span class="par">)</span>.<span class="fn">toBeTruthy</span><span class="par">()</span><span class="op">;</span>
-
-      <span class="kw">const</span> newCount <span class="op">=</span>
-        <span class="kw">await</span> dependentsPage.<span class="fn">getDependentCount</span><span class="par">()</span><span class="op">;</span>
-      <span class="fn">expect</span><span class="par">(</span>newCount<span class="par">)</span>.<span class="fn">toBeGreaterThan</span><span class="par">(</span>initialCount<span class="par">)</span><span class="op">;</span>
-    <span class="par">})</span><span class="op">;</span>
-
-    <span class="cmt">// ── Step 7: Logout ───────────────────────────────</span>
-    <span class="kw">await</span> test.<span class="fn">step</span><span class="par">(</span><span class="str">"Perform logout"</span><span class="op">,</span> <span class="kw">async</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
-      <span class="kw">await</span> dashboardPage.<span class="fn">logout</span><span class="par">()</span><span class="op">;</span>
-      <span class="kw">await</span> <span class="fn">expect</span><span class="par">(</span>loginPage.<span class="prop">usernameInput</span><span class="par">)</span>.<span class="fn">toBeVisible</span><span class="par">()</span><span class="op">;</span>
-    <span class="par">})</span><span class="op">;</span>
-  <span class="par">})</span><span class="op">;</span>
-<span class="par">})</span><span class="op">;</span></pre></div>
-    </div>
-
-    <!-- ── playwright.config.js ──────────────────── -->
-    <div class="file-section" id="file-config">
-      <div class="file-header" onclick="toggleFile('file-config')">
-        <div class="file-icon config">CF</div>
-        <div class="file-name">playwright.config.js</div>
-        <div class="file-desc">Playwright configuration</div>
-        <div class="file-toggle">▼</div>
-      </div>
-      <div class="code-wrapper"><pre><span class="cmt">// @ts-check</span>
-<span class="kw">const</span> <span class="par">{</span> defineConfig<span class="op">,</span> devices <span class="par">}</span> <span class="op">=</span> <span class="fn">require</span><span class="par">(</span><span class="str">"@playwright/test"</span><span class="par">)</span><span class="op">;</span>
-
-<span class="kw">module</span>.<span class="prop">exports</span> <span class="op">=</span> <span class="fn">defineConfig</span><span class="par">({</span>
-  <span class="prop">testDir</span><span class="op">:</span>       <span class="str">"./tests"</span><span class="op">,</span>
-  <span class="prop">fullyParallel</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span>
-  <span class="prop">forbidOnly</span><span class="op">:</span>    <span class="op">!!</span>process.env.CI<span class="op">,</span>
-  <span class="prop">retries</span><span class="op">:</span>       process.env.CI <span class="op">?</span> <span class="num">1</span> <span class="op">:</span> <span class="num">0</span><span class="op">,</span>
-  <span class="prop">workers</span><span class="op">:</span>       <span class="num">1</span><span class="op">,</span>
-  <span class="prop">reporter</span><span class="op">:</span>      <span class="par">[[</span><span class="str">"html"</span><span class="op">,</span> <span class="par">{</span> <span class="prop">open</span><span class="op">:</span> <span class="str">"never"</span> <span class="par">}]</span><span class="op">,</span> <span class="par">[</span><span class="str">"list"</span><span class="par">]]</span><span class="op">,</span>
-  <span class="prop">timeout</span><span class="op">:</span>       <span class="num">60000</span><span class="op">,</span>
-
-  <span class="prop">expect</span><span class="op">:</span> <span class="par">{</span>
-    <span class="prop">timeout</span><span class="op">:</span> <span class="num">10000</span><span class="op">,</span>
-  <span class="par">}</span><span class="op">,</span>
-
-  <span class="prop">use</span><span class="op">:</span> <span class="par">{</span>
-    <span class="prop">baseURL</span><span class="op">:</span>           <span class="str">"https://opensource-demo.orangehrmlive.com"</span><span class="op">,</span>
-    <span class="prop">trace</span><span class="op">:</span>             <span class="str">"on-first-retry"</span><span class="op">,</span>
-    <span class="prop">screenshot</span><span class="op">:</span>        <span class="str">"only-on-failure"</span><span class="op">,</span>
-    <span class="prop">video</span><span class="op">:</span>             <span class="str">"retain-on-failure"</span><span class="op">,</span>
-    <span class="prop">actionTimeout</span><span class="op">:</span>     <span class="num">15000</span><span class="op">,</span>
-    <span class="prop">navigationTimeout</span><span class="op">:</span> <span class="num">30000</span><span class="op">,</span>
-  <span class="par">}</span><span class="op">,</span>
-
-  <span class="prop">projects</span><span class="op">:</span> <span class="par">[</span>
-    <span class="par">{</span>
-      <span class="prop">name</span><span class="op">:</span> <span class="str">"chromium"</span><span class="op">,</span>
-      <span class="prop">use</span><span class="op">:</span>  <span class="par">{</span> <span class="op">...</span>devices<span class="par">[</span><span class="str">"Desktop Chrome"</span><span class="par">]</span> <span class="par">}</span><span class="op">,</span>
-    <span class="par">}</span><span class="op">,</span>
-  <span class="par">]</span><span class="op">,</span>
-<span class="par">})</span><span class="op">;</span></pre></div>
-    </div>
-
-    <!-- ── package.json ──────────────────────────── -->
-    <div class="file-section" id="file-package">
-      <div class="file-header" onclick="toggleFile('file-package')">
-        <div class="file-icon config">PK</div>
-        <div class="file-name">package.json</div>
-        <div class="file-desc">Dependencies &amp; npm scripts</div>
-        <div class="file-toggle">▼</div>
-      </div>
-      <div class="code-wrapper"><pre><span class="par">{</span>
-  <span class="prop">"name"</span><span class="op">:</span>        <span class="str">"playwright-orangehrm-assignment"</span><span class="op">,</span>
-  <span class="prop">"version"</span><span class="op">:</span>     <span class="str">"1.0.0"</span><span class="op">,</span>
-  <span class="prop">"description"</span><span class="op">:</span> <span class="str">"Playwright POM Assignment - Orange HRM"</span><span class="op">,</span>
-  <span class="prop">"scripts"</span><span class="op">:</span> <span class="par">{</span>
-    <span class="prop">"test"</span><span class="op">:</span>        <span class="str">"npx playwright test"</span><span class="op">,</span>
-    <span class="prop">"test:headed"</span><span class="op">:</span> <span class="str">"npx playwright test --headed"</span><span class="op">,</span>
-    <span class="prop">"test:debug"</span><span class="op">:</span>  <span class="str">"npx playwright test --debug"</span>
-  <span class="par">}</span><span class="op">,</span>
-  <span class="prop">"devDependencies"</span><span class="op">:</span> <span class="par">{</span>
-    <span class="prop">"@playwright/test"</span><span class="op">:</span> <span class="str">"^1.44.0"</span>
-  <span class="par">}</span>
-<span class="par">}</span></pre></div>
-    </div>
-
-    <!-- ══════════════════ SETUP ═════════════════════ -->
     <section class="setup-section">
       <h2>Quick Setup</h2>
       <div class="setup-steps">
-        <div class="setup-step">
-          <div class="step-num">1</div>
-          <div>
-            <div class="step-title">Install dependencies</div>
-            <code>npm install</code>
-          </div>
-        </div>
-        <div class="setup-step">
-          <div class="step-num">2</div>
-          <div>
-            <div class="step-title">Install Playwright browsers</div>
-            <code>npx playwright install chromium</code>
-          </div>
-        </div>
-        <div class="setup-step">
-          <div class="step-num">3</div>
-          <div>
-            <div class="step-title">Run the test (headless)</div>
-            <code>npm test</code>
-          </div>
-        </div>
-        <div class="setup-step">
-          <div class="step-num">4</div>
-          <div>
-            <div class="step-title">Run headed (watch the browser)</div>
-            <code>npm run test:headed</code>
-          </div>
-        </div>
-        <div class="setup-step">
-          <div class="step-num">5</div>
-          <div>
-            <div class="step-title">Debug with inspector</div>
-            <code>npm run test:debug</code>
-          </div>
-        </div>
+        <div class="setup-step"><div class="step-num">1</div><div><div class="step-title">Install dependencies</div><code>npm install</code></div></div>
+        <div class="setup-step"><div class="step-num">2</div><div><div class="step-title">Install browsers</div><code>npx playwright install chromium</code></div></div>
+        <div class="setup-step"><div class="step-num">3</div><div><div class="step-title">Run test (headless)</div><code>npm test</code></div></div>
+        <div class="setup-step"><div class="step-num">4</div><div><div class="step-title">Run headed</div><code>npm run test:headed</code></div></div>
+        <div class="setup-step"><div class="step-num">5</div><div><div class="step-title">Debug</div><code>npm run test:debug</code></div></div>
       </div>
     </section>
 
-    <!-- ══════════════════ REVIEW QUESTIONS ══════════ -->
     <section class="questions-section">
-      <h2>Assignment Review Questions</h2>
+      <h2>Assignment Review &mdash; Questions &amp; Answers</h2>
+      <p class="subtitle">Click any question to reveal the answer. Use the buttons to expand or collapse all.</p>
+      <div class="qa-controls"><button onclick="toggleAll(true)">Expand All</button><button onclick="toggleAll(false)">Collapse All</button></div>
 
-      <div class="q-category">
-        <h3>A — Page Object Model Concepts</h3>
-        <ul class="q-list">
-          <li><span class="q-num">Q01</span> What is the Page Object Model and why is it used in test automation?</li>
-          <li><span class="q-num">Q02</span> How did you structure your page objects? Walk us through the folder layout.</li>
-          <li><span class="q-num">Q03</span> Why separate locators and actions into page classes instead of the test file?</li>
-          <li><span class="q-num">Q04</span> If a UI element changes, how many files need updating with POM vs without?</li>
-          <li><span class="q-num">Q05</span> How do your page objects communicate — does one call another, or does the test orchestrate?</li>
-        </ul>
-      </div>
+      <div class="q-category"><h3>A &mdash; Page Object Model Concepts</h3><ul class="q-list">
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q01</span><span class="q-text">What is the Page Object Model and why is it used in test automation?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">The <strong>Page Object Model (POM)</strong> is a design pattern where each web page (or major component) is represented by its own class. That class holds all the <em>locators</em> (selectors for elements) and <em>action methods</em> (login, addDependent, etc.) for that page. Tests call page-object methods instead of touching raw selectors.<br><br><strong>Benefits:</strong> (1) <em>Maintainability</em> &mdash; if the UI changes, you update one file, not every test. (2) <em>Readability</em> &mdash; tests read like business steps: <code>loginPage.login(user, pass)</code>. (3) <em>Reusability</em> &mdash; multiple tests share the same page objects. (4) <em>Separation of concerns</em> &mdash; test logic is separate from page structure.</div></li>
 
-      <div class="q-category">
-        <h3>B — Locator Strategy</h3>
-        <ul class="q-list">
-          <li><span class="q-num">Q06</span> What locator strategies did you use (CSS, XPath, text, role, test-id)? Why?</li>
-          <li><span class="q-num">Q07</span> OrangeHRM lacks <code>data-testid</code> attributes — how did you handle that?</li>
-          <li><span class="q-num">Q08</span> How would you deal with a locator that matches multiple elements?</li>
-          <li><span class="q-num">Q09</span> Difference between <code>page.locator()</code> and <code>page.getByRole()</code> / <code>getByText()</code>?</li>
-          <li><span class="q-num">Q10</span> How did you locate the Relationship dropdown and select a value?</li>
-        </ul>
-      </div>
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q02</span><span class="q-text">How did you structure your page objects? Walk us through the folder layout.</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Three main folders: <code>pages/</code> contains one class per page &mdash; <code>LoginPage.js</code>, <code>DashboardPage.js</code>, and <code>DependentsPage.js</code>. <code>tests/</code> holds the spec file that orchestrates the flow. <code>utils/</code> stores shared test data (credentials, dependent info, URLs) in <code>testData.js</code>.<br><br>Each page class receives the Playwright <code>page</code> object via its constructor. Locators are defined as properties in the constructor, and actions are async methods. The test file imports all three page classes plus test data, instantiates them in <code>beforeEach</code>, and chains their methods.</div></li>
 
-      <div class="q-category">
-        <h3>C — Waits &amp; Synchronisation</h3>
-        <ul class="q-list">
-          <li><span class="q-num">Q11</span> Does Playwright use implicit or explicit waits? How does auto-wait work?</li>
-          <li><span class="q-num">Q12</span> Where did you add explicit waits, and why were they necessary?</li>
-          <li><span class="q-num">Q13</span> Difference between <code>waitForSelector</code>, <code>waitForURL</code>, and <code>waitForTimeout</code>?</li>
-          <li><span class="q-num">Q14</span> How would you handle a flaky test caused by a slow network?</li>
-          <li><span class="q-num">Q15</span> Why is <code>waitForTimeout</code> discouraged, and when might it be acceptable?</li>
-        </ul>
-      </div>
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q03</span><span class="q-text">Why separate locators and actions into page classes instead of the test file?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">If locators live inside tests, a single UI change (e.g. a button class rename) could break dozens of test files. With POM, you fix it in <em>one place</em>. Page classes also encapsulate <em>how</em> to interact with the page, while tests describe <em>what</em> the business scenario is. This makes tests shorter, more readable, and easier for non-developers to understand.</div></li>
 
-      <div class="q-category">
-        <h3>D — Assertions &amp; Verification</h3>
-        <ul class="q-list">
-          <li><span class="q-num">Q16</span> How did you verify that the dependent was successfully added?</li>
-          <li><span class="q-num">Q17</span> What assertion methods does Playwright provide? Which did you use?</li>
-          <li><span class="q-num">Q18</span> Difference between <code>expect(locator).toBeVisible()</code> and <code>locator.count() > 0</code>?</li>
-          <li><span class="q-num">Q19</span> If the toast disappears before your assertion, how would you handle it?</li>
-          <li><span class="q-num">Q20</span> How would you add a negative test — e.g. missing name shows validation error?</li>
-        </ul>
-      </div>
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q04</span><span class="q-text">If a UI element changes, how many files need updating with POM vs without?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer"><strong>With POM:</strong> Exactly <em>1 file</em> &mdash; the relevant page object. For example, if the login button selector changes, you update only <code>LoginPage.js</code>.<br><br><strong>Without POM:</strong> Every test file that references that selector &mdash; potentially 10, 20, or more files. This is the single biggest maintenance advantage of POM.</div></li>
 
-      <div class="q-category">
-        <h3>E — Test Structure &amp; Reporting</h3>
-        <ul class="q-list">
-          <li><span class="q-num">Q21</span> Explain <code>test.describe</code>, <code>test.beforeEach</code>, and <code>test.step</code> in your test.</li>
-          <li><span class="q-num">Q22</span> If one <code>test.step</code> fails, do the remaining steps still run?</li>
-          <li><span class="q-num">Q23</span> How do you generate and view the Playwright HTML report?</li>
-          <li><span class="q-num">Q24</span> Purpose of <code>trace</code>, <code>screenshot</code>, and <code>video</code> in config?</li>
-          <li><span class="q-num">Q25</span> How would you run this test only in headed mode for a live demo?</li>
-        </ul>
-      </div>
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q05</span><span class="q-text">How do your page objects communicate &mdash; does one call another, or does the test orchestrate?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">The <strong>test orchestrates</strong>. Page objects are independent &mdash; <code>LoginPage</code> doesn't know about <code>DashboardPage</code>. The spec file creates all page objects and calls their methods in sequence. This keeps page objects loosely coupled and reusable in any test that needs them.</div></li>
+      </ul></div>
 
-      <div class="q-category">
-        <h3>F — Configuration</h3>
-        <ul class="q-list">
-          <li><span class="q-num">Q26</span> Walk through your <code>playwright.config.js</code> — what does each key setting do?</li>
-          <li><span class="q-num">Q27</span> Why set <code>fullyParallel: false</code> and <code>workers: 1</code>?</li>
-          <li><span class="q-num">Q28</span> What is <code>baseURL</code> and how does it simplify navigation code?</li>
-          <li><span class="q-num">Q29</span> How would you run the same test across Chrome, Firefox, and Safari?</li>
-          <li><span class="q-num">Q30</span> Where are credentials stored, and how would you secure them in production?</li>
-        </ul>
-      </div>
+      <div class="q-category"><h3>B &mdash; Locator Strategy</h3><ul class="q-list">
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q06</span><span class="q-text">What locator strategies did you use (CSS, XPath, text, role, test-id)? Why?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Primarily <strong>CSS selectors</strong> combined with Playwright's <code>hasText</code> filter. For example: <code>page.locator('a.oxd-main-menu-item', { hasText: "My Info" })</code>. CSS selectors are fast, well-supported, and readable. The <code>hasText</code> option adds semantic meaning so the selector is both structurally and textually specific. I also used attribute selectors like <code>input[name="username"]</code> where stable HTML attributes were available.</div></li>
 
-      <div class="q-category">
-        <h3>G — Advanced / Scenario-Based</h3>
-        <ul class="q-list">
-          <li><span class="q-num">Q31</span> How would you parameterise this test to add multiple dependents?</li>
-          <li><span class="q-num">Q32</span> Cleanup strategy — <code>afterEach</code>, inside the test, or via API?</li>
-          <li><span class="q-num">Q33</span> The demo site is shared by many users — how does that affect your test?</li>
-          <li><span class="q-num">Q34</span> How would you integrate this into a CI/CD pipeline (e.g. GitHub Actions)?</li>
-          <li><span class="q-num">Q35</span> What is a Playwright fixture? How would you create one for the logged-in state?</li>
-          <li><span class="q-num">Q36</span> Difference between <code>page.goto()</code> and <code>page.navigate()</code>?</li>
-          <li><span class="q-num">Q37</span> How would you handle file upload / download scenarios?</li>
-          <li><span class="q-num">Q38</span> Playwright's retry mechanisms vs re-running the entire test?</li>
-          <li><span class="q-num">Q39</span> Testing the same flow on a mobile viewport — what changes?</li>
-          <li><span class="q-num">Q40</span> How would you use Playwright's API request context for test data setup?</li>
-        </ul>
-      </div>
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q07</span><span class="q-text">OrangeHRM lacks <code>data-testid</code> attributes &mdash; how did you handle that?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Without <code>data-testid</code>, I relied on: (1) <strong>Stable HTML attributes</strong> like <code>name</code>, <code>type</code>, and <code>href</code>. (2) <strong>CSS class names</strong> from the OXD component library (e.g. <code>.oxd-userdropdown-tab</code>). (3) <strong>Parent-child relationships with text filters</strong> &mdash; e.g. <code>.oxd-input-group:has(label:text("Name")) input</code> finds the input associated with a specific label. This "label-anchored" approach is resilient because label text rarely changes without the feature itself changing.</div></li>
 
-      <div class="q-category">
-        <h3>H — Debugging &amp; Troubleshooting</h3>
-        <ul class="q-list">
-          <li><span class="q-num">Q41</span> Passes locally, fails in CI — first three things you check?</li>
-          <li><span class="q-num">Q42</span> How do you use the trace viewer to diagnose a failure?</li>
-          <li><span class="q-num">Q43</span> What is <code>--debug</code> mode and how does it help during development?</li>
-          <li><span class="q-num">Q44</span> How would you capture console errors or network failures during a run?</li>
-          <li><span class="q-num">Q45</span> A locator broke after a UI redesign — describe your process to fix it.</li>
-        </ul>
-      </div>
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q08</span><span class="q-text">How would you deal with a locator that matches multiple elements?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Several options: (1) Make the selector more specific by adding parent context, e.g. <code>.oxd-form .oxd-input-group:has(label:text("Name")) input</code>. (2) Use <code>.first()</code>, <code>.nth(index)</code>, or <code>.last()</code> to target a specific match. (3) Filter with <code>{ hasText: "..." }</code> or <code>{ has: locator }</code> to narrow results. (4) Use <code>locator.filter()</code> for chained conditions. The goal is always to have a <em>unique</em> match for reliability.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q09</span><span class="q-text">Difference between <code>page.locator()</code> and <code>page.getByRole()</code> / <code>getByText()</code>?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer"><code>page.locator()</code> accepts any CSS or XPath selector &mdash; it's the most flexible. <code>getByRole()</code>, <code>getByText()</code>, <code>getByLabel()</code> are <strong>user-facing locators</strong> that target elements the way a user perceives them (by ARIA role, visible text, or label).<br><br><strong>Best practice:</strong> Prefer <code>getByRole</code>/<code>getByLabel</code> when the app has good accessibility markup. Fall back to <code>locator()</code> with CSS when ARIA roles are missing &mdash; which is the case with OrangeHRM's custom OXD components.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q10</span><span class="q-text">How did you locate the Relationship dropdown and select a value?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">OrangeHRM uses a <strong>custom dropdown</strong> (not a native <code>&lt;select&gt;</code>), so <code>selectOption()</code> won't work. The approach: (1) Click the dropdown trigger: <code>.oxd-input-group:has(label:text("Relationship")) .oxd-select-text</code>. (2) Wait for the panel to appear. (3) Click the matching option: <code>.oxd-select-dropdown .oxd-select-option</code> filtered with <code>{ hasText: "Child" }</code>. This two-step "click-then-select" pattern is standard for custom/React dropdowns.</div></li>
+      </ul></div>
+
+      <div class="q-category"><h3>C &mdash; Waits &amp; Synchronisation</h3><ul class="q-list">
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q11</span><span class="q-text">Does Playwright use implicit or explicit waits? How does auto-wait work?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Playwright uses <strong>auto-wait</strong>, which is neither traditional implicit nor explicit. When you call an action like <code>.click()</code> or <code>.fill()</code>, Playwright automatically waits for the element to be: visible, enabled, stable (not animating), able to receive events, and attached to the DOM. This happens up to the configured <code>actionTimeout</code>. It eliminates most manual <code>sleep</code> calls required in Selenium.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q12</span><span class="q-text">Where did you add explicit waits, and why were they necessary?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">I used <code>waitForURL()</code> after navigation actions (clicking "My Info", "Dependents" tab, logout) because the URL change confirms the SPA has routed correctly. I used <code>waitFor({ state: "visible" })</code> on the toast message after saving a dependent, because the toast is dynamically injected. I also used it for the logout link which only appears after clicking the dropdown.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q13</span><span class="q-text">Difference between <code>waitForSelector</code>, <code>waitForURL</code>, and <code>waitForTimeout</code>?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer"><strong><code>waitForSelector</code></strong> &mdash; Waits until an element appears/disappears in the DOM. Deprecated in favor of <code>locator.waitFor()</code>.<br><br><strong><code>waitForURL</code></strong> &mdash; Waits until the page URL matches a string, regex, or predicate. Ideal for SPA navigation.<br><br><strong><code>waitForTimeout</code></strong> &mdash; A hard sleep. Last resort because it slows tests and doesn't wait for a condition. I used it sparingly (1s) after table updates where no better signal was available.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q14</span><span class="q-text">How would you handle a flaky test caused by a slow network?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">(1) Increase <code>timeout</code> and <code>actionTimeout</code> in the config. (2) Add <code>waitForURL</code> or <code>waitForResponse</code> to wait for specific API calls to complete. (3) Use <code>retries: 1</code> as a safety net. (4) Wait for DOM signals (spinner disappearing, row appearing) rather than hard timeouts. (5) Use <code>page.waitForLoadState('networkidle')</code> if the page makes many API calls during load.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q15</span><span class="q-text">Why is <code>waitForTimeout</code> discouraged, and when might it be acceptable?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">It <em>always waits the full duration</em> even if the condition is met earlier (wasting time), and if the condition takes longer, the test still fails (not reliable). It's acceptable as a <strong>last resort</strong> when there's no DOM event, network request, or URL change to wait on &mdash; e.g. waiting for a CSS transition, or a third-party widget with no hookable events.</div></li>
+      </ul></div>
+
+      <div class="q-category"><h3>D &mdash; Assertions &amp; Verification</h3><ul class="q-list">
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q16</span><span class="q-text">How did you verify that the dependent was successfully added?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Two checks: (1) <strong>Name check</strong> &mdash; <code>isDependentPresent("John Doe")</code> searches the table for a cell containing the name and returns true/false. (2) <strong>Count check</strong> &mdash; recorded <code>initialCount</code> before adding and compared with <code>newCount</code> after, asserting <code>expect(newCount).toBeGreaterThan(initialCount)</code>. This dual approach confirms both row content and row count increased.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q17</span><span class="q-text">What assertion methods does Playwright provide? Which did you use?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Two kinds: <strong>Web-first</strong> (auto-retrying): <code>toBeVisible()</code>, <code>toHaveURL()</code>, <code>toHaveText()</code>, <code>toBeEnabled()</code>, <code>toHaveCount()</code>. <strong>Generic</strong> (non-retrying): <code>toBeTruthy()</code>, <code>toBeGreaterThan()</code>, <code>toEqual()</code>.<br><br>I used: <code>toBeVisible()</code> for element checks, <code>toHaveURL()</code> for navigation, <code>toBeTruthy()</code> for <code>isDependentPresent</code>'s boolean, and <code>toBeGreaterThan()</code> for the count comparison.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q18</span><span class="q-text">Difference between <code>expect(locator).toBeVisible()</code> and <code>locator.count() &gt; 0</code>?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer"><code>toBeVisible()</code> is a <strong>web-first assertion</strong> &mdash; it auto-retries/polls the DOM until the timeout. If the element appears within that window, it passes.<br><br><code>locator.count()</code> is a <strong>one-shot evaluation</strong> &mdash; checks the DOM at that instant. If not rendered yet, returns 0 and the test fails immediately. Always prefer <code>toBeVisible()</code> or <code>toHaveCount()</code> for reliability.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q19</span><span class="q-text">If the toast disappears before your assertion, how would you handle it?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">(1) Use <code>locator.waitFor({ state: "visible" })</code> immediately after the triggering action &mdash; this is what I do in <code>addDependent()</code>. (2) Use <code>page.waitForResponse()</code> to wait for the API call and assert on the HTTP status (201/200) instead. (3) Listen via <code>page.waitForSelector('.oxd-toast', { state: 'attached' })</code> which catches it even if it auto-dismisses quickly.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q20</span><span class="q-text">How would you add a negative test &mdash; missing name shows validation error?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Create a separate test that: (1) Navigates to the Dependents tab. (2) Clicks "Add". (3) Leaves name empty. (4) Selects a relationship. (5) Clicks "Save". (6) Asserts a validation message: <code>await expect(page.locator('.oxd-input-field-error-message')).toHaveText('Required')</code>. (7) Asserts the count did <em>not</em> increase.</div></li>
+      </ul></div>
+
+      <div class="q-category"><h3>E &mdash; Test Structure &amp; Reporting</h3><ul class="q-list">
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q21</span><span class="q-text">Explain <code>test.describe</code>, <code>test.beforeEach</code>, and <code>test.step</code>.</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer"><strong><code>test.describe</code></strong> &mdash; Groups related tests under a common label. Useful for shared hooks and organisation.<br><br><strong><code>test.beforeEach</code></strong> &mdash; Runs before every test in the describe block. I use it to instantiate fresh page objects.<br><br><strong><code>test.step</code></strong> &mdash; Sub-divides a test into named steps. Each appears as a collapsible section in the HTML report and trace viewer, making it easy to see <em>which step</em> failed.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q22</span><span class="q-text">If one <code>test.step</code> fails, do the remaining steps still run?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer"><strong>No.</strong> When a step fails, the entire test exits and is marked as failed. Remaining steps are <em>not</em> executed. If you need independent checks, put them in <em>separate tests</em>. Steps are for sequential flows where later steps depend on earlier ones.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q23</span><span class="q-text">How do you generate and view the Playwright HTML report?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">The config includes <code>reporter: [["html", { open: "never" }], ["list"]]</code>. After <code>npx playwright test</code>, Playwright generates the report in <code>playwright-report/</code>. View it with: <code>npx playwright show-report</code>. It opens a local web server showing pass/fail status, duration, screenshots, traces, and step breakdowns.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q24</span><span class="q-text">Purpose of <code>trace</code>, <code>screenshot</code>, and <code>video</code> in config?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer"><strong><code>trace: "on-first-retry"</code></strong> &mdash; Records DOM snapshots, network, console, and action timeline on the first retry. Open in trace viewer for step-by-step debugging.<br><br><strong><code>screenshot: "only-on-failure"</code></strong> &mdash; Captures a screenshot on failure, attached to the report.<br><br><strong><code>video: "retain-on-failure"</code></strong> &mdash; Records video for all tests but only <em>keeps</em> it on failure, avoiding bloated reports for passing tests.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q25</span><span class="q-text">How would you run this test only in headed mode for a live demo?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Run: <code>npx playwright test --headed</code> or <code>npm run test:headed</code>. Slow it down with <code>npx playwright test --headed --slowMo=500</code> which adds a 500ms pause between each action so viewers can follow the flow.</div></li>
+      </ul></div>
+
+      <div class="q-category"><h3>F &mdash; Configuration</h3><ul class="q-list">
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q26</span><span class="q-text">Walk through your <code>playwright.config.js</code> &mdash; what does each key setting do?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer"><strong><code>testDir</code></strong> &mdash; Folder containing test files.<br><strong><code>fullyParallel</code></strong> &mdash; Whether tests inside a file run in parallel.<br><strong><code>forbidOnly</code></strong> &mdash; Prevents accidental <code>.only</code> in CI.<br><strong><code>retries</code></strong> &mdash; Retries on failure (1 in CI, 0 locally).<br><strong><code>workers</code></strong> &mdash; Parallel worker processes.<br><strong><code>timeout</code></strong> &mdash; Max time per test (60s).<br><strong><code>baseURL</code></strong> &mdash; Prepended to relative <code>goto()</code> paths.<br><strong><code>actionTimeout</code></strong> &mdash; Max wait for auto-wait actions (15s).<br><strong><code>navigationTimeout</code></strong> &mdash; Max wait for navigation (30s).<br><strong><code>projects</code></strong> &mdash; Browser configurations to test against.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q27</span><span class="q-text">Why set <code>fullyParallel: false</code> and <code>workers: 1</code>?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">The OrangeHRM demo is a <strong>shared environment</strong>. Running tests in parallel could cause conflicts (e.g. two tests adding/deleting dependents simultaneously). <code>workers: 1</code> ensures only one browser runs at a time. For an isolated test environment, you'd enable both for faster execution.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q28</span><span class="q-text">What is <code>baseURL</code> and how does it simplify navigation code?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer"><code>baseURL</code> is a URL prefix applied to all relative paths in <code>page.goto()</code>. Instead of the full URL every time, I write <code>page.goto("/web/index.php/auth/login")</code>. It also makes it trivial to switch environments (dev, staging, prod) by changing one config value or overriding via an environment variable.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q29</span><span class="q-text">How would you run the same test across Chrome, Firefox, and Safari?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Add more entries to the <code>projects</code> array:<div class="ans-code">projects: [
+  { name: "chromium", use: { ...devices["Desktop Chrome"] } },
+  { name: "firefox",  use: { ...devices["Desktop Firefox"] } },
+  { name: "webkit",   use: { ...devices["Desktop Safari"] } },
+]</div>Then install all browsers: <code>npx playwright install</code>. Target one with <code>--project=firefox</code>.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q30</span><span class="q-text">Where are credentials stored, and how would you secure them in production?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Currently in <code>utils/testData.js</code> &mdash; fine for a demo site. In production: (1) Use <strong>environment variables</strong>: <code>process.env.OHR_USERNAME</code>. (2) Store in a <strong>.env file</strong> (gitignored) loaded with <code>dotenv</code>. (3) In CI, use <strong>secrets managers</strong> (GitHub Secrets, Azure Key Vault). (4) Never commit real credentials to version control.</div></li>
+      </ul></div>
+
+      <div class="q-category"><h3>G &mdash; Advanced / Scenario-Based</h3><ul class="q-list">
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q31</span><span class="q-text">How would you parameterise this test to add multiple dependents?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Use Playwright's parameterised tests:<div class="ans-code">const dependents = [
+  { name: "John Doe",  relationship: "Child" },
+  { name: "Jane Smith", relationship: "Spouse" },
+];
+for (const dep of dependents) {
+  test(`add dependent: ${dep.name}`, async ({ page }) =&gt; {
+    // login, navigate, add dep.name, verify, logout
+  });
+}</div>Each iteration becomes a separate, independently-reported test.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q32</span><span class="q-text">Cleanup strategy &mdash; <code>afterEach</code>, inside the test, or via API?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer"><strong>Best: API cleanup</strong> &mdash; Use Playwright's <code>request</code> context in <code>afterEach</code> to call the REST API and delete the dependent. Fast, reliable, UI-independent.<br><br><strong>Acceptable: UI cleanup in <code>afterEach</code></strong> &mdash; Call <code>deleteFirstDependent()</code>. Risk: if the test failed mid-way, page state might be unexpected.<br><br><strong>Least ideal: Inside the test</strong> &mdash; A failure skips the cleanup. Always prefer <code>afterEach</code> hooks because they run regardless of outcome.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q33</span><span class="q-text">The demo site is shared &mdash; how does that affect your test?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">(1) <strong>Data pollution</strong> &mdash; Other users may modify data concurrently. Mitigation: assert on <em>name presence</em> not exact row count. (2) <strong>Slow responses</strong> &mdash; Use generous timeouts. (3) <strong>Data resets</strong> &mdash; Demo may reset periodically. (4) <strong>No parallel execution</strong> &mdash; Run sequentially. For production, use an isolated environment.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q34</span><span class="q-text">How would you integrate this into CI/CD (e.g. GitHub Actions)?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Create <code>.github/workflows/playwright.yml</code>:<div class="ans-code">name: Playwright Tests
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/</div></div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q35</span><span class="q-text">What is a fixture? How would you create one for the logged-in state?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">A <strong>fixture</strong> is a reusable setup/teardown mechanism injected into tests:<div class="ans-code">const test = base.extend({
+  loggedInPage: async ({ page }, use) =&gt; {
+    const lp = new LoginPage(page);
+    await lp.navigate();
+    await lp.login("Admin", "admin123");
+    await use(page);  // test runs here
+    // teardown after
+  },
+});
+test("my test", async ({ loggedInPage }) =&gt; {
+  // Already logged in!
+});</div>Avoids repeating login code and ensures consistent setup/teardown.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q36</span><span class="q-text">Difference between <code>page.goto()</code> and <code>page.navigate()</code>?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">In Playwright, <strong>there is no <code>page.navigate()</code></strong>. The correct method is <code>page.goto(url)</code>. This is a common confusion from Selenium (which uses <code>driver.navigate().to(url)</code>). In our project, <code>navigate()</code> is a <em>custom method name</em> on <code>LoginPage</code> that internally calls <code>page.goto()</code>.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q37</span><span class="q-text">How would you handle file upload / download?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer"><strong>Upload:</strong> <code>locator.setInputFiles('path/to/file.pdf')</code> or <code>page.on('filechooser')</code> for non-standard triggers.<br><br><strong>Download:</strong><div class="ans-code">const downloadPromise = page.waitForEvent('download');
+await page.locator('#export-btn').click();
+const download = await downloadPromise;
+await download.saveAs('./downloads/' + download.suggestedFilename());</div></div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q38</span><span class="q-text">Playwright's retry mechanisms vs re-running the entire test?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer"><strong>Web-first assertion retries:</strong> Methods like <code>toBeVisible()</code> auto-poll the DOM until timeout &mdash; <em>micro-level</em> retry within a single action.<br><br><strong>Test-level retries:</strong> The <code>retries</code> config re-runs the <em>entire test</em> from scratch (fresh browser context). Handles broader flakiness from network/timing issues.<br><br>They work at different levels: assertion retries handle momentary DOM delays; test retries handle environmental flakiness.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q39</span><span class="q-text">Testing on a mobile viewport &mdash; what changes?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Add a mobile project: <code>{ name: "mobile", use: { ...devices["iPhone 14"] } }</code>. This sets viewport, user agent, and touch events. You may need to: (1) Handle <em>hamburger menus</em> &mdash; sidebar may collapse. (2) Adjust locators for mobile layout. (3) Account for <em>touch-based</em> dropdowns.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q40</span><span class="q-text">How would you use Playwright's API request context for test data setup?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Playwright provides <code>request</code> as a built-in fixture:<div class="ans-code">test.beforeEach(async ({ request }) =&gt; {
+  await request.post('/api/v2/auth/login', {
+    data: { username: 'Admin', password: 'admin123' }
+  });
+  await request.post('/api/v2/pim/employees/7/dependents', {
+    data: { name: 'John Doe', relationshipType: 'child' }
+  });
+});</div>Much faster than UI setup and less flaky. Also great for cleanup in <code>afterEach</code>.</div></li>
+      </ul></div>
+
+      <div class="q-category"><h3>H &mdash; Debugging &amp; Troubleshooting</h3><ul class="q-list">
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q41</span><span class="q-text">Passes locally, fails in CI &mdash; first three things you check?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">(1) <strong>Timeouts</strong> &mdash; CI runners are slower. Increase all timeouts. (2) <strong>Browser dependencies</strong> &mdash; Use <code>npx playwright install --with-deps</code> for OS-level libraries. (3) <strong>Environment differences</strong> &mdash; Check <code>baseURL</code>, credentials, network access. Open the trace artifact from the failed CI run for a visual replay.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q42</span><span class="q-text">How do you use the trace viewer to diagnose a failure?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">Open the trace file: <code>npx playwright show-trace trace.zip</code>. It shows: (1) <strong>Action timeline</strong> &mdash; every click, fill, navigation. (2) <strong>DOM snapshots</strong> &mdash; before/after each action. (3) <strong>Network log</strong> &mdash; all HTTP requests. (4) <strong>Console log</strong> &mdash; JS errors. Click any action to see the exact DOM state when it failed.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q43</span><span class="q-text">What is <code>--debug</code> mode and how does it help?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer"><code>npx playwright test --debug</code> opens the <strong>Playwright Inspector</strong>: (1) Pauses at the first action. (2) Step-over button for one action at a time. (3) Highlights target elements. (4) <strong>Locator picker</strong> &mdash; hover over elements for suggested selectors. (5) Call log showing internal Playwright operations. Invaluable during development.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q44</span><span class="q-text">How would you capture console errors or network failures?</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer"><strong>Console errors:</strong><div class="ans-code">page.on('console', msg =&gt; {
+  if (msg.type() === 'error') console.log('Browser error:', msg.text());
+});</div><strong>Network failures:</strong><div class="ans-code">page.on('requestfailed', req =&gt; {
+  console.log('Failed:', req.url(), req.failure().errorText);
+});</div>Place in <code>beforeEach</code>. Collect in an array and assert no errors in <code>afterEach</code>.</div></li>
+
+        <li class="qa-card" onclick="this.classList.toggle('open')"><div class="qa-question"><span class="q-num">Q45</span><span class="q-text">A locator broke after a UI redesign &mdash; describe your fix process.</span><span class="q-toggle">&#9662;</span></div><div class="qa-answer">(1) <strong>Debug mode:</strong> <code>npx playwright test --debug</code> to see the page live. (2) <strong>Locator picker:</strong> hover over the element for a suggested selector. (3) <strong>Inspect DOM:</strong> check what changed (tag, class, parent). (4) <strong>Update page object:</strong> fix the locator in the single file. (5) <strong>Run test:</strong> verify it passes. (6) <strong>Audit:</strong> check other locators in the same page object. (7) <strong>Commit:</strong> reference the UI change. Because of POM, only one file needs updating.</div></li>
+      </ul></div>
+
     </section>
-
   </div>
 
-  <footer class="footer">
-    Playwright Training Assignment &middot; Orange HRM &middot; Deadline: 20 April 2026
-  </footer>
+  <footer class="footer">Playwright Training Assignment &middot; Orange HRM &middot; Deadline: 20 April 2026</footer>
 
   <script>
-    function toggleFile(id) {
-      document.getElementById(id).classList.toggle('collapsed');
-    }
+    function toggleFile(id) { document.getElementById(id).classList.toggle('collapsed'); }
+    function toggleAll(open) { document.querySelectorAll('.qa-card').forEach(c => open ? c.classList.add('open') : c.classList.remove('open')); }
   </script>
 </body>
 </html>
