@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playwright Assignment – Orange HRM</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0c0e12;
+      --bg-card: #13161c;
+      --bg-code: #0a0c10;
+      --border: #1e2330;
+      --border-accent: #2a3040;
+      --text: #c8cdd8;
+      --text-muted: #6b7280;
+      --text-heading: #eef0f4;
+      --accent: #f97316;
+      --accent-dim: #f9731622;
+      --accent2: #22d3ee;
+      --accent2-dim: #22d3ee18;
+      --green: #34d399;
+      --green-dim: #34d39918;
+      --purple: #a78bfa;
+      --purple-dim: #a78bfa18;
+      --red: #fb7185;
+      --yellow: #fbbf24;
+      --pink: #f472b6;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Hero ─────────────────────────────────────── */
+    .hero {
+      position: relative;
+      padding: 80px 40px 60px;
+      text-align: center;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 600px 400px at 30% 20%, #f9731612 0%, transparent 70%),
+        radial-gradient(ellipse 500px 350px at 70% 60%, #22d3ee0a 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 100px;
+      background: var(--accent-dim);
+      border: 1px solid #f9731644;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 900;
+      color: var(--text-heading);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      max-width: 600px;
+      margin: 20px auto 0;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* ── Meta cards row ───────────────────────────── */
+    .meta-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 32px 40px 0;
+    }
+    .meta-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 28px;
+      min-width: 200px;
+      text-align: center;
+    }
+    .meta-card .label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .meta-card .value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--accent2);
+    }
+
+    /* ── Layout ───────────────────────────────────── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 32px 80px;
+    }
+
+    /* ── Flow diagram ─────────────────────────────── */
+    .flow-section { margin-bottom: 56px; }
+    .flow-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--text-heading);
+      margin-bottom: 28px;
+    }
+    .flow-steps {
+      display: flex;
+      gap: 0;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .flow-step {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 22px;
+      text-align: center;
+      min-width: 130px;
+      position: relative;
+    }
+    .flow-step .num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+    .flow-step .name {
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--text-heading);
+    }
+    .flow-arrow {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      padding: 0 6px;
+      user-select: none;
+    }
+
+    /* ── Structure diagram ────────────────────────── */
+    .structure-section { margin-bottom: 56px; }
+    .structure-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--text-heading);
+      margin-bottom: 28px;
+    }
+    .tree {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 32px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      line-height: 2;
+      overflow-x: auto;
+    }
+    .tree .folder { color: var(--accent2); }
+    .tree .file { color: var(--text); }
+    .tree .comment { color: var(--text-muted); font-style: italic; }
+
+    /* ── Code sections ────────────────────────────── */
+    .file-section {
+      margin-bottom: 48px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--bg-card);
+    }
+    .file-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, var(--bg-card), #181c24);
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.2s;
+    }
+    .file-header:hover { background: #181c24; }
+    .file-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .file-icon.page { background: var(--accent-dim); color: var(--accent); border: 1px solid #f9731633; }
+    .file-icon.test { background: var(--green-dim); color: var(--green); border: 1px solid #34d39933; }
+    .file-icon.util { background: var(--purple-dim); color: var(--purple); border: 1px solid #a78bfa33; }
+    .file-icon.config { background: var(--accent2-dim); color: var(--accent2); border: 1px solid #22d3ee33; }
+
+    .file-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-heading);
+    }
+    .file-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+    .file-toggle {
+      margin-left: 12px;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      transition: transform 0.3s;
+    }
+    .file-section.collapsed .file-toggle { transform: rotate(-90deg); }
+    .file-section.collapsed .code-wrapper { display: none; }
+
+    .code-wrapper {
+      overflow-x: auto;
+      background: var(--bg-code);
+    }
+    pre {
+      padding: 24px 28px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      line-height: 1.85;
+      overflow-x: auto;
+      tab-size: 2;
+      color: var(--text);
+    }
+
+    /* Syntax highlighting */
+    .kw { color: var(--pink); }
+    .str { color: var(--green); }
+    .cmt { color: var(--text-muted); font-style: italic; }
+    .fn { color: var(--accent2); }
+    .num { color: var(--yellow); }
+    .cls { color: var(--accent); }
+    .prop { color: var(--purple); }
+    .par { color: #8b95a8; }
+    .op { color: #8b95a8; }
+
+    /* ── Questions section ────────────────────────── */
+    .questions-section {
+      margin-top: 64px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+    }
+    .questions-section > h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--text-heading);
+      margin-bottom: 36px;
+      text-align: center;
+    }
+    .q-category {
+      margin-bottom: 36px;
+    }
+    .q-category h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 16px;
+      padding-left: 16px;
+      border-left: 3px solid var(--accent);
+    }
+    .q-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .q-list li {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 20px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      display: flex;
+      gap: 12px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .q-list li:hover {
+      border-color: var(--border-accent);
+      background: #171a22;
+    }
+    .q-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent2);
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+
+    /* ── Setup section ────────────────────────────── */
+    .setup-section {
+      margin-top: 64px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+    }
+    .setup-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--text-heading);
+      margin-bottom: 24px;
+    }
+    .setup-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .setup-step {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .setup-step .step-num {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      border: 1px solid #f9731644;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .setup-step code {
+      background: var(--bg-code);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--accent2);
+    }
+    .setup-step .step-title {
+      font-weight: 600;
+      color: var(--text-heading);
+      margin-bottom: 4px;
+    }
+
+    /* ── Footer ───────────────────────────────────── */
+    .footer {
+      text-align: center;
+      padding: 40px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    /* ── Responsive ───────────────────────────────── */
+    @media (max-width: 700px) {
+      .hero { padding: 48px 20px 40px; }
+      .container { padding: 32px 16px 60px; }
+      .meta-row { padding: 24px 16px 0; }
+      .flow-steps { flex-direction: column; gap: 8px; }
+      .flow-arrow { transform: rotate(90deg); }
+      pre { padding: 16px; font-size: 0.72rem; }
+      .file-desc { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════ HERO ══════════════════════ -->
+  <header class="hero">
+    <div class="hero-badge">Playwright Training Assignment</div>
+    <h1>Orange HRM <span>Automation</span></h1>
+    <p>End-to-end test suite using Page Object Model — add &amp; verify a dependent, with full review prep.</p>
+  </header>
+
+  <div class="meta-row">
+    <div class="meta-card">
+      <div class="label">Framework</div>
+      <div class="value">Playwright + Node.js</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Pattern</div>
+      <div class="value">Page Object Model</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Deadline</div>
+      <div class="value">20 Apr 2026</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Files</div>
+      <div class="value">7 files</div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- ══════════════════ TEST FLOW ═════════════════ -->
+    <section class="flow-section">
+      <h2>Test Flow</h2>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="num">Step 1</div><div class="name">Open Login</div></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step"><div class="num">Step 2</div><div class="name">Login</div></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step"><div class="num">Step 3</div><div class="name">My Info</div></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step"><div class="num">Step 4</div><div class="name">Dependents</div></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step"><div class="num">Step 5</div><div class="name">Add Dependent</div></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step"><div class="num">Step 6</div><div class="name">Verify</div></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step"><div class="num">Step 7</div><div class="name">Logout</div></div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ STRUCTURE ═════════════════ -->
+    <section class="structure-section">
+      <h2>Project Structure</h2>
+      <div class="tree">
+<span class="folder">playwright-orangehrm/</span>
+├── <span class="folder">pages/</span>                      <span class="comment">── Page Object Model classes</span>
+│   ├── <span class="file">LoginPage.js</span>             <span class="comment">── Login locators &amp; actions</span>
+│   ├── <span class="file">DashboardPage.js</span>         <span class="comment">── Sidebar nav &amp; logout</span>
+│   └── <span class="file">DependentsPage.js</span>        <span class="comment">── Add, verify, delete dependents</span>
+├── <span class="folder">tests/</span>
+│   └── <span class="file">dependents.spec.js</span>       <span class="comment">── Main E2E test</span>
+├── <span class="folder">utils/</span>
+│   └── <span class="file">testData.js</span>              <span class="comment">── Credentials &amp; test data</span>
+├── <span class="file">playwright.config.js</span>         <span class="comment">── Playwright configuration</span>
+└── <span class="file">package.json</span>                 <span class="comment">── Dependencies &amp; scripts</span>
+      </div>
+    </section>
+
+    <!-- ══════════════════ CODE FILES ════════════════ -->
+
+    <!-- ── LoginPage.js ──────────────────────────── -->
+    <div class="file-section" id="file-login">
+      <div class="file-header" onclick="toggleFile('file-login')">
+        <div class="file-icon page">PG</div>
+        <div class="file-name">pages/LoginPage.js</div>
+        <div class="file-desc">Login page locators &amp; actions</div>
+        <div class="file-toggle">▼</div>
+      </div>
+      <div class="code-wrapper"><pre><span class="cmt">/**
+ * Page Object Model for the OrangeHRM Login Page.
+ *
+ * Encapsulates all locators and actions related to the login screen.
+ */</span>
+<span class="kw">class</span> <span class="cls">LoginPage</span> <span class="par">{</span>
+  <span class="cmt">/**
+   * @param {import('@playwright/test').Page} page
+   */</span>
+  <span class="fn">constructor</span><span class="par">(</span>page<span class="par">)</span> <span class="par">{</span>
+    <span class="kw">this</span>.page <span class="op">=</span> page<span class="op">;</span>
+
+    <span class="cmt">// --- Locators ---</span>
+    <span class="kw">this</span>.<span class="prop">usernameInput</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">'input[name="username"]'</span><span class="par">)</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="prop">passwordInput</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">'input[name="password"]'</span><span class="par">)</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="prop">loginButton</span>   <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">'button[type="submit"]'</span><span class="par">)</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="prop">errorMessage</span>  <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">".oxd-alert-content--error"</span><span class="par">)</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="prop">brandingLogo</span>  <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">".orangehrm-login-branding img"</span><span class="par">)</span><span class="op">;</span>
+  <span class="par">}</span>
+
+  <span class="cmt">// --- Actions ---</span>
+
+  <span class="cmt">/** Navigate to the login page. */</span>
+  <span class="kw">async</span> <span class="fn">navigate</span><span class="par">()</span> <span class="par">{</span>
+    <span class="kw">await</span> <span class="kw">this</span>.page.<span class="fn">goto</span><span class="par">(</span><span class="str">"/web/index.php/auth/login"</span><span class="par">)</span><span class="op">;</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">brandingLogo</span>.<span class="fn">waitFor</span><span class="par">({</span> <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span> <span class="par">})</span><span class="op">;</span>
+  <span class="par">}</span>
+
+  <span class="cmt">/**
+   * Perform login with provided credentials.
+   * @param {string} username
+   * @param {string} password
+   */</span>
+  <span class="kw">async</span> <span class="fn">login</span><span class="par">(</span>username<span class="op">,</span> password<span class="par">)</span> <span class="par">{</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">usernameInput</span>.<span class="fn">fill</span><span class="par">(</span>username<span class="par">)</span><span class="op">;</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">passwordInput</span>.<span class="fn">fill</span><span class="par">(</span>password<span class="par">)</span><span class="op">;</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">loginButton</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
+  <span class="par">}</span>
+
+  <span class="cmt">/** Returns the error message text if login fails. */</span>
+  <span class="kw">async</span> <span class="fn">getErrorMessage</span><span class="par">()</span> <span class="par">{</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">errorMessage</span>.<span class="fn">waitFor</span><span class="par">({</span> <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span> <span class="par">})</span><span class="op">;</span>
+    <span class="kw">return</span> <span class="kw">this</span>.<span class="prop">errorMessage</span>.<span class="fn">textContent</span><span class="par">()</span><span class="op">;</span>
+  <span class="par">}</span>
+<span class="par">}</span>
+
+<span class="kw">module</span>.<span class="prop">exports</span> <span class="op">=</span> <span class="par">{</span> <span class="cls">LoginPage</span> <span class="par">}</span><span class="op">;</span></pre></div>
+    </div>
+
+    <!-- ── DashboardPage.js ──────────────────────── -->
+    <div class="file-section" id="file-dashboard">
+      <div class="file-header" onclick="toggleFile('file-dashboard')">
+        <div class="file-icon page">PG</div>
+        <div class="file-name">pages/DashboardPage.js</div>
+        <div class="file-desc">Dashboard navigation &amp; logout</div>
+        <div class="file-toggle">▼</div>
+      </div>
+      <div class="code-wrapper"><pre><span class="cmt">/**
+ * Page Object Model for the OrangeHRM Dashboard Page.
+ *
+ * Handles top-level navigation (sidebar menu items) and logout.
+ */</span>
+<span class="kw">class</span> <span class="cls">DashboardPage</span> <span class="par">{</span>
+  <span class="cmt">/**
+   * @param {import('@playwright/test').Page} page
+   */</span>
+  <span class="fn">constructor</span><span class="par">(</span>page<span class="par">)</span> <span class="par">{</span>
+    <span class="kw">this</span>.page <span class="op">=</span> page<span class="op">;</span>
+
+    <span class="cmt">// --- Locators ---</span>
+    <span class="kw">this</span>.<span class="prop">sidebarMyInfo</span>    <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">'a.oxd-main-menu-item'</span><span class="op">,</span>
+                              <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"My Info"</span> <span class="par">})</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="prop">userDropdown</span>     <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">".oxd-userdropdown-tab"</span><span class="par">)</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="prop">logoutLink</span>       <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
+      <span class="str">'a[href="/web/index.php/auth/logout"]'</span><span class="par">)</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="prop">dashboardHeading</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">"h6"</span><span class="op">,</span>
+                              <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"Dashboard"</span> <span class="par">})</span><span class="op">;</span>
+  <span class="par">}</span>
+
+  <span class="cmt">/** Wait until the dashboard is fully loaded. */</span>
+  <span class="kw">async</span> <span class="fn">waitForDashboard</span><span class="par">()</span> <span class="par">{</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">dashboardHeading</span>.<span class="fn">waitFor</span><span class="par">({</span>
+      <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span><span class="op">,</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">15000</span>
+    <span class="par">})</span><span class="op">;</span>
+  <span class="par">}</span>
+
+  <span class="cmt">/** Click "My Info" in the left sidebar. */</span>
+  <span class="kw">async</span> <span class="fn">navigateToMyInfo</span><span class="par">()</span> <span class="par">{</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">sidebarMyInfo</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
+    <span class="kw">await</span> <span class="kw">this</span>.page.<span class="fn">waitForURL</span><span class="par">(</span><span class="str">"**/viewPersonalDetails/**"</span><span class="op">,</span>
+      <span class="par">{</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">15000</span> <span class="par">})</span><span class="op">;</span>
+  <span class="par">}</span>
+
+  <span class="cmt">/** Perform logout via the user dropdown. */</span>
+  <span class="kw">async</span> <span class="fn">logout</span><span class="par">()</span> <span class="par">{</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">userDropdown</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">logoutLink</span>.<span class="fn">waitFor</span><span class="par">({</span> <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span> <span class="par">})</span><span class="op">;</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">logoutLink</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
+    <span class="kw">await</span> <span class="kw">this</span>.page.<span class="fn">waitForURL</span><span class="par">(</span><span class="str">"**/auth/login"</span><span class="op">,</span>
+      <span class="par">{</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">15000</span> <span class="par">})</span><span class="op">;</span>
+  <span class="par">}</span>
+<span class="par">}</span>
+
+<span class="kw">module</span>.<span class="prop">exports</span> <span class="op">=</span> <span class="par">{</span> <span class="cls">DashboardPage</span> <span class="par">}</span><span class="op">;</span></pre></div>
+    </div>
+
+    <!-- ── DependentsPage.js ─────────────────────── -->
+    <div class="file-section" id="file-dependents">
+      <div class="file-header" onclick="toggleFile('file-dependents')">
+        <div class="file-icon page">PG</div>
+        <div class="file-name">pages/DependentsPage.js</div>
+        <div class="file-desc">Add, verify &amp; delete dependents</div>
+        <div class="file-toggle">▼</div>
+      </div>
+      <div class="code-wrapper"><pre><span class="cmt">/**
+ * Page Object Model for the OrangeHRM Dependents tab
+ * under My Info → Dependents.
+ */</span>
+<span class="kw">class</span> <span class="cls">DependentsPage</span> <span class="par">{</span>
+  <span class="fn">constructor</span><span class="par">(</span>page<span class="par">)</span> <span class="par">{</span>
+    <span class="kw">this</span>.page <span class="op">=</span> page<span class="op">;</span>
+
+    <span class="cmt">// --- Tab Locator ---</span>
+    <span class="kw">this</span>.<span class="prop">dependentsTab</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
+      <span class="str">'a[href*="viewDependents"]'</span><span class="op">,</span> <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"Dependents"</span> <span class="par">})</span><span class="op">;</span>
+
+    <span class="cmt">// --- Form Locators ---</span>
+    <span class="kw">this</span>.<span class="prop">addButton</span>    <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">"button"</span><span class="op">,</span> <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"Add"</span> <span class="par">})</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="prop">saveButton</span>   <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
+      <span class="str">'button[type="submit"]'</span><span class="op">,</span> <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"Save"</span> <span class="par">})</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="prop">cancelButton</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">"button"</span><span class="op">,</span> <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"Cancel"</span> <span class="par">})</span><span class="op">;</span>
+
+    <span class="cmt">// Form fields inside .oxd-form</span>
+    <span class="kw">this</span>.<span class="prop">nameInput</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
+      <span class="str">'.oxd-form .oxd-input-group:has(label:text("Name")) input'</span><span class="par">)</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="prop">relationshipDropdown</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
+      <span class="str">'.oxd-form .oxd-input-group:has(label:text("Relationship")) .oxd-select-text'</span><span class="par">)</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="prop">dateOfBirthInput</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
+      <span class="str">'.oxd-form .oxd-input-group:has(label:text("Date of Birth")) input'</span><span class="par">)</span><span class="op">;</span>
+
+    <span class="cmt">// --- Table Locators ---</span>
+    <span class="kw">this</span>.<span class="prop">dependentsTable</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">".oxd-table"</span><span class="par">)</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="prop">tableRows</span>       <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
+      <span class="str">".oxd-table .oxd-table-body .oxd-table-row"</span><span class="par">)</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="prop">toastMessage</span>    <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span><span class="str">".oxd-toast"</span><span class="par">)</span><span class="op">;</span>
+
+    <span class="cmt">// --- Delete Locators ---</span>
+    <span class="kw">this</span>.<span class="prop">deleteCheckbox</span>      <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
+      <span class="str">".oxd-table-body .oxd-table-row .oxd-checkbox-input"</span><span class="par">)</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="prop">deleteSelectedButton</span> <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
+      <span class="str">"button"</span><span class="op">,</span> <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"Delete Selected"</span> <span class="par">})</span><span class="op">;</span>
+    <span class="kw">this</span>.<span class="prop">confirmDeleteButton</span>  <span class="op">=</span> page.<span class="fn">locator</span><span class="par">(</span>
+      <span class="str">".orangehrm-modal-footer button"</span><span class="op">,</span>
+      <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> <span class="str">"Yes, Delete"</span> <span class="par">})</span><span class="op">;</span>
+  <span class="par">}</span>
+
+  <span class="cmt">/** Navigate to the Dependents tab within My Info. */</span>
+  <span class="kw">async</span> <span class="fn">navigateToDependentsTab</span><span class="par">()</span> <span class="par">{</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">dependentsTab</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
+    <span class="kw">await</span> <span class="kw">this</span>.page.<span class="fn">waitForURL</span><span class="par">(</span><span class="str">"**/viewDependents/**"</span><span class="op">,</span>
+      <span class="par">{</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">15000</span> <span class="par">})</span><span class="op">;</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">addButton</span>.<span class="fn">waitFor</span><span class="par">({</span>
+      <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span><span class="op">,</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">10000</span>
+    <span class="par">})</span><span class="op">;</span>
+  <span class="par">}</span>
+
+  <span class="cmt">/** Get the count of dependents currently in the table. */</span>
+  <span class="kw">async</span> <span class="fn">getDependentCount</span><span class="par">()</span> <span class="par">{</span>
+    <span class="kw">await</span> <span class="kw">this</span>.page.<span class="fn">waitForTimeout</span><span class="par">(</span><span class="num">1000</span><span class="par">)</span><span class="op">;</span>
+    <span class="kw">return</span> <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">tableRows</span>.<span class="fn">count</span><span class="par">()</span><span class="op">;</span>
+  <span class="par">}</span>
+
+  <span class="cmt">/**
+   * Add a new dependent.
+   * @param {string} name
+   * @param {string} relationship  - "Child", "Spouse", or "Other"
+   * @param {string} [dateOfBirth] - YYYY-MM-DD (optional)
+   */</span>
+  <span class="kw">async</span> <span class="fn">addDependent</span><span class="par">(</span>name<span class="op">,</span> relationship<span class="op">,</span> dateOfBirth<span class="par">)</span> <span class="par">{</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">addButton</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
+
+    <span class="cmt">// Fill the name</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">nameInput</span>.<span class="fn">waitFor</span><span class="par">({</span> <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span><span class="op">,</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">5000</span> <span class="par">})</span><span class="op">;</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">nameInput</span>.<span class="fn">fill</span><span class="par">(</span>name<span class="par">)</span><span class="op">;</span>
+
+    <span class="cmt">// Select relationship from dropdown</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">relationshipDropdown</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
+    <span class="kw">const</span> option <span class="op">=</span> <span class="kw">this</span>.page.<span class="fn">locator</span><span class="par">(</span>
+      <span class="str">`.oxd-select-dropdown .oxd-select-option`</span><span class="op">,</span>
+      <span class="par">{</span> <span class="prop">hasText</span><span class="op">:</span> relationship <span class="par">}</span>
+    <span class="par">)</span><span class="op">;</span>
+    <span class="kw">await</span> option.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
+
+    <span class="cmt">// Fill date of birth if provided</span>
+    <span class="kw">if</span> <span class="par">(</span>dateOfBirth<span class="par">)</span> <span class="par">{</span>
+      <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">dateOfBirthInput</span>.<span class="fn">clear</span><span class="par">()</span><span class="op">;</span>
+      <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">dateOfBirthInput</span>.<span class="fn">fill</span><span class="par">(</span>dateOfBirth<span class="par">)</span><span class="op">;</span>
+      <span class="kw">await</span> <span class="kw">this</span>.page.keyboard.<span class="fn">press</span><span class="par">(</span><span class="str">"Escape"</span><span class="par">)</span><span class="op">;</span>
+    <span class="par">}</span>
+
+    <span class="cmt">// Save &amp; wait for success toast</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">saveButton</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">toastMessage</span>.<span class="fn">waitFor</span><span class="par">({</span>
+      <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span><span class="op">,</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">10000</span>
+    <span class="par">})</span><span class="op">;</span>
+  <span class="par">}</span>
+
+  <span class="cmt">/** Check whether a dependent with the given name exists. */</span>
+  <span class="kw">async</span> <span class="fn">isDependentPresent</span><span class="par">(</span>name<span class="par">)</span> <span class="par">{</span>
+    <span class="kw">await</span> <span class="kw">this</span>.page.<span class="fn">waitForTimeout</span><span class="par">(</span><span class="num">1000</span><span class="par">)</span><span class="op">;</span>
+    <span class="kw">const</span> row <span class="op">=</span> <span class="kw">this</span>.page.<span class="fn">locator</span><span class="par">(</span>
+      <span class="str">`.oxd-table-body .oxd-table-row .oxd-table-cell:has-text("${</span>name<span class="str">}")`</span>
+    <span class="par">)</span><span class="op">;</span>
+    <span class="kw">return</span> <span class="par">(</span><span class="kw">await</span> row.<span class="fn">count</span><span class="par">())</span> <span class="op">&gt;</span> <span class="num">0</span><span class="op">;</span>
+  <span class="par">}</span>
+
+  <span class="cmt">/** Delete the first dependent using checkbox + Delete Selected. */</span>
+  <span class="kw">async</span> <span class="fn">deleteFirstDependent</span><span class="par">()</span> <span class="par">{</span>
+    <span class="kw">const</span> firstCheckbox <span class="op">=</span> <span class="kw">this</span>.<span class="prop">deleteCheckbox</span>.<span class="fn">first</span><span class="par">()</span><span class="op">;</span>
+    <span class="kw">await</span> firstCheckbox.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">deleteSelectedButton</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">confirmDeleteButton</span>.<span class="fn">waitFor</span><span class="par">({</span> <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span> <span class="par">})</span><span class="op">;</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">confirmDeleteButton</span>.<span class="fn">click</span><span class="par">()</span><span class="op">;</span>
+    <span class="kw">await</span> <span class="kw">this</span>.<span class="prop">toastMessage</span>.<span class="fn">waitFor</span><span class="par">({</span>
+      <span class="prop">state</span><span class="op">:</span> <span class="str">"visible"</span><span class="op">,</span> <span class="prop">timeout</span><span class="op">:</span> <span class="num">10000</span>
+    <span class="par">})</span><span class="op">;</span>
+  <span class="par">}</span>
+<span class="par">}</span>
+
+<span class="kw">module</span>.<span class="prop">exports</span> <span class="op">=</span> <span class="par">{</span> <span class="cls">DependentsPage</span> <span class="par">}</span><span class="op">;</span></pre></div>
+    </div>
+
+    <!-- ── testData.js ───────────────────────────── -->
+    <div class="file-section" id="file-testdata">
+      <div class="file-header" onclick="toggleFile('file-testdata')">
+        <div class="file-icon util">UT</div>
+        <div class="file-name">utils/testData.js</div>
+        <div class="file-desc">Credentials &amp; test data</div>
+        <div class="file-toggle">▼</div>
+      </div>
+      <div class="code-wrapper"><pre><span class="cmt">/**
+ * Test data and constants used across the test suite.
+ */</span>
+<span class="kw">const</span> <span class="cls">TestData</span> <span class="op">=</span> <span class="par">{</span>
+  <span class="prop">credentials</span><span class="op">:</span> <span class="par">{</span>
+    <span class="prop">username</span><span class="op">:</span> <span class="str">"Admin"</span><span class="op">,</span>
+    <span class="prop">password</span><span class="op">:</span> <span class="str">"admin123"</span><span class="op">,</span>
+  <span class="par">}</span><span class="op">,</span>
+
+  <span class="prop">urls</span><span class="op">:</span> <span class="par">{</span>
+    <span class="prop">login</span><span class="op">:</span>     <span class="str">"/web/index.php/auth/login"</span><span class="op">,</span>
+    <span class="prop">dashboard</span><span class="op">:</span> <span class="str">"/web/index.php/dashboard/index"</span><span class="op">,</span>
+    <span class="prop">myInfo</span><span class="op">:</span>    <span class="str">"/web/index.php/pim/viewPersonalDetails"</span><span class="op">,</span>
+  <span class="par">}</span><span class="op">,</span>
+
+  <span class="prop">dependent</span><span class="op">:</span> <span class="par">{</span>
+    <span class="prop">name</span><span class="op">:</span>         <span class="str">"John Doe"</span><span class="op">,</span>
+    <span class="prop">relationship</span><span class="op">:</span> <span class="str">"Child"</span><span class="op">,</span>
+    <span class="prop">dateOfBirth</span><span class="op">:</span>  <span class="str">"2015-06-15"</span><span class="op">,</span>
+  <span class="par">}</span><span class="op">,</span>
+<span class="par">}</span><span class="op">;</span>
+
+<span class="kw">module</span>.<span class="prop">exports</span> <span class="op">=</span> <span class="par">{</span> <span class="cls">TestData</span> <span class="par">}</span><span class="op">;</span></pre></div>
+    </div>
+
+    <!-- ── dependents.spec.js ────────────────────── -->
+    <div class="file-section" id="file-spec">
+      <div class="file-header" onclick="toggleFile('file-spec')">
+        <div class="file-icon test">TS</div>
+        <div class="file-name">tests/dependents.spec.js</div>
+        <div class="file-desc">Main E2E test</div>
+        <div class="file-toggle">▼</div>
+      </div>
+      <div class="code-wrapper"><pre><span class="cmt">// @ts-check</span>
+<span class="kw">const</span> <span class="par">{</span> test<span class="op">,</span> expect <span class="par">}</span> <span class="op">=</span> <span class="fn">require</span><span class="par">(</span><span class="str">"@playwright/test"</span><span class="par">)</span><span class="op">;</span>
+<span class="kw">const</span> <span class="par">{</span> <span class="cls">LoginPage</span> <span class="par">}</span>      <span class="op">=</span> <span class="fn">require</span><span class="par">(</span><span class="str">"../pages/LoginPage"</span><span class="par">)</span><span class="op">;</span>
+<span class="kw">const</span> <span class="par">{</span> <span class="cls">DashboardPage</span> <span class="par">}</span>  <span class="op">=</span> <span class="fn">require</span><span class="par">(</span><span class="str">"../pages/DashboardPage"</span><span class="par">)</span><span class="op">;</span>
+<span class="kw">const</span> <span class="par">{</span> <span class="cls">DependentsPage</span> <span class="par">}</span> <span class="op">=</span> <span class="fn">require</span><span class="par">(</span><span class="str">"../pages/DependentsPage"</span><span class="par">)</span><span class="op">;</span>
+<span class="kw">const</span> <span class="par">{</span> <span class="cls">TestData</span> <span class="par">}</span>       <span class="op">=</span> <span class="fn">require</span><span class="par">(</span><span class="str">"../utils/testData"</span><span class="par">)</span><span class="op">;</span>
+
+<span class="cmt">/**
+ * Orange HRM – Add Dependent &amp; Verify (End-to-End)
+ *
+ * Flow:
+ *   1. Open login page
+ *   2. Login with valid credentials
+ *   3. Navigate to My Info
+ *   4. Click the Dependents tab
+ *   5. Add a new dependent
+ *   6. Verify the dependent was added
+ *   7. Logout
+ */</span>
+test.<span class="fn">describe</span><span class="par">(</span><span class="str">"OrangeHRM – Dependents Management"</span><span class="op">,</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
+  <span class="cmt">/** @type {LoginPage} */</span>
+  <span class="kw">let</span> loginPage<span class="op">;</span>
+  <span class="cmt">/** @type {DashboardPage} */</span>
+  <span class="kw">let</span> dashboardPage<span class="op">;</span>
+  <span class="cmt">/** @type {DependentsPage} */</span>
+  <span class="kw">let</span> dependentsPage<span class="op">;</span>
+
+  test.<span class="fn">beforeEach</span><span class="par">(</span><span class="kw">async</span> <span class="par">({</span> page <span class="par">})</span> <span class="op">=&gt;</span> <span class="par">{</span>
+    loginPage      <span class="op">=</span> <span class="kw">new</span> <span class="cls">LoginPage</span><span class="par">(</span>page<span class="par">)</span><span class="op">;</span>
+    dashboardPage  <span class="op">=</span> <span class="kw">new</span> <span class="cls">DashboardPage</span><span class="par">(</span>page<span class="par">)</span><span class="op">;</span>
+    dependentsPage <span class="op">=</span> <span class="kw">new</span> <span class="cls">DependentsPage</span><span class="par">(</span>page<span class="par">)</span><span class="op">;</span>
+  <span class="par">})</span><span class="op">;</span>
+
+  test<span class="par">(</span><span class="str">"should add a dependent and verify, then logout"</span><span class="op">,</span>
+    <span class="kw">async</span> <span class="par">({</span> page <span class="par">})</span> <span class="op">=&gt;</span> <span class="par">{</span>
+
+    <span class="cmt">// ── Step 1: Open Login Page ──────────────────────</span>
+    <span class="kw">await</span> test.<span class="fn">step</span><span class="par">(</span><span class="str">"Open the login page"</span><span class="op">,</span> <span class="kw">async</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
+      <span class="kw">await</span> loginPage.<span class="fn">navigate</span><span class="par">()</span><span class="op">;</span>
+      <span class="kw">await</span> <span class="fn">expect</span><span class="par">(</span>loginPage.<span class="prop">usernameInput</span><span class="par">)</span>.<span class="fn">toBeVisible</span><span class="par">()</span><span class="op">;</span>
+    <span class="par">})</span><span class="op">;</span>
+
+    <span class="cmt">// ── Step 2: Login ────────────────────────────────</span>
+    <span class="kw">await</span> test.<span class="fn">step</span><span class="par">(</span><span class="str">"Login with valid credentials"</span><span class="op">,</span> <span class="kw">async</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
+      <span class="kw">await</span> loginPage.<span class="fn">login</span><span class="par">(</span>
+        <span class="cls">TestData</span>.<span class="prop">credentials</span>.<span class="prop">username</span><span class="op">,</span>
+        <span class="cls">TestData</span>.<span class="prop">credentials</span>.<span class="prop">password</span>
+      <span class="par">)</span><span class="op">;</span>
+      <span class="kw">await</span> dashboardPage.<span class="fn">waitForDashboard</span><span class="par">()</span><span class="op">;</span>
+      <span class="kw">await</span> <span class="fn">expect</span><span class="par">(</span>dashboardPage.<span class="prop">dashboardHeading</span><span class="par">)</span>.<span class="fn">toBeVisible</span><span class="par">()</span><span class="op">;</span>
+    <span class="par">})</span><span class="op">;</span>
+
+    <span class="cmt">// ── Step 3: Navigate to My Info ──────────────────</span>
+    <span class="kw">await</span> test.<span class="fn">step</span><span class="par">(</span><span class="str">"Click My Info from the sidebar"</span><span class="op">,</span> <span class="kw">async</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
+      <span class="kw">await</span> dashboardPage.<span class="fn">navigateToMyInfo</span><span class="par">()</span><span class="op">;</span>
+      <span class="kw">await</span> <span class="fn">expect</span><span class="par">(</span>page<span class="par">)</span>.<span class="fn">toHaveURL</span><span class="par">(</span><span class="str">/viewPersonalDetails/</span><span class="par">)</span><span class="op">;</span>
+    <span class="par">})</span><span class="op">;</span>
+
+    <span class="cmt">// ── Step 4: Click Dependents Tab ─────────────────</span>
+    <span class="kw">await</span> test.<span class="fn">step</span><span class="par">(</span><span class="str">"Click the Dependents tab"</span><span class="op">,</span> <span class="kw">async</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
+      <span class="kw">await</span> dependentsPage.<span class="fn">navigateToDependentsTab</span><span class="par">()</span><span class="op">;</span>
+      <span class="kw">await</span> <span class="fn">expect</span><span class="par">(</span>page<span class="par">)</span>.<span class="fn">toHaveURL</span><span class="par">(</span><span class="str">/viewDependents/</span><span class="par">)</span><span class="op">;</span>
+    <span class="par">})</span><span class="op">;</span>
+
+    <span class="cmt">// ── Step 5: Record count &amp; Add dependent ─────────</span>
+    <span class="kw">const</span> initialCount <span class="op">=</span>
+      <span class="kw">await</span> dependentsPage.<span class="fn">getDependentCount</span><span class="par">()</span><span class="op">;</span>
+
+    <span class="kw">await</span> test.<span class="fn">step</span><span class="par">(</span><span class="str">"Add a new dependent"</span><span class="op">,</span> <span class="kw">async</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
+      <span class="kw">await</span> dependentsPage.<span class="fn">addDependent</span><span class="par">(</span>
+        <span class="cls">TestData</span>.<span class="prop">dependent</span>.<span class="prop">name</span><span class="op">,</span>
+        <span class="cls">TestData</span>.<span class="prop">dependent</span>.<span class="prop">relationship</span><span class="op">,</span>
+        <span class="cls">TestData</span>.<span class="prop">dependent</span>.<span class="prop">dateOfBirth</span>
+      <span class="par">)</span><span class="op">;</span>
+    <span class="par">})</span><span class="op">;</span>
+
+    <span class="cmt">// ── Step 6: Verify dependent was added ───────────</span>
+    <span class="kw">await</span> test.<span class="fn">step</span><span class="par">(</span><span class="str">"Verify dependent in the table"</span><span class="op">,</span> <span class="kw">async</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
+      <span class="kw">const</span> isPresent <span class="op">=</span>
+        <span class="kw">await</span> dependentsPage.<span class="fn">isDependentPresent</span><span class="par">(</span>
+          <span class="cls">TestData</span>.<span class="prop">dependent</span>.<span class="prop">name</span>
+        <span class="par">)</span><span class="op">;</span>
+      <span class="fn">expect</span><span class="par">(</span>isPresent<span class="par">)</span>.<span class="fn">toBeTruthy</span><span class="par">()</span><span class="op">;</span>
+
+      <span class="kw">const</span> newCount <span class="op">=</span>
+        <span class="kw">await</span> dependentsPage.<span class="fn">getDependentCount</span><span class="par">()</span><span class="op">;</span>
+      <span class="fn">expect</span><span class="par">(</span>newCount<span class="par">)</span>.<span class="fn">toBeGreaterThan</span><span class="par">(</span>initialCount<span class="par">)</span><span class="op">;</span>
+    <span class="par">})</span><span class="op">;</span>
+
+    <span class="cmt">// ── Step 7: Logout ───────────────────────────────</span>
+    <span class="kw">await</span> test.<span class="fn">step</span><span class="par">(</span><span class="str">"Perform logout"</span><span class="op">,</span> <span class="kw">async</span> <span class="par">()</span> <span class="op">=&gt;</span> <span class="par">{</span>
+      <span class="kw">await</span> dashboardPage.<span class="fn">logout</span><span class="par">()</span><span class="op">;</span>
+      <span class="kw">await</span> <span class="fn">expect</span><span class="par">(</span>loginPage.<span class="prop">usernameInput</span><span class="par">)</span>.<span class="fn">toBeVisible</span><span class="par">()</span><span class="op">;</span>
+    <span class="par">})</span><span class="op">;</span>
+  <span class="par">})</span><span class="op">;</span>
+<span class="par">})</span><span class="op">;</span></pre></div>
+    </div>
+
+    <!-- ── playwright.config.js ──────────────────── -->
+    <div class="file-section" id="file-config">
+      <div class="file-header" onclick="toggleFile('file-config')">
+        <div class="file-icon config">CF</div>
+        <div class="file-name">playwright.config.js</div>
+        <div class="file-desc">Playwright configuration</div>
+        <div class="file-toggle">▼</div>
+      </div>
+      <div class="code-wrapper"><pre><span class="cmt">// @ts-check</span>
+<span class="kw">const</span> <span class="par">{</span> defineConfig<span class="op">,</span> devices <span class="par">}</span> <span class="op">=</span> <span class="fn">require</span><span class="par">(</span><span class="str">"@playwright/test"</span><span class="par">)</span><span class="op">;</span>
+
+<span class="kw">module</span>.<span class="prop">exports</span> <span class="op">=</span> <span class="fn">defineConfig</span><span class="par">({</span>
+  <span class="prop">testDir</span><span class="op">:</span>       <span class="str">"./tests"</span><span class="op">,</span>
+  <span class="prop">fullyParallel</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span>
+  <span class="prop">forbidOnly</span><span class="op">:</span>    <span class="op">!!</span>process.env.CI<span class="op">,</span>
+  <span class="prop">retries</span><span class="op">:</span>       process.env.CI <span class="op">?</span> <span class="num">1</span> <span class="op">:</span> <span class="num">0</span><span class="op">,</span>
+  <span class="prop">workers</span><span class="op">:</span>       <span class="num">1</span><span class="op">,</span>
+  <span class="prop">reporter</span><span class="op">:</span>      <span class="par">[[</span><span class="str">"html"</span><span class="op">,</span> <span class="par">{</span> <span class="prop">open</span><span class="op">:</span> <span class="str">"never"</span> <span class="par">}]</span><span class="op">,</span> <span class="par">[</span><span class="str">"list"</span><span class="par">]]</span><span class="op">,</span>
+  <span class="prop">timeout</span><span class="op">:</span>       <span class="num">60000</span><span class="op">,</span>
+
+  <span class="prop">expect</span><span class="op">:</span> <span class="par">{</span>
+    <span class="prop">timeout</span><span class="op">:</span> <span class="num">10000</span><span class="op">,</span>
+  <span class="par">}</span><span class="op">,</span>
+
+  <span class="prop">use</span><span class="op">:</span> <span class="par">{</span>
+    <span class="prop">baseURL</span><span class="op">:</span>           <span class="str">"https://opensource-demo.orangehrmlive.com"</span><span class="op">,</span>
+    <span class="prop">trace</span><span class="op">:</span>             <span class="str">"on-first-retry"</span><span class="op">,</span>
+    <span class="prop">screenshot</span><span class="op">:</span>        <span class="str">"only-on-failure"</span><span class="op">,</span>
+    <span class="prop">video</span><span class="op">:</span>             <span class="str">"retain-on-failure"</span><span class="op">,</span>
+    <span class="prop">actionTimeout</span><span class="op">:</span>     <span class="num">15000</span><span class="op">,</span>
+    <span class="prop">navigationTimeout</span><span class="op">:</span> <span class="num">30000</span><span class="op">,</span>
+  <span class="par">}</span><span class="op">,</span>
+
+  <span class="prop">projects</span><span class="op">:</span> <span class="par">[</span>
+    <span class="par">{</span>
+      <span class="prop">name</span><span class="op">:</span> <span class="str">"chromium"</span><span class="op">,</span>
+      <span class="prop">use</span><span class="op">:</span>  <span class="par">{</span> <span class="op">...</span>devices<span class="par">[</span><span class="str">"Desktop Chrome"</span><span class="par">]</span> <span class="par">}</span><span class="op">,</span>
+    <span class="par">}</span><span class="op">,</span>
+  <span class="par">]</span><span class="op">,</span>
+<span class="par">})</span><span class="op">;</span></pre></div>
+    </div>
+
+    <!-- ── package.json ──────────────────────────── -->
+    <div class="file-section" id="file-package">
+      <div class="file-header" onclick="toggleFile('file-package')">
+        <div class="file-icon config">PK</div>
+        <div class="file-name">package.json</div>
+        <div class="file-desc">Dependencies &amp; npm scripts</div>
+        <div class="file-toggle">▼</div>
+      </div>
+      <div class="code-wrapper"><pre><span class="par">{</span>
+  <span class="prop">"name"</span><span class="op">:</span>        <span class="str">"playwright-orangehrm-assignment"</span><span class="op">,</span>
+  <span class="prop">"version"</span><span class="op">:</span>     <span class="str">"1.0.0"</span><span class="op">,</span>
+  <span class="prop">"description"</span><span class="op">:</span> <span class="str">"Playwright POM Assignment - Orange HRM"</span><span class="op">,</span>
+  <span class="prop">"scripts"</span><span class="op">:</span> <span class="par">{</span>
+    <span class="prop">"test"</span><span class="op">:</span>        <span class="str">"npx playwright test"</span><span class="op">,</span>
+    <span class="prop">"test:headed"</span><span class="op">:</span> <span class="str">"npx playwright test --headed"</span><span class="op">,</span>
+    <span class="prop">"test:debug"</span><span class="op">:</span>  <span class="str">"npx playwright test --debug"</span>
+  <span class="par">}</span><span class="op">,</span>
+  <span class="prop">"devDependencies"</span><span class="op">:</span> <span class="par">{</span>
+    <span class="prop">"@playwright/test"</span><span class="op">:</span> <span class="str">"^1.44.0"</span>
+  <span class="par">}</span>
+<span class="par">}</span></pre></div>
+    </div>
+
+    <!-- ══════════════════ SETUP ═════════════════════ -->
+    <section class="setup-section">
+      <h2>Quick Setup</h2>
+      <div class="setup-steps">
+        <div class="setup-step">
+          <div class="step-num">1</div>
+          <div>
+            <div class="step-title">Install dependencies</div>
+            <code>npm install</code>
+          </div>
+        </div>
+        <div class="setup-step">
+          <div class="step-num">2</div>
+          <div>
+            <div class="step-title">Install Playwright browsers</div>
+            <code>npx playwright install chromium</code>
+          </div>
+        </div>
+        <div class="setup-step">
+          <div class="step-num">3</div>
+          <div>
+            <div class="step-title">Run the test (headless)</div>
+            <code>npm test</code>
+          </div>
+        </div>
+        <div class="setup-step">
+          <div class="step-num">4</div>
+          <div>
+            <div class="step-title">Run headed (watch the browser)</div>
+            <code>npm run test:headed</code>
+          </div>
+        </div>
+        <div class="setup-step">
+          <div class="step-num">5</div>
+          <div>
+            <div class="step-title">Debug with inspector</div>
+            <code>npm run test:debug</code>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════ REVIEW QUESTIONS ══════════ -->
+    <section class="questions-section">
+      <h2>Assignment Review Questions</h2>
+
+      <div class="q-category">
+        <h3>A — Page Object Model Concepts</h3>
+        <ul class="q-list">
+          <li><span class="q-num">Q01</span> What is the Page Object Model and why is it used in test automation?</li>
+          <li><span class="q-num">Q02</span> How did you structure your page objects? Walk us through the folder layout.</li>
+          <li><span class="q-num">Q03</span> Why separate locators and actions into page classes instead of the test file?</li>
+          <li><span class="q-num">Q04</span> If a UI element changes, how many files need updating with POM vs without?</li>
+          <li><span class="q-num">Q05</span> How do your page objects communicate — does one call another, or does the test orchestrate?</li>
+        </ul>
+      </div>
+
+      <div class="q-category">
+        <h3>B — Locator Strategy</h3>
+        <ul class="q-list">
+          <li><span class="q-num">Q06</span> What locator strategies did you use (CSS, XPath, text, role, test-id)? Why?</li>
+          <li><span class="q-num">Q07</span> OrangeHRM lacks <code>data-testid</code> attributes — how did you handle that?</li>
+          <li><span class="q-num">Q08</span> How would you deal with a locator that matches multiple elements?</li>
+          <li><span class="q-num">Q09</span> Difference between <code>page.locator()</code> and <code>page.getByRole()</code> / <code>getByText()</code>?</li>
+          <li><span class="q-num">Q10</span> How did you locate the Relationship dropdown and select a value?</li>
+        </ul>
+      </div>
+
+      <div class="q-category">
+        <h3>C — Waits &amp; Synchronisation</h3>
+        <ul class="q-list">
+          <li><span class="q-num">Q11</span> Does Playwright use implicit or explicit waits? How does auto-wait work?</li>
+          <li><span class="q-num">Q12</span> Where did you add explicit waits, and why were they necessary?</li>
+          <li><span class="q-num">Q13</span> Difference between <code>waitForSelector</code>, <code>waitForURL</code>, and <code>waitForTimeout</code>?</li>
+          <li><span class="q-num">Q14</span> How would you handle a flaky test caused by a slow network?</li>
+          <li><span class="q-num">Q15</span> Why is <code>waitForTimeout</code> discouraged, and when might it be acceptable?</li>
+        </ul>
+      </div>
+
+      <div class="q-category">
+        <h3>D — Assertions &amp; Verification</h3>
+        <ul class="q-list">
+          <li><span class="q-num">Q16</span> How did you verify that the dependent was successfully added?</li>
+          <li><span class="q-num">Q17</span> What assertion methods does Playwright provide? Which did you use?</li>
+          <li><span class="q-num">Q18</span> Difference between <code>expect(locator).toBeVisible()</code> and <code>locator.count() > 0</code>?</li>
+          <li><span class="q-num">Q19</span> If the toast disappears before your assertion, how would you handle it?</li>
+          <li><span class="q-num">Q20</span> How would you add a negative test — e.g. missing name shows validation error?</li>
+        </ul>
+      </div>
+
+      <div class="q-category">
+        <h3>E — Test Structure &amp; Reporting</h3>
+        <ul class="q-list">
+          <li><span class="q-num">Q21</span> Explain <code>test.describe</code>, <code>test.beforeEach</code>, and <code>test.step</code> in your test.</li>
+          <li><span class="q-num">Q22</span> If one <code>test.step</code> fails, do the remaining steps still run?</li>
+          <li><span class="q-num">Q23</span> How do you generate and view the Playwright HTML report?</li>
+          <li><span class="q-num">Q24</span> Purpose of <code>trace</code>, <code>screenshot</code>, and <code>video</code> in config?</li>
+          <li><span class="q-num">Q25</span> How would you run this test only in headed mode for a live demo?</li>
+        </ul>
+      </div>
+
+      <div class="q-category">
+        <h3>F — Configuration</h3>
+        <ul class="q-list">
+          <li><span class="q-num">Q26</span> Walk through your <code>playwright.config.js</code> — what does each key setting do?</li>
+          <li><span class="q-num">Q27</span> Why set <code>fullyParallel: false</code> and <code>workers: 1</code>?</li>
+          <li><span class="q-num">Q28</span> What is <code>baseURL</code> and how does it simplify navigation code?</li>
+          <li><span class="q-num">Q29</span> How would you run the same test across Chrome, Firefox, and Safari?</li>
+          <li><span class="q-num">Q30</span> Where are credentials stored, and how would you secure them in production?</li>
+        </ul>
+      </div>
+
+      <div class="q-category">
+        <h3>G — Advanced / Scenario-Based</h3>
+        <ul class="q-list">
+          <li><span class="q-num">Q31</span> How would you parameterise this test to add multiple dependents?</li>
+          <li><span class="q-num">Q32</span> Cleanup strategy — <code>afterEach</code>, inside the test, or via API?</li>
+          <li><span class="q-num">Q33</span> The demo site is shared by many users — how does that affect your test?</li>
+          <li><span class="q-num">Q34</span> How would you integrate this into a CI/CD pipeline (e.g. GitHub Actions)?</li>
+          <li><span class="q-num">Q35</span> What is a Playwright fixture? How would you create one for the logged-in state?</li>
+          <li><span class="q-num">Q36</span> Difference between <code>page.goto()</code> and <code>page.navigate()</code>?</li>
+          <li><span class="q-num">Q37</span> How would you handle file upload / download scenarios?</li>
+          <li><span class="q-num">Q38</span> Playwright's retry mechanisms vs re-running the entire test?</li>
+          <li><span class="q-num">Q39</span> Testing the same flow on a mobile viewport — what changes?</li>
+          <li><span class="q-num">Q40</span> How would you use Playwright's API request context for test data setup?</li>
+        </ul>
+      </div>
+
+      <div class="q-category">
+        <h3>H — Debugging &amp; Troubleshooting</h3>
+        <ul class="q-list">
+          <li><span class="q-num">Q41</span> Passes locally, fails in CI — first three things you check?</li>
+          <li><span class="q-num">Q42</span> How do you use the trace viewer to diagnose a failure?</li>
+          <li><span class="q-num">Q43</span> What is <code>--debug</code> mode and how does it help during development?</li>
+          <li><span class="q-num">Q44</span> How would you capture console errors or network failures during a run?</li>
+          <li><span class="q-num">Q45</span> A locator broke after a UI redesign — describe your process to fix it.</li>
+        </ul>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="footer">
+    Playwright Training Assignment &middot; Orange HRM &middot; Deadline: 20 April 2026
+  </footer>
+
+  <script>
+    function toggleFile(id) {
+      document.getElementById(id).classList.toggle('collapsed');
+    }
+  </script>
+</body>
+</html>
