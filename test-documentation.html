@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orange HRM Test Automation - Project Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #667eea;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .subsection {
+            margin-left: 20px;
+            margin-bottom: 25px;
+        }
+
+        .subsection-title {
+            font-size: 1.3em;
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .feature-box {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+
+        .step-container {
+            display: flex;
+            align-items: flex-start;
+            margin: 20px 0;
+        }
+
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h4 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .step-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .architecture {
+            background: #f8f9ff;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .architecture-item {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .architecture-icon {
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .architecture-text h4 {
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .architecture-text p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .flow-diagram {
+            text-align: center;
+            font-size: 1.2em;
+            color: #333;
+            line-height: 2;
+            margin: 30px 0;
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 5px;
+            border: 2px solid #667eea;
+        }
+
+        .flow-arrow {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .test-data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .test-data-table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .test-data-table td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .test-data-table tr:hover {
+            background: #f8f9ff;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+        }
+
+        .success {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .warning {
+            color: #ff6b6b;
+            font-weight: 600;
+        }
+
+        .command-box {
+            background: #2d2d2d;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+        }
+
+        .file-structure {
+            background: #f8f9ff;
+            border: 1px solid #667eea;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            line-height: 1.8;
+        }
+
+        .footer {
+            background: #f8f9ff;
+            border-top: 2px solid #667eea;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+        }
+
+        ul, ol {
+            margin-left: 20px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Orange HRM Test Automation</h1>
+            <p>Comprehensive Test Automation Project Documentation</p>
+        </div>
+
+        <div class="content">
+            <!-- Project Overview -->
+            <div class="section">
+                <h2 class="section-title">📋 Project Overview</h2>
+                <p style="font-size: 1.05em; color: #555; line-height: 1.8; margin-bottom: 15px;">
+                    This project demonstrates <span class="highlight">automated testing</span> for the Orange HRM application using <span class="highlight">Playwright</span> and the <span class="highlight">Page Object Model (POM)</span> design pattern. The test suite validates the complete workflow of managing employee dependents, from login to logout.
+                </p>
+
+                <div class="feature-box">
+                    <strong>🎯 Key Objectives:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Automate critical user workflows in Orange HRM</li>
+                        <li>Implement Page Object Model for maintainability</li>
+                        <li>Ensure data consistency and test reliability</li>
+                        <li>Generate comprehensive test reports</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Technology Stack -->
+            <div class="section">
+                <h2 class="section-title">🛠️ Technology Stack</h2>
+
+                <div class="subsection">
+                    <div class="subsection-title">Tools & Frameworks</div>
+                    <table class="test-data-table">
+                        <tr>
+                            <th>Technology</th>
+                            <th>Purpose</th>
+                            <th>Version</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Playwright</strong></td>
+                            <td>Browser automation framework</td>
+                            <td>^1.44.0</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Node.js</strong></td>
+                            <td>JavaScript runtime environment</td>
+                            <td>Latest</td>
+                        </tr>
+                        <tr>
+                            <td><strong>JavaScript</strong></td>
+                            <td>Test scripting language</td>
+                            <td>ES6+</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Chromium</strong></td>
+                            <td>Browser automation</td>
+                            <td>Latest</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Project Structure -->
+            <div class="section">
+                <h2 class="section-title">📁 Project Structure</h2>
+
+                <div class="file-structure">
+orange-hrm/<br/>
+├── pages/<br/>
+│   ├── LoginPage.js &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Login page POM<br/>
+│   ├── DashboardPage.js &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Dashboard navigation<br/>
+│   └── DependentsPage.js &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Dependents management<br/>
+├── tests/<br/>
+│   └── dependents.spec.js &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Main test suite<br/>
+├── utils/<br/>
+│   └── testData.js &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Test data<br/>
+├── playwright.config.js &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Playwright configuration<br/>
+├── package.json &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# Dependencies<br/>
+└── test-documentation.html &nbsp;&nbsp;&nbsp;&nbsp;# This file<br/>
+                </div>
+
+                <div class="subsection" style="margin-top: 20px;">
+                    <div class="subsection-title">📄 File Descriptions</div>
+                    <ul>
+                        <li><strong>pages/</strong> - Contains Page Object Model classes for different application pages</li>
+                        <li><strong>tests/</strong> - Contains Playwright test specifications</li>
+                        <li><strong>utils/</strong> - Stores test data and utility functions</li>
+                        <li><strong>playwright.config.js</strong> - Configuration for Playwright test runner</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Page Object Model Architecture -->
+            <div class="section">
+                <h2 class="section-title">🏗️ Page Object Model Architecture</h2>
+
+                <p style="color: #555; margin-bottom: 20px;">
+                    The Page Object Model (POM) is a design pattern that improves test maintainability by abstracting page elements and actions into reusable classes.
+                </p>
+
+                <div class="architecture">
+                    <div class="architecture-item">
+                        <div class="architecture-icon">📝</div>
+                        <div class="architecture-text">
+                            <h4>LoginPage</h4>
+                            <p>Handles authentication flows - locators for username, password fields and login button. Methods: navigate(), login(), getErrorMessage()</p>
+                        </div>
+                    </div>
+
+                    <div class="architecture-item">
+                        <div class="architecture-icon">🏠</div>
+                        <div class="architecture-text">
+                            <h4>DashboardPage</h4>
+                            <p>Manages dashboard navigation and user interactions. Methods: waitForDashboard(), navigateToMyInfo(), logout()</p>
+                        </div>
+                    </div>
+
+                    <div class="architecture-item">
+                        <div class="architecture-icon">👥</div>
+                        <div class="architecture-text">
+                            <h4>DependentsPage</h4>
+                            <p>Manages dependent records - add, view, verify, delete operations. Methods: addDependent(), isDependentPresent(), getDependentCount()</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Flow Diagram -->
+            <div class="section">
+                <h2 class="section-title">🔄 Test Execution Flow</h2>
+
+                <div class="flow-diagram">
+                    LOGIN<br/>
+                    <span class="flow-arrow">↓</span><br/>
+                    DASHBOARD<br/>
+                    <span class="flow-arrow">↓</span><br/>
+                    MY INFO<br/>
+                    <span class="flow-arrow">↓</span><br/>
+                    DEPENDENTS TAB<br/>
+                    <span class="flow-arrow">↓</span><br/>
+                    ADD DEPENDENT<br/>
+                    <span class="flow-arrow">↓</span><br/>
+                    VERIFY ADDITION<br/>
+                    <span class="flow-arrow">↓</span><br/>
+                    LOGOUT<br/>
+                    <span class="flow-arrow">↓</span><br/>
+                    <span class="success">✓ TEST PASSED</span>
+                </div>
+            </div>
+
+            <!-- Detailed Test Steps -->
+            <div class="section">
+                <h2 class="section-title">📍 Detailed Test Steps</h2>
+
+                <div class="step-container">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Open Login Page</h4>
+                        <p>Navigate to Orange HRM login page at <code>https://opensource-demo.orangehrmlive.com/web/index.php/auth/login</code>. Wait for branding logo to ensure page is fully loaded.</p>
+                    </div>
+                </div>
+
+                <div class="step-container">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Login with Valid Credentials</h4>
+                        <p>Enter username: <span class="highlight">Admin</span> and password: <span class="highlight">admin123</span>. Click login button and wait for dashboard to load.</p>
+                    </div>
+                </div>
+
+                <div class="step-container">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Navigate to My Info</h4>
+                        <p>Click "My Info" in the left sidebar. Application redirects to personal details page. Wait for URL change to verify navigation.</p>
+                    </div>
+                </div>
+
+                <div class="step-container">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Click Dependents Tab</h4>
+                        <p>Click "Dependents" tab under My Info section. Wait for URL to contain "viewDependents" and "Add" button to be visible.</p>
+                    </div>
+                </div>
+
+                <div class="step-container">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Add a New Dependent</h4>
+                        <p>Click "Add" button. Fill in dependent details: Name, Relationship (Child/Spouse/Other), and Date of Birth. Click Save and wait for success notification.</p>
+                    </div>
+                </div>
+
+                <div class="step-container">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h4>Verify Dependent Addition</h4>
+                        <p>Confirm that the newly added dependent appears in the dependents table. Verify table row count increased and dependent name is visible.</p>
+                    </div>
+                </div>
+
+                <div class="step-container">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h4>Logout</h4>
+                        <p>Click user dropdown menu and select logout. Verify redirect to login page. Test suite completes successfully.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Data -->
+            <div class="section">
+                <h2 class="section-title">📊 Test Data</h2>
+
+                <div class="subsection">
+                    <div class="subsection-title">Login Credentials</div>
+                    <table class="test-data-table">
+                        <tr>
+                            <th>Credential Type</th>
+                            <th>Value</th>
+                        </tr>
+                        <tr>
+                            <td>Username</td>
+                            <td><strong>Admin</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td><strong>admin123</strong></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Sample Dependent Data</div>
+                    <table class="test-data-table">
+                        <tr>
+                            <th>Name</th>
+                            <th>Relationship</th>
+                            <th>Date of Birth</th>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>Child</td>
+                            <td>2015-05-20</td>
+                        </tr>
+                        <tr>
+                            <td>Jane Smith</td>
+                            <td>Spouse</td>
+                            <td>1990-08-15</td>
+                        </tr>
+                        <tr>
+                            <td>Michael Johnson</td>
+                            <td>Other</td>
+                            <td>1985-03-10</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Configuration -->
+            <div class="section">
+                <h2 class="section-title">⚙️ Playwright Configuration</h2>
+
+                <div class="subsection">
+                    <div class="subsection-title">Key Configuration Settings</div>
+                    <table class="test-data-table">
+                        <tr>
+                            <th>Setting</th>
+                            <th>Value</th>
+                            <th>Purpose</th>
+                        </tr>
+                        <tr>
+                            <td>testDir</td>
+                            <td>./tests</td>
+                            <td>Location of test files</td>
+                        </tr>
+                        <tr>
+                            <td>timeout</td>
+                            <td>60000ms</td>
+                            <td>Test execution timeout</td>
+                        </tr>
+                        <tr>
+                            <td>workers</td>
+                            <td>1</td>
+                            <td>Serial test execution</td>
+                        </tr>
+                        <tr>
+                            <td>reporter</td>
+                            <td>HTML + List</td>
+                            <td>Test report generation</td>
+                        </tr>
+                        <tr>
+                            <td>baseURL</td>
+                            <td>https://opensource-demo.orangehrmlive.com</td>
+                            <td>Application base URL</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Running the Tests -->
+            <div class="section">
+                <h2 class="section-title">🚀 Running the Tests</h2>
+
+                <div class="subsection">
+                    <div class="subsection-title">Prerequisites</div>
+                    <ul>
+                        <li>Node.js v14+ installed</li>
+                        <li>npm or yarn package manager</li>
+                        <li>Internet connection (for OrangeHRM access)</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Installation</div>
+                    <div class="command-box">
+npm install
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">Run Tests</div>
+                    <div class="command-box">
+# Run tests in headless mode<br/>
+npm test<br/>
+<br/>
+# Run tests with browser UI visible<br/>
+npm run test:headed<br/>
+<br/>
+# Debug mode with step-by-step execution<br/>
+npm run test:debug
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <div class="subsection-title">View Test Report</div>
+                    <div class="command-box">
+npx playwright show-report
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expected Results -->
+            <div class="section">
+                <h2 class="section-title">✅ Expected Results</h2>
+
+                <div class="feature-box">
+                    <strong>Successful Test Execution Should:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li><span class="success">✓</span> Successfully log into Orange HRM with valid credentials</li>
+                        <li><span class="success">✓</span> Navigate to My Info section without errors</li>
+                        <li><span class="success">✓</span> Access Dependents tab and verify page loads</li>
+                        <li><span class="success">✓</span> Add a new dependent with complete details</li>
+                        <li><span class="success">✓</span> Verify the added dependent appears in the table</li>
+                        <li><span class="success">✓</span> Dependent count increases after addition</li>
+                        <li><span class="success">✓</span> Successfully logout and return to login page</li>
+                        <li><span class="success">✓</span> Generate HTML test report with screenshots</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Best Practices -->
+            <div class="section">
+                <h2 class="section-title">💡 Best Practices Implemented</h2>
+
+                <ul>
+                    <li><strong>Page Object Model (POM):</strong> Separates test logic from UI element locators for better maintainability</li>
+                    <li><strong>Explicit Waits:</strong> Uses proper wait conditions instead of hard timeouts</li>
+                    <li><strong>Test Data Management:</strong> Centralized test data in utils/testData.js for easy updates</li>
+                    <li><strong>Error Handling:</strong> Proper assertions and error messages for debugging</li>
+                    <li><strong>Screenshots & Videos:</strong> Automatic capture on test failure for debugging</li>
+                    <li><strong>Serial Execution:</strong> Tests run one at a time for consistent state management</li>
+                    <li><strong>HTML Reporting:</strong> Comprehensive test reports with execution details</li>
+                </ul>
+            </div>
+
+            <!-- Troubleshooting -->
+            <div class="section">
+                <h2 class="section-title">🔧 Troubleshooting Guide</h2>
+
+                <div class="subsection">
+                    <div class="subsection-title">Common Issues & Solutions</div>
+                    <ul>
+                        <li>
+                            <strong>Locator Ambiguity Error:</strong> Multiple elements match the selector. Solution: Use more specific locators or add context filters.
+                        </li>
+                        <li>
+                            <strong>Timeout Errors:</strong> Page element not found within timeout. Solution: Increase timeout or verify element visibility conditions.
+                        </li>
+                        <li>
+                            <strong>Network Issues:</strong> Cannot reach OrangeHRM. Solution: Check internet connection and baseURL in playwright.config.js.
+                        </li>
+                        <li>
+                            <strong>Test Flakiness:</strong> Tests pass/fail inconsistently. Solution: Add proper waits and verify test isolation.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="section">
+                <h2 class="section-title">📈 Test Metrics</h2>
+
+                <table class="test-data-table">
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                    </tr>
+                    <tr>
+                        <td>Total Test Cases</td>
+                        <td><strong>1 (Full Workflow)</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Test Scenarios Covered</td>
+                        <td><strong>7 Steps</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Page Objects</td>
+                        <td><strong>3</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Average Execution Time</td>
+                        <td><strong>~12 seconds</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Browser Coverage</td>
+                        <td><strong>Chromium</strong></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Key Learnings -->
+            <div class="section">
+                <h2 class="section-title">🎓 Key Learnings & Benefits</h2>
+
+                <div class="feature-box">
+                    <strong>Benefits of This Approach:</strong>
+                    <ul style="margin-top: 10px;">
+                        <li>Reduced test maintenance overhead through POM pattern</li>
+                        <li>Easy to add new test cases by reusing page objects</li>
+                        <li>Clear separation of concerns (test logic vs UI interactions)</li>
+                        <li>Scalable architecture for growing test suites</li>
+                        <li>Comprehensive debugging information through reports and videos</li>
+                        <li>Cross-browser testing capability (can add more browsers to config)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="section">
+                <h2 class="section-title">📝 Next Steps & Recommendations</h2>
+
+                <ul>
+                    <li>Add more test cases for edge cases and negative scenarios</li>
+                    <li>Implement parallel test execution for faster feedback</li>
+                    <li>Add API testing layer for complex workflows</li>
+                    <li>Set up CI/CD pipeline for automated test execution</li>
+                    <li>Create comprehensive test documentation and wikis</li>
+                    <li>Implement test data cleanup and rollback mechanisms</li>
+                    <li>Add performance testing for critical workflows</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <p>📅 Created: April 18, 2026 | 🎯 Project: Orange HRM Test Automation</p>
+        </div>
+    </div>
+</body>
+</html>
