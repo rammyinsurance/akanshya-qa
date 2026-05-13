@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akansha Ramteke — Complete Karmic & Kundali Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Nunito:wght@300;400;500;600;700;800&family=Cinzel:wght@400;600&display=swap');
+
+:root {
+  --rose:     #b56b6b;
+  --rose-l:   #f2d8d8;
+  --rose-bg:  #fdf6f6;
+  --gold:     #a87c2a;
+  --gold-l:   #f0dfa8;
+  --gold-bg:  #fdf9ee;
+  --teal:     #3a8f82;
+  --teal-l:   #c8e8e4;
+  --teal-bg:  #f0faf9;
+  --purple:   #6b5aa0;
+  --purple-l: #dcd5f5;
+  --purple-bg:#f6f4fc;
+  --navy:     #1e2240;
+  --ink:      #2a2218;
+  --ink2:     #52402e;
+  --ink3:     #8a7a6a;
+  --paper:    #fefcf9;
+  --cream:    #f7f3ec;
+  --border:   #e4d8cc;
+  --shadow:   rgba(42,34,24,0.08);
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Nunito',sans-serif;
+  font-weight:400;
+  line-height:1.75;
+}
+
+/* ── NAV TABS ── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(254,252,249,0.95);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);
+  padding:0.6rem 1rem;
+  display:flex;gap:0.4rem;flex-wrap:wrap;justify-content:center;
+}
+.nav a{
+  text-decoration:none;
+  font-size:0.75rem;font-weight:700;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--ink3);
+  padding:0.35rem 0.9rem;
+  border-radius:30px;
+  border:1px solid transparent;
+  transition:all 0.2s;
+}
+.nav a:hover{background:var(--rose-l);color:var(--rose);border-color:var(--rose-l);}
+
+/* ── PAGE WRAP ── */
+.page{max-width:860px;margin:0 auto;padding:0 1.5rem 5rem;}
+
+/* ── COVER ── */
+.cover{
+  text-align:center;
+  padding:4rem 1rem 2.5rem;
+  background:linear-gradient(180deg,var(--cream) 0%,var(--paper) 100%);
+  margin:0 -1.5rem;
+  padding-left:1.5rem;padding-right:1.5rem;
+}
+.cover-badge{
+  display:inline-block;
+  font-size:0.7rem;font-weight:800;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--rose);
+  background:var(--rose-l);
+  padding:0.3rem 1.2rem;border-radius:30px;
+  margin-bottom:1.25rem;
+}
+.cover h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3rem;font-weight:700;
+  color:var(--ink);line-height:1.15;
+  margin-bottom:0.6rem;
+}
+.cover h1 .name{color:var(--rose);}
+.cover-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:1.2rem;
+  color:var(--ink2);max-width:520px;margin:0 auto 2rem;
+}
+.birth-strip{
+  display:inline-flex;flex-wrap:wrap;
+  gap:0.5rem;justify-content:center;
+  background:white;border:1px solid var(--border);
+  border-radius:14px;padding:1rem 1.5rem;
+  box-shadow:0 2px 16px var(--shadow);
+}
+.bs-item{text-align:center;padding:0 1rem;}
+.bs-item+.bs-item{border-left:1px solid var(--border);}
+.bs-label{font-size:0.65rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.2rem;}
+.bs-value{font-family:'Cinzel',serif;font-size:0.88rem;color:var(--gold);}
+
+/* ── SECTION ── */
+.section{
+  margin:2.5rem 0;
+  scroll-margin-top:70px;
+}
+.sec-label{
+  font-size:0.65rem;font-weight:800;
+  letter-spacing:0.2em;text-transform:uppercase;
+  color:var(--rose);margin-bottom:0.4rem;
+  display:flex;align-items:center;gap:0.6rem;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--rose-l);}
+.sec-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem;font-weight:700;
+  color:var(--ink);margin-bottom:1.25rem;line-height:1.25;
+}
+
+/* ── KUNDALI ── */
+.kundali-outer{
+  display:flex;flex-direction:column;align-items:center;
+  gap:1.5rem;padding:2rem;
+  background:var(--navy);
+  border-radius:20px;
+  box-shadow:0 8px 40px rgba(0,0,0,0.18);
+}
+.kundali-heading{
+  font-family:'Cinzel',serif;
+  font-size:0.75rem;letter-spacing:0.22em;
+  color:#c9a96e;text-transform:uppercase;
+  text-align:center;
+}
+.kundali-grid{
+  display:grid;
+  grid-template-columns:repeat(4,120px);
+  grid-template-rows:repeat(4,100px);
+  border:1.5px solid rgba(201,169,110,0.4);
+  border-radius:6px;overflow:hidden;
+}
+.hbox{
+  border:0.5px solid rgba(255,255,255,0.07);
+  padding:7px 9px;
+  display:flex;flex-direction:column;
+  justify-content:space-between;
+  background:rgba(255,255,255,0.03);
+  transition:background 0.2s;
+  cursor:default;
+}
+.hbox:hover{background:rgba(201,169,110,0.08);}
+.hbox.is-lagna{background:rgba(201,169,110,0.07);border:0.5px solid rgba(201,169,110,0.3);}
+.h-num{font-size:8px;color:rgba(255,255,255,0.3);font-family:'Cinzel',serif;letter-spacing:0.05em;}
+.h-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.h-glyph{font-size:13px;color:rgba(201,169,110,0.5);}
+.h-sign{font-size:9px;color:rgba(201,169,110,0.65);font-style:italic;margin-top:1px;}
+.h-planets{display:flex;flex-wrap:wrap;gap:2px;margin-top:auto;}
+.ptag{
+  font-size:9px;font-weight:700;
+  padding:1px 4px;border-radius:3px;
+  letter-spacing:0.02em;
+}
+.pt-su{color:#f4b94a;background:rgba(244,185,74,0.15);}
+.pt-mo{color:#aac8e8;background:rgba(170,200,232,0.15);}
+.pt-ma{color:#e07070;background:rgba(224,112,112,0.15);}
+.pt-me{color:#5dc89a;background:rgba(93,200,154,0.15);}
+.pt-ju{color:#e8d070;background:rgba(232,208,112,0.15);}
+.pt-ve{color:#e08aba;background:rgba(224,138,186,0.15);}
+.pt-sa{color:#90a0c0;background:rgba(144,160,192,0.15);}
+.pt-ra{color:#b87ae0;background:rgba(184,122,224,0.15);}
+.pt-ke{color:#d0a050;background:rgba(208,160,80,0.15);}
+.lagna-tag{
+  font-size:7px;color:rgba(201,169,110,0.5);
+  letter-spacing:0.08em;text-align:right;
+  font-family:'Cinzel',serif;
+}
+/* grid positions */
+.hh12{grid-column:1;grid-row:1;}
+.hh1 {grid-column:2;grid-row:1;}
+.hh2 {grid-column:3;grid-row:1;}
+.hh3 {grid-column:4;grid-row:1;}
+.hh4 {grid-column:4;grid-row:2;}
+.hh5 {grid-column:4;grid-row:3;}
+.hh6 {grid-column:4;grid-row:4;}
+.hh7 {grid-column:3;grid-row:4;}
+.hh8 {grid-column:2;grid-row:4;}
+.hh9 {grid-column:1;grid-row:4;}
+.hh10{grid-column:1;grid-row:3;}
+.hh11{grid-column:1;grid-row:2;}
+.center-box{
+  grid-column:2/4;grid-row:2/4;
+  background:rgba(0,0,0,0.3);
+  border:0.5px solid rgba(201,169,110,0.15);
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  gap:0.4rem;padding:1rem;
+}
+.center-star{font-size:1.5rem;color:rgba(201,169,110,0.4);}
+.center-title{font-family:'Cinzel',serif;font-size:10px;color:rgba(201,169,110,0.6);letter-spacing:0.14em;}
+.center-data{font-size:8px;color:rgba(255,255,255,0.25);text-align:center;line-height:1.8;}
+
+/* legend */
+.k-legend{
+  display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;
+}
+.k-legend .ptag{padding:3px 8px;border-radius:4px;font-size:10px;}
+
+/* ── PLANET TABLE ── */
+.ptable{width:100%;border-collapse:collapse;font-size:0.85rem;}
+.ptable th{
+  font-size:0.65rem;font-weight:800;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--ink3);
+  padding:0.5rem 0.75rem;
+  border-bottom:2px solid var(--border);
+  text-align:left;background:var(--cream);
+}
+.ptable td{
+  padding:0.65rem 0.75rem;
+  border-bottom:1px solid var(--border);
+  vertical-align:middle;
+}
+.ptable tr:last-child td{border-bottom:none;}
+.ptable tr:hover td{background:rgba(165,120,50,0.04);}
+.planet-name{font-weight:700;color:var(--ink);display:flex;align-items:center;gap:0.5rem;}
+.pdot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.good{color:#3a8f60;font-size:0.78rem;font-weight:700;}
+.mix {color:var(--gold);font-size:0.78rem;font-weight:700;}
+.weak{color:var(--rose);font-size:0.78rem;font-weight:700;}
+
+/* ── HOUSE CARDS ── */
+.house-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;}
+.hcard{
+  background:white;border:1px solid var(--border);
+  border-radius:14px;padding:1.2rem;
+  box-shadow:0 2px 10px var(--shadow);
+  border-top:3px solid var(--gold-l);
+}
+.hcard.occupied{border-top-color:var(--gold);}
+.hc-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.6rem;}
+.hc-num{font-family:'Cinzel',serif;font-size:0.7rem;color:var(--ink3);letter-spacing:0.08em;}
+.hc-glyph{font-size:1.3rem;}
+.hc-sign{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:0.2rem;}
+.hc-planets{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:0.5rem;}
+.hc-body{font-size:0.82rem;color:var(--ink2);line-height:1.65;}
+
+/* ── PAST LIFE STORIES ── */
+.pl-story{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  overflow:hidden;
+  margin-bottom:1.5rem;
+  box-shadow:0 4px 20px var(--shadow);
+}
+.pl-header{
+  padding:1.5rem 2rem;
+  display:flex;align-items:center;gap:1.25rem;
+}
+.ph-purple{background:linear-gradient(135deg,#f0ecfc,#e8e0f8);}
+.ph-rose  {background:linear-gradient(135deg,#fcecec,#f8e0e0);}
+.ph-gold  {background:linear-gradient(135deg,#fcf6e8,#f8ecc8);}
+.ph-teal  {background:linear-gradient(135deg,#ecf8f6,#d8f0ec);}
+.pl-icon{font-size:2.5rem;flex-shrink:0;}
+.pl-life-num{
+  font-size:0.65rem;font-weight:800;letter-spacing:0.18em;
+  text-transform:uppercase;margin-bottom:0.25rem;
+}
+.pln-purple{color:var(--purple);}
+.pln-rose  {color:var(--rose);}
+.pln-gold  {color:var(--gold);}
+.pln-teal  {color:var(--teal);}
+.pl-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--ink);}
+.pl-astro{font-size:0.75rem;color:var(--ink3);margin-top:0.25rem;}
+.pl-body{padding:0 2rem 1.75rem;}
+.pl-scene{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;font-style:italic;
+  color:var(--ink2);line-height:1.9;
+  margin-bottom:1rem;
+  padding:1rem 1.25rem;
+  background:rgba(0,0,0,0.02);
+  border-left:3px solid var(--border);
+  border-radius:0 8px 8px 0;
+}
+.pl-analysis{margin-top:1rem;}
+.pl-analysis-title{
+  font-size:0.7rem;font-weight:800;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--ink3);
+  margin-bottom:0.75rem;
+}
+.pl-points{list-style:none;display:flex;flex-direction:column;gap:0.6rem;}
+.pl-points li{
+  display:flex;gap:0.75rem;align-items:flex-start;
+  font-size:0.88rem;color:var(--ink2);line-height:1.65;
+}
+.pl-points li .tag{
+  font-size:0.68rem;font-weight:800;letter-spacing:0.08em;
+  padding:2px 8px;border-radius:10px;flex-shrink:0;margin-top:2px;
+  text-transform:uppercase;
+}
+.tag-gift{background:var(--teal-l);color:var(--teal);}
+.tag-debt{background:var(--rose-l);color:var(--rose);}
+.tag-lesson{background:var(--gold-l);color:var(--gold);}
+.tag-carry{background:var(--purple-l);color:var(--purple);}
+
+/* ── SOUL CONTRACT ── */
+.soul-contract{
+  background:linear-gradient(135deg,#fdf9ee,#f6f4fc);
+  border:1.5px solid var(--gold-l);
+  border-radius:16px;padding:2rem;
+  margin:1.5rem 0;
+}
+.sc-title{
+  font-family:'Cinzel',serif;font-size:0.8rem;
+  letter-spacing:0.15em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:1rem;
+  text-align:center;
+}
+.sc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;}
+.sc-item{
+  background:white;border-radius:12px;
+  border:1px solid var(--border);
+  padding:1rem;text-align:center;
+}
+.sc-icon{font-size:1.6rem;margin-bottom:0.4rem;}
+.sc-name{font-size:0.7rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:0.3rem;}
+.sc-desc{font-size:0.84rem;color:var(--ink2);line-height:1.6;}
+
+/* ── KARMA FLOW ── */
+.karma-flow{
+  display:grid;grid-template-columns:1fr 60px 1fr;
+  gap:0;align-items:center;
+  margin:1.5rem 0;
+}
+.kf-box{
+  border-radius:14px;padding:1.5rem;
+  text-align:center;
+}
+.kf-past{background:var(--purple-bg);border:1px solid var(--purple-l);}
+.kf-future{background:var(--teal-bg);border:1px solid var(--teal-l);}
+.kf-arrow{text-align:center;font-size:1.5rem;color:var(--border);}
+.kf-label{font-size:0.65rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:0.5rem;}
+.kfl-purple{color:var(--purple);}
+.kfl-teal  {color:var(--teal);}
+.kf-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:0.5rem;}
+.kf-body{font-size:0.85rem;color:var(--ink2);line-height:1.65;}
+.kf-planet{
+  display:inline-block;
+  font-size:0.72rem;font-weight:700;
+  padding:2px 8px;border-radius:10px;
+  margin-top:0.5rem;
+}
+.kfp-purple{background:var(--purple-l);color:var(--purple);}
+.kfp-teal  {background:var(--teal-l);  color:var(--teal);}
+
+/* ── YOGA CARDS ── */
+.yoga-row{display:flex;flex-direction:column;gap:1rem;}
+.yoga-card{
+  display:flex;gap:1.25rem;
+  background:white;border:1px solid var(--border);
+  border-radius:14px;padding:1.2rem 1.5rem;
+  align-items:flex-start;
+  box-shadow:0 2px 8px var(--shadow);
+}
+.yoga-badge{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;flex-shrink:0;
+}
+.yb-gold  {background:var(--gold-l);}
+.yb-teal  {background:var(--teal-l);}
+.yb-rose  {background:var(--rose-l);}
+.yb-purple{background:var(--purple-l);}
+.yoga-info{}
+.yoga-name{font-weight:800;font-size:0.95rem;color:var(--ink);margin-bottom:0.15rem;}
+.yoga-planets{font-size:0.72rem;font-weight:700;letter-spacing:0.06em;color:var(--ink3);margin-bottom:0.4rem;}
+.yoga-desc{font-size:0.87rem;color:var(--ink2);line-height:1.65;}
+.yoga-strength{
+  font-size:0.7rem;font-weight:800;padding:2px 8px;
+  border-radius:10px;display:inline-block;margin-top:0.4rem;
+}
+.ys-strong{background:#d4f0e0;color:#2a8050;}
+.ys-mixed {background:var(--gold-l);color:var(--gold);}
+.ys-weak  {background:var(--rose-l);color:var(--rose);}
+
+/* ── PATTERN ITEMS ── */
+.pattern-list{list-style:none;display:flex;flex-direction:column;gap:0.9rem;}
+.pitem{
+  display:flex;gap:1rem;align-items:flex-start;
+  background:white;border:1px solid var(--border);
+  border-radius:12px;padding:1.1rem 1.3rem;
+  box-shadow:0 2px 8px var(--shadow);
+}
+.p-emoji{font-size:1.5rem;flex-shrink:0;margin-top:2px;}
+.p-head{font-weight:700;color:var(--ink);margin-bottom:0.25rem;font-size:0.95rem;}
+.p-body{font-size:0.87rem;color:var(--ink2);line-height:1.65;}
+.p-body strong{color:var(--ink);font-weight:700;}
+
+/* ── DASHA TIMELINE ── */
+.dasha-line{
+  display:flex;flex-direction:column;gap:0;
+  position:relative;padding-left:2.5rem;
+}
+.dasha-line::before{
+  content:'';
+  position:absolute;left:11px;top:24px;bottom:24px;
+  width:2px;background:linear-gradient(to bottom,var(--rose-l),var(--teal-l));
+}
+.dl-item{
+  position:relative;padding:0.6rem 0;
+}
+.dl-item+.dl-item{border-top:1px solid rgba(228,216,204,0.6);}
+.dl-dot{
+  position:absolute;left:-2.2rem;top:14px;
+  width:16px;height:16px;border-radius:50%;
+  background:white;border:2px solid var(--border);
+  z-index:1;
+}
+.dl-dot.curr{background:var(--rose);border-color:var(--rose);box-shadow:0 0 12px rgba(181,107,107,0.4);}
+.dl-content{padding:0.5rem 0;}
+.dl-period{font-size:0.7rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--rose);margin-bottom:0.15rem;}
+.dl-planet{font-weight:800;font-size:0.95rem;color:var(--ink);margin-bottom:0.25rem;}
+.dl-planet.curr{color:var(--rose);}
+.curr-badge{
+  display:inline-block;font-size:0.65rem;font-weight:800;
+  letter-spacing:0.1em;text-transform:uppercase;
+  background:var(--rose-l);color:var(--rose);
+  padding:2px 8px;border-radius:10px;margin-left:0.5rem;
+}
+.dl-body{font-size:0.85rem;color:var(--ink2);line-height:1.65;}
+
+/* ── REMEDY CARDS ── */
+.remedy-stack{display:flex;flex-direction:column;gap:1.25rem;}
+.r-card{
+  background:white;border:1px solid var(--border);
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 3px 14px var(--shadow);
+}
+.r-head{
+  padding:1rem 1.5rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.rh-gold  {background:var(--gold-bg);  border-bottom:1px solid var(--gold-l);}
+.rh-rose  {background:var(--rose-bg);  border-bottom:1px solid var(--rose-l);}
+.rh-teal  {background:var(--teal-bg);  border-bottom:1px solid var(--teal-l);}
+.rh-purple{background:var(--purple-bg);border-bottom:1px solid var(--purple-l);}
+.r-icon{font-size:1.5rem;}
+.r-name{font-weight:800;font-size:1rem;color:var(--ink);}
+.r-planet{font-size:0.75rem;color:var(--ink3);margin-top:2px;}
+.r-body{padding:1.2rem 1.5rem;}
+.r-steps{list-style:none;display:flex;flex-direction:column;gap:0.65rem;}
+.r-steps li{display:flex;gap:0.75rem;align-items:flex-start;font-size:0.87rem;color:var(--ink2);line-height:1.65;}
+.snum{
+  min-width:22px;height:22px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.65rem;font-weight:800;flex-shrink:0;margin-top:2px;
+}
+.sn-gold  {background:var(--gold-l);  color:var(--gold);}
+.sn-rose  {background:var(--rose-l);  color:var(--rose);}
+.sn-teal  {background:var(--teal-l);  color:var(--teal);}
+.sn-purple{background:var(--purple-l);color:var(--purple);}
+.r-steps strong{color:var(--ink);font-weight:700;}
+.day-tag{
+  font-size:0.68rem;font-weight:800;padding:1px 7px;
+  border-radius:8px;margin-right:4px;letter-spacing:0.06em;
+}
+.dt-gold  {background:var(--gold-l);  color:var(--gold);}
+.dt-rose  {background:var(--rose-l);  color:var(--rose);}
+.dt-teal  {background:var(--teal-l);  color:var(--teal);}
+.dt-purple{background:var(--purple-l);color:var(--purple);}
+
+/* mantra box */
+.mantra-box{
+  background:linear-gradient(135deg,var(--gold-bg),var(--purple-bg));
+  border:1.5px solid var(--gold-l);
+  border-radius:12px;padding:1.25rem 1.5rem;
+  text-align:center;margin:0.75rem 0;
+}
+.mb-label{font-size:0.65rem;font-weight:800;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;}
+.mb-mantra{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--ink);letter-spacing:0.06em;margin-bottom:0.3rem;}
+.mb-meaning{font-size:0.8rem;color:var(--ink3);font-style:italic;margin-bottom:0.3rem;}
+.mb-count{font-size:0.78rem;font-weight:700;color:var(--gold);}
+
+/* ── MESSAGE QUOTE ── */
+.quote{
+  background:white;
+  border-left:4px solid var(--rose);
+  border-radius:0 14px 14px 0;
+  padding:1.25rem 1.75rem;
+  margin:1rem 0;
+}
+.quote p{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:1.1rem;
+  color:var(--ink2);line-height:1.85;
+}
+.quote strong{font-style:normal;color:var(--rose);}
+
+/* ── FINAL ── */
+.final{
+  text-align:center;
+  padding:3rem 2rem;
+  background:linear-gradient(135deg,#fff8f5,#f5f3fc);
+  border-radius:20px;border:1px solid var(--border);
+  margin-top:2.5rem;
+  box-shadow:0 4px 24px var(--shadow);
+}
+.final-sym{font-size:2.5rem;display:block;margin-bottom:1rem;}
+.final h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:700;
+  color:var(--ink);margin-bottom:1rem;line-height:1.3;
+}
+.final h2 span{color:var(--rose);}
+.final p{font-size:1rem;color:var(--ink2);max-width:580px;margin:0 auto 0.8rem;line-height:1.85;}
+.final p strong{color:var(--ink);}
+.final .big-quote{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:1.2rem;
+  color:var(--ink);max-width:540px;margin:1.5rem auto 0;
+  line-height:1.8;
+}
+
+/* ── CARD WRAPPER ── */
+.card{
+  background:white;border:1px solid var(--border);
+  border-radius:18px;padding:2rem;
+  box-shadow:0 2px 14px var(--shadow);
+  margin-bottom:1.5rem;
+}
+.card-rose  {background:var(--rose-bg);  border-color:var(--rose-l);}
+.card-gold  {background:var(--gold-bg);  border-color:var(--gold-l);}
+.card-teal  {background:var(--teal-bg);  border-color:var(--teal-l);}
+.card-purple{background:var(--purple-bg);border-color:var(--purple-l);}
+
+/* ── STORY TEXT ── */
+.story{font-size:0.95rem;color:var(--ink2);line-height:1.85;}
+.story p{margin-bottom:0.9rem;}
+.story p:last-child{margin-bottom:0;}
+.story strong{color:var(--ink);font-weight:700;}
+
+/* responsive */
+@media(max-width:600px){
+  .cover h1{font-size:2.2rem;}
+  .karma-flow{grid-template-columns:1fr;gap:0.75rem;}
+  .kf-arrow{transform:rotate(90deg);}
+  .kundali-grid{grid-template-columns:repeat(4,80px);grid-template-rows:repeat(4,70px);}
+  .birth-strip{flex-direction:column;gap:0.5rem;}
+  .bs-item{border-left:none!important;border-top:1px solid var(--border);padding:0.5rem 0;}
+  .bs-item:first-child{border-top:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#kundali">🔯 Kundali</a>
+  <a href="#planets">🪐 Planets</a>
+  <a href="#pastlives">🔮 Past Lives</a>
+  <a href="#patterns">🌀 Patterns</a>
+  <a href="#yogas">✨ Yogas</a>
+  <a href="#dasha">⏳ Dasha</a>
+  <a href="#remedies">🙏 Remedies</a>
+</nav>
+
+<div class="page">
+
+<!-- ═══ COVER ═══ -->
+<div class="cover">
+  <div class="cover-badge">Complete Karmic & Kundali Guide</div>
+  <h1>Akansha <span class="name">Ramteke</span><br/>Your Soul's Complete Story</h1>
+  <p class="cover-sub">"Your past lives, your karmic debts, your gifts — and exactly what your soul came here to do"</p>
+  <div class="birth-strip">
+    <div class="bs-item"><div class="bs-label">Birth Date</div><div class="bs-value">28 Sep 1990</div></div>
+    <div class="bs-item"><div class="bs-label">Birth Time</div><div class="bs-value">22:45 IST</div></div>
+    <div class="bs-item"><div class="bs-label">Place</div><div class="bs-value">Tumsar, Maharashtra</div></div>
+    <div class="bs-item"><div class="bs-label">Lagna</div><div class="bs-value">Gemini ♊</div></div>
+    <div class="bs-item"><div class="bs-label">Rashi</div><div class="bs-value">Sagittarius ♐</div></div>
+    <div class="bs-item"><div class="bs-label">Nakshatra</div><div class="bs-value">Uttarashada · Pada 1</div></div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 1: KUNDALI ═══ -->
+<div class="section" id="kundali">
+  <div class="sec-label">Birth Chart · Sidereal / Vedic</div>
+  <div class="sec-title">Janma Kundali — North Indian Chart</div>
+
+  <div class="kundali-outer">
+    <div class="kundali-heading">॥ Janma Kundali · Akansha Ramteke · Mithuna Lagna ॥</div>
+
+    <div class="kundali-grid">
+      <!-- H12: Taurus -->
+      <div class="hbox hh12">
+        <div class="h-top"><div class="h-num">H12</div><div class="h-glyph">♉</div></div>
+        <div class="h-sign">Taurus</div>
+        <div class="h-planets"></div>
+      </div>
+
+      <!-- H1: Gemini LAGNA + Jupiter -->
+      <div class="hbox hh1 is-lagna">
+        <div class="h-top"><div class="h-num">H1</div><div class="h-glyph">♊</div></div>
+        <div class="h-sign">Gemini</div>
+        <div class="h-planets">
+          <span class="ptag pt-ju">Ju</span>
+        </div>
+        <div class="lagna-tag">LAGNA ▲</div>
+      </div>
+
+      <!-- H2: Cancer + Ketu + Mars(R) -->
+      <div class="hbox hh2">
+        <div class="h-top"><div class="h-num">H2</div><div class="h-glyph">♋</div></div>
+        <div class="h-sign">Cancer</div>
+        <div class="h-planets">
+          <span class="ptag pt-ke">Ke</span>
+          <span class="ptag pt-ma">Ma(R)</span>
+        </div>
+      </div>
+
+      <!-- H3: Leo + Venus -->
+      <div class="hbox hh3">
+        <div class="h-top"><div class="h-num">H3</div><div class="h-glyph">♌</div></div>
+        <div class="h-sign">Leo</div>
+        <div class="h-planets">
+          <span class="ptag pt-ve">Ve</span>
+        </div>
+      </div>
+
+      <!-- H4: Virgo + Sun + Mercury -->
+      <div class="hbox hh4">
+        <div class="h-top"><div class="h-num">H4</div><div class="h-glyph">♍</div></div>
+        <div class="h-sign">Virgo</div>
+        <div class="h-planets">
+          <span class="ptag pt-su">Su</span>
+          <span class="ptag pt-me">Me</span>
+        </div>
+      </div>
+
+      <!-- H11: Aries -->
+      <div class="hbox hh11">
+        <div class="h-top"><div class="h-num">H11</div><div class="h-glyph">♈</div></div>
+        <div class="h-sign">Aries</div>
+        <div class="h-planets"></div>
+      </div>
+
+      <!-- CENTER -->
+      <div class="center-box">
+        <div class="center-star">✦</div>
+        <div class="center-title">JANMA KUNDALI</div>
+        <div class="center-data">Akansha Ramteke<br/>28-09-1990 · 22:45 IST<br/>Tumsar, Maharashtra<br/>Lat 20°54'N · Lon 80°29'E<br/>Uttarashada Nakshatra · Pada 1</div>
+      </div>
+
+      <!-- H5: Libra -->
+      <div class="hbox hh5">
+        <div class="h-top"><div class="h-num">H5</div><div class="h-glyph">♎</div></div>
+        <div class="h-sign">Libra</div>
+        <div class="h-planets"></div>
+      </div>
+
+      <!-- H10: Pisces -->
+      <div class="hbox hh10">
+        <div class="h-top"><div class="h-num">H10</div><div class="h-glyph">♓</div></div>
+        <div class="h-sign">Pisces</div>
+        <div class="h-planets"></div>
+      </div>
+
+      <!-- H9: Aquarius -->
+      <div class="hbox hh9">
+        <div class="h-top"><div class="h-num">H9</div><div class="h-glyph">♒</div></div>
+        <div class="h-sign">Aquarius</div>
+        <div class="h-planets"></div>
+      </div>
+
+      <!-- H8: Capricorn + Rahu -->
+      <div class="hbox hh8">
+        <div class="h-top"><div class="h-num">H8</div><div class="h-glyph">♑</div></div>
+        <div class="h-sign">Capricorn</div>
+        <div class="h-planets">
+          <span class="ptag pt-ra">Ra</span>
+        </div>
+      </div>
+
+      <!-- H7: Sagittarius + Moon + Saturn -->
+      <div class="hbox hh7">
+        <div class="h-top"><div class="h-num">H7</div><div class="h-glyph">♐</div></div>
+        <div class="h-sign">Sagittarius</div>
+        <div class="h-planets">
+          <span class="ptag pt-mo">Mo</span>
+          <span class="ptag pt-sa">Sa</span>
+        </div>
+      </div>
+
+      <!-- H6: Scorpio -->
+      <div class="hbox hh6">
+        <div class="h-top"><div class="h-num">H6</div><div class="h-glyph">♏</div></div>
+        <div class="h-sign">Scorpio</div>
+        <div class="h-planets"></div>
+      </div>
+    </div>
+
+    <!-- legend -->
+    <div class="k-legend">
+      <span class="ptag pt-su" style="padding:3px 10px;border-radius:5px;">Su = Sun</span>
+      <span class="ptag pt-mo" style="padding:3px 10px;border-radius:5px;">Mo = Moon</span>
+      <span class="ptag pt-ma" style="padding:3px 10px;border-radius:5px;">Ma(R) = Mars Retrograde</span>
+      <span class="ptag pt-me" style="padding:3px 10px;border-radius:5px;">Me = Mercury</span>
+      <span class="ptag pt-ju" style="padding:3px 10px;border-radius:5px;">Ju = Jupiter</span>
+      <span class="ptag pt-ve" style="padding:3px 10px;border-radius:5px;">Ve = Venus</span>
+      <span class="ptag pt-sa" style="padding:3px 10px;border-radius:5px;">Sa = Saturn</span>
+      <span class="ptag pt-ra" style="padding:3px 10px;border-radius:5px;">Ra = Rahu</span>
+      <span class="ptag pt-ke" style="padding:3px 10px;border-radius:5px;">Ke = Ketu</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 2: PLANETS ═══ -->
+<div class="section" id="planets">
+  <div class="sec-label">Sidereal Positions · Lahiri Ayanamsha 23°43'39"</div>
+  <div class="sec-title">All Planetary Positions Explained Simply</div>
+
+  <div style="overflow-x:auto;">
+  <table class="ptable">
+    <thead>
+      <tr><th>Planet</th><th>Vedic Sign</th><th>Degree</th><th>House</th><th>Status</th><th>What it means for you</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="planet-name"><div class="pdot" style="background:#f4b94a;"></div>☀ Sun (Surya)</div></td>
+        <td>Virgo ♍</td><td>~12° Virgo</td><td>4th House</td>
+        <td><span class="good">● Friendly</span></td>
+        <td>Your intelligence, mother's influence, home life. Forms Budhaditya Yoga.</td>
+      </tr>
+      <tr>
+        <td><div class="planet-name"><div class="pdot" style="background:#aac8e8;"></div>☽ Moon (Chandra)</div></td>
+        <td>Sagittarius ♐</td><td>~27°40'</td><td>7th House</td>
+        <td><span class="mix">● Neutral</span></td>
+        <td>Your Janma Rashi. Emotions, relationships, philosophical nature.</td>
+      </tr>
+      <tr>
+        <td><div class="planet-name"><div class="pdot" style="background:#e07070;"></div>♂ Mars (Mangal-R)</div></td>
+        <td>Cancer ♋</td><td>~20° Cancer</td><td>2nd House</td>
+        <td><span class="weak">● Debilitated (Retrograde)</span></td>
+        <td>Family karma, wealth blocks, suppressed anger. Healing needed here.</td>
+      </tr>
+      <tr>
+        <td><div class="planet-name"><div class="pdot" style="background:#5dc89a;"></div>☿ Mercury (Budha)</div></td>
+        <td>Virgo ♍</td><td>~9° Virgo</td><td>4th House</td>
+        <td><span class="good">● Exalted / Own Sign</span></td>
+        <td>Brilliant analytical mind. With Sun = Budhaditya Yoga (exceptional intellect).</td>
+      </tr>
+      <tr>
+        <td><div class="planet-name"><div class="pdot" style="background:#e8d070;"></div>♃ Jupiter (Guru)</div></td>
+        <td>Gemini ♊</td><td>~17° Gemini</td><td>1st House (Lagna)</td>
+        <td><span class="mix">● Auspicious</span></td>
+        <td>Blesses your personality with wisdom and spiritual grace. Natural teacher.</td>
+      </tr>
+      <tr>
+        <td><div class="planet-name"><div class="pdot" style="background:#e08aba;"></div>♀ Venus (Shukra)</div></td>
+        <td>Leo ♌</td><td>~26° Leo</td><td>3rd House</td>
+        <td><span class="mix">● Enemy Sign</span></td>
+        <td>Creative talents, artistic expression, love of beauty. Brave, charming.</td>
+      </tr>
+      <tr>
+        <td><div class="planet-name"><div class="pdot" style="background:#90a0c0;"></div>♄ Saturn (Shani)</div></td>
+        <td>Sagittarius ♐</td><td>~26° Sagittarius</td><td>7th House</td>
+        <td><span class="mix">● Friendly Sign</span></td>
+        <td>Karmic lessons in relationships. With Moon = deep emotional discipline.</td>
+      </tr>
+      <tr>
+        <td><div class="planet-name"><div class="pdot" style="background:#b87ae0;"></div>☊ Rahu</div></td>
+        <td>Capricorn ♑</td><td>~3° Capricorn</td><td>8th House</td>
+        <td><span class="mix">● Karmic Destiny</span></td>
+        <td>Soul's direction: ambition, discipline, occult mastery, transformation.</td>
+      </tr>
+      <tr>
+        <td><div class="planet-name"><div class="pdot" style="background:#d0a050;"></div>☋ Ketu</div></td>
+        <td>Cancer ♋</td><td>~3° Cancer</td><td>2nd House</td>
+        <td><span class="mix">● Past Life Karma</span></td>
+        <td>Past lives of nurturing, family, emotional service. Natural wisdom carried forward.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div style="margin-top:1.5rem;">
+    <div class="sec-label" style="font-size:0.62rem;">House by House · Quick View</div>
+    <div class="house-grid" style="margin-top:0.75rem;">
+      <div class="hcard occupied">
+        <div class="hc-top"><span class="hc-num">1st House · Lagna</span><span class="hc-glyph">♊</span></div>
+        <div class="hc-sign">Gemini — Jupiter</div>
+        <div class="hc-planets"><span class="ptag pt-ju">Ju</span></div>
+        <div class="hc-body">Your personality is wise, optimistic, and philosophical. Jupiter here blesses your life with protection and opportunities. You are naturally a guide and teacher to others.</div>
+      </div>
+      <div class="hcard occupied">
+        <div class="hc-top"><span class="hc-num">2nd House · Wealth</span><span class="hc-glyph">♋</span></div>
+        <div class="hc-sign">Cancer — Ketu + Mars(R)</div>
+        <div class="hc-planets"><span class="ptag pt-ke">Ke</span><span class="ptag pt-ma">Ma(R)</span></div>
+        <div class="hc-body">Past-life karma around money, family, and speech. Natural detachment from wealth. Family relationships need healing. Your voice carries deep spiritual power when used consciously.</div>
+      </div>
+      <div class="hcard occupied">
+        <div class="hc-top"><span class="hc-num">3rd House · Creativity</span><span class="hc-glyph">♌</span></div>
+        <div class="hc-sign">Leo — Venus</div>
+        <div class="hc-planets"><span class="ptag pt-ve">Ve</span></div>
+        <div class="hc-body">Artistic, creative, and expressive nature. Beautiful communication style. Love of art, music, and aesthetics. Courage through creative self-expression.</div>
+      </div>
+      <div class="hcard occupied">
+        <div class="hc-top"><span class="hc-num">4th House · Home/Mind</span><span class="hc-glyph">♍</span></div>
+        <div class="hc-sign">Virgo — Sun + Mercury</div>
+        <div class="hc-planets"><span class="ptag pt-su">Su</span><span class="ptag pt-me">Me</span></div>
+        <div class="hc-body"><strong>Budhaditya Yoga</strong> here. Exceptional analytical mind. Deep bond with mother and home. Academic intelligence. Strong inner life and private nature. Healing abilities.</div>
+      </div>
+      <div class="hcard occupied">
+        <div class="hc-top"><span class="hc-num">7th House · Partnership</span><span class="hc-glyph">♐</span></div>
+        <div class="hc-sign">Sagittarius — Moon + Saturn</div>
+        <div class="hc-planets"><span class="ptag pt-mo">Mo</span><span class="ptag pt-sa">Sa</span></div>
+        <div class="hc-body">Your most karmic house. Relationships require patience and maturity. Attracted to philosophical, older, or disciplined partners. Deep, transformational love awaits — after Saturn's lessons are learned.</div>
+      </div>
+      <div class="hcard occupied">
+        <div class="hc-top"><span class="hc-num">8th House · Occult</span><span class="hc-glyph">♑</span></div>
+        <div class="hc-sign">Capricorn — Rahu</div>
+        <div class="hc-planets"><span class="ptag pt-ra">Ra</span></div>
+        <div class="hc-body">Strong pull toward mysticism, astrology, healing, and hidden knowledge. Psychic sensitivity. Sudden transformations are life themes. Rahu here gives powerful research abilities and occult gifts.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 3: PAST LIVES ═══ -->
+<div class="section" id="pastlives">
+  <div class="sec-label">Ketu · Past Life Karma · Soul Memory</div>
+  <div class="sec-title">Your Past Lives — What Your Soul Remembers</div>
+
+  <div class="story" style="margin-bottom:1.5rem;">
+    <p>In Vedic astrology, <strong>Ketu shows where your soul has been</strong> — the skills mastered, the roles lived, and the karma accumulated across previous lifetimes. Your Ketu sits in Cancer (2nd house) with Mars retrograde. Your Rahu (future direction) is in Capricorn (8th house). Together with Moon+Saturn in the 7th, Jupiter in the 1st, and Sun+Mercury in the 4th — your chart reveals 3 very specific past-life patterns. Here they are, told as a story.</p>
+  </div>
+
+  <!-- PAST LIFE 1 -->
+  <div class="pl-story">
+    <div class="pl-header ph-purple">
+      <div class="pl-icon">👩‍⚕️</div>
+      <div>
+        <div class="pl-life-num pln-purple">Past Life One · Most Recent & Strongest</div>
+        <div class="pl-title">The Healer Who Forgot Herself</div>
+        <div class="pl-astro">Ketu in Cancer (2nd) + Mars(R) · Jupiter in Lagna · Moon-Saturn in 7th</div>
+      </div>
+    </div>
+    <div class="pl-body">
+      <div class="pl-scene">
+        "She was a village healer — a midwife, a herbalist, a woman everyone came to when they were in pain. From the youngest age, she could sense others' suffering as if it were her own. She gave her knowledge freely, sat by bedsides through the night, delivered babies in storms, consoled the grieving. She never said no. Her home was always open. But when she herself fell sick, no one came. When she herself needed love, she received duty. She gave and gave until there was nothing left — and died quietly, with great wisdom in her heart, but with a hollow space where her own life should have been."
+      </div>
+      <div class="pl-analysis">
+        <div class="pl-analysis-title">What This Past Life Left in Your Soul Today</div>
+        <ul class="pl-points">
+          <li><span class="tag tag-gift">Gift</span>Extraordinary empathy and healing intuition. You understand people's pain instantly, often before they speak it. This is a real psychic gift from this lifetime.</li>
+          <li><span class="tag tag-gift">Gift</span>Natural knowledge of the body, health, herbs, or healing modalities. You may find this knowledge "comes to you" without formal study.</li>
+          <li><span class="tag tag-debt">Debt</span>A pattern of giving everything to others while neglecting your own needs. This is the #1 karmic wound that needs healing in this lifetime.</li>
+          <li><span class="tag tag-debt">Debt</span>A deep, unconscious belief that "I must earn my place in this world by being useful to others." This creates the pattern of overgiving and burnout.</li>
+          <li><span class="tag tag-lesson">Lesson</span>This life teaches you: <strong>You are worthy simply because you exist — not because of what you give.</strong> Receiving is not selfish. Rest is sacred.</li>
+          <li><span class="tag tag-carry">Carry</span>This is why you feel naturally drawn to healing, astrology, counseling, or any form of service — it echoes deeply in your soul's memory.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAST LIFE 2 -->
+  <div class="pl-story">
+    <div class="pl-header ph-rose">
+      <div class="pl-icon">🏛️</div>
+      <div>
+        <div class="pl-life-num pln-rose">Past Life Two · Deep Relationship Karma</div>
+        <div class="pl-title">The Devoted Woman Bound by Duty</div>
+        <div class="pl-astro">Moon + Saturn in 7th House (Sagittarius) · Ketu in Cancer</div>
+      </div>
+    </div>
+    <div class="pl-body">
+      <div class="pl-scene">
+        "She was married young — not to the person her heart chose, but to the one her family chose. He was not unkind, but he was cold — responsible, disciplined, always working, rarely present emotionally. She stayed because that was her duty. She raised children, managed the home, kept the household in perfect order, and smiled at every social occasion. Inside, she carried a silent grief — the love she never got to give or receive freely. She was loyal until death. But she made a silent vow: 'Next time, I choose with my own heart. Next time, I will not be bound by duty alone.'"
+      </div>
+      <div class="pl-analysis">
+        <div class="pl-analysis-title">What This Past Life Left in Your Soul Today</div>
+        <ul class="pl-points">
+          <li><span class="tag tag-gift">Gift</span>Deep emotional intelligence and understanding of what makes relationships work or fail. You have an instinct for the hidden dynamics in any partnership.</li>
+          <li><span class="tag tag-gift">Gift</span>Extraordinary loyalty and commitment once you trust someone fully. When you love, you love with your entire being.</li>
+          <li><span class="tag tag-debt">Debt</span>Saturn in 7th is the echo of that past-life partnership "debt." Saturn now asks you to learn the difference between love and obligation, between staying from choice versus staying from fear.</li>
+          <li><span class="tag tag-debt">Debt</span>You may sometimes feel emotionally lonely even in relationships — a residual memory of the past-life emotional isolation. This heals as you learn to express your emotional needs clearly.</li>
+          <li><span class="tag tag-lesson">Lesson</span><strong>True love for you must pass Saturn's test: Is this consistent? Is this honest? Does this person see my full self?</strong> The right partner respects your intelligence and your depth.</li>
+          <li><span class="tag tag-carry">Carry</span>Your Moon is in Sagittarius — in this life, your soul NEEDS a partner who values truth, philosophy, and freedom. A partner who teaches you AND learns from you. This is who you are waiting for.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAST LIFE 3 -->
+  <div class="pl-story">
+    <div class="pl-header ph-gold">
+      <div class="pl-icon">📚</div>
+      <div>
+        <div class="pl-life-num pln-gold">Past Life Three · Spiritual Teacher</div>
+        <div class="pl-title">The Scholar & Spiritual Guide</div>
+        <div class="pl-astro">Jupiter in 1st House (Gemini) · Sun+Mercury in 4th (Virgo) · Rahu in 8th (Capricorn)</div>
+      </div>
+    </div>
+    <div class="pl-body">
+      <div class="pl-scene">
+        "In another life — perhaps in ancient India, or perhaps in a monastery elsewhere — she was a scholar and a spiritual teacher. She had mastered Vedic texts, philosophy, and the hidden sciences (astrology, tantra, or yogic arts). Students came to her for wisdom. She was respected, trusted, and deeply learned. But she stayed in the ashram or temple — never building anything in the material world. She gave wisdom but never learned to build power, wealth, or lasting structures for herself. She was brilliant but materially invisible."
+      </div>
+      <div class="pl-analysis">
+        <div class="pl-analysis-title">What This Past Life Left in Your Soul Today</div>
+        <ul class="pl-points">
+          <li><span class="tag tag-gift">Gift</span>Jupiter in your Lagna is the direct inheritance of this past-life spiritual mastery. People sense your wisdom and trust you instinctively. You carry an ancient knowing.</li>
+          <li><span class="tag tag-gift">Gift</span>The Budhaditya Yoga (Sun+Mercury in Virgo) is this scholar's mind carried forward. You have a naturally brilliant, analytical, deeply curious intellect that absorbs and synthesizes knowledge fast.</li>
+          <li><span class="tag tag-gift">Gift</span>Natural affinity for astrology, vedic sciences, philosophy, or spiritual topics — these feel like a homecoming, not a new subject, because your soul has studied them before.</li>
+          <li><span class="tag tag-debt">Debt</span>Rahu in Capricorn (8th house) is the corrective: <strong>this life, the soul must BUILD in the material world, not only give wisdom.</strong> Structure, ambition, career achievement, and financial mastery are karmic goals.</li>
+          <li><span class="tag tag-lesson">Lesson</span>You are not meant to stay in the "ashram" of quiet service. Your wisdom must be paired with worldly impact. <strong>Sharing your knowledge with a broader audience — through teaching, writing, counseling, or content creation — is a soul-level directive.</strong></li>
+          <li><span class="tag tag-carry">Carry</span>This is why studying astrology (like you are doing now) feels like remembering, not learning. Your soul already knows these patterns. You are simply waking up.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOUL CONTRACTS -->
+  <div class="soul-contract">
+    <div class="sc-title">Your Soul Contracts in This Lifetime</div>
+    <div class="sc-grid">
+      <div class="sc-item">
+        <div class="sc-icon">💞</div>
+        <div class="sc-name">Love Contract</div>
+        <div class="sc-desc">Saturn in 7th: You contracted to <strong>learn what real love feels like</strong> — chosen freely, not from duty. This may take time, but the right person arrives when you stop settling.</div>
+      </div>
+      <div class="sc-item">
+        <div class="sc-icon">💰</div>
+        <div class="sc-name">Wealth Contract</div>
+        <div class="sc-desc">Rahu in Capricorn: You contracted to <strong>build financial security through disciplined effort</strong> — moving past the past-life pattern of giving all wealth away.</div>
+      </div>
+      <div class="sc-item">
+        <div class="sc-icon">🎓</div>
+        <div class="sc-name">Wisdom Contract</div>
+        <div class="sc-desc">Jupiter in Lagna: You contracted to <strong>teach and guide others</strong>. Your wisdom is meant to be shared, not hidden. Teaching IS your soul's dharma.</div>
+      </div>
+      <div class="sc-item">
+        <div class="sc-icon">🗣️</div>
+        <div class="sc-name">Voice Contract</div>
+        <div class="sc-desc">Mars(R) in 2nd: You contracted to <strong>heal your relationship with your own voice</strong> — to speak your truth rather than swallowing your needs for others' comfort.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RAHU KETU FLOW -->
+  <div style="margin-top:1.5rem;">
+    <div class="sec-label" style="font-size:0.62rem;">Soul Direction · This Lifetime</div>
+    <div class="karma-flow" style="margin-top:0.75rem;">
+      <div class="kf-box kf-past">
+        <div class="kf-label kfl-purple">☋ Ketu — Where You Came From</div>
+        <div class="kf-title">Cancer · Emotional Service</div>
+        <div class="kf-body">Many lifetimes of nurturing, healing, mothering, and emotional service. Your soul is so comfortable here it feels like "home" — which is exactly why Ketu creates <em>detachment</em> from it. You have mastered this. Time to move on.</div>
+        <div><span class="kf-planet kfp-purple">Past: Healer · Mother · Devoted Wife · Scholar</span></div>
+      </div>
+      <div class="kf-arrow">→</div>
+      <div class="kf-box kf-future">
+        <div class="kf-label kfl-teal">☊ Rahu — Where You Are Going</div>
+        <div class="kf-title">Capricorn · Disciplined Mastery</div>
+        <div class="kf-body">This lifetime calls you toward structure, ambition, worldly achievement, and mastery of the hidden/occult sciences. You are meant to combine your emotional wisdom with disciplined power — and build something lasting in the world.</div>
+        <div><span class="kf-planet kfp-teal">Future: Achiever · Teacher · Mystic Leader · Builder</span></div>
+      </div>
+    </div>
+    <div class="quote" style="margin-top:1rem;">
+      <p>Simply: <strong>Your soul spent many lives giving everything to others.</strong> This life, the universe wants you to also build something for yourself — a career, a platform, financial security, a legacy of wisdom. Every time you invest in your own growth, you are fulfilling your Rahu destiny.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 4: PATTERNS ═══ -->
+<div class="section" id="patterns">
+  <div class="sec-label">Why Life Feels the Way It Does</div>
+  <div class="sec-title">Your 5 Karmic Life Patterns — Explained</div>
+  <ul class="pattern-list">
+    <li class="pitem"><span class="p-emoji">💸</span>
+      <div>
+        <div class="p-head">Money feels unstable or comes and goes</div>
+        <div class="p-body"><strong>Why:</strong> Ketu (past-life planet) in your 2nd house of wealth signals that your soul has <em>already lived many lifetimes with wealth</em> and has mastered financial security before. This creates a soul-level detachment from money — you don't instinctively chase it. Mars retrograde here adds financial hesitation and family-related money tensions. <strong>What to do:</strong> Consciously practice treating money as a spiritual tool. Budgeting, saving, and investing are karmic healers for you — acts of self-respect, not greed.</div>
+      </div>
+    </li>
+    <li class="pitem"><span class="p-emoji">💔</span>
+      <div>
+        <div class="p-head">Relationships feel delayed, heavy, or emotionally lonely</div>
+        <div class="p-body"><strong>Why:</strong> Saturn (karma) sits with Moon (emotions) in your 7th house (partnerships). This is the past-life devoted wife karma — Saturn is making you take relationships very, very seriously this time. It delays until the right person arrives, then rewards with extraordinary depth and permanence. <strong>Your peak relationship years are after age 29-32.</strong> Do not settle before that. Patience here is a sacred practice.</div>
+      </div>
+    </li>
+    <li class="pitem"><span class="p-emoji">👨‍👩‍👧</span>
+      <div>
+        <div class="p-head">Family tensions — feeling unheard or undervalued at home</div>
+        <div class="p-body"><strong>Why:</strong> Mars is retrograde and debilitated in Cancer in your 2nd house (family). Retrograde Mars means anger and frustration turn <em>inward</em> rather than being expressed. Past-life pattern: always absorbing family pain silently. <strong>This life's healing:</strong> Learning to express your needs, set gentle boundaries, and stop silently sacrificing. This is not disrespect — it is necessary soul work. The family karma heals when you heal yourself.</div>
+      </div>
+    </li>
+    <li class="pitem"><span class="p-emoji">🧠</span>
+      <div>
+        <div class="p-head">Your mind is brilliant but sometimes exhausting (overthinking)</div>
+        <div class="p-body"><strong>Why:</strong> Sun and Mercury are together in Virgo in your 4th house — this is called Budhaditya Yoga. Mercury in Virgo is exalted (at its strongest), making your analytical mind extraordinarily powerful. The "curse" of this blessing is that the mind never truly stops. <strong>This is your greatest gift:</strong> writing, analysis, healing arts, astrology, research, teaching — anything that channels this mental power productively is your Dharma. Meditation is the remedy for overthinking.</div>
+      </div>
+    </li>
+    <li class="pitem"><span class="p-emoji">🌌</span>
+      <div>
+        <div class="p-head">You feel pulled toward spirituality, mysticism, and hidden truths</div>
+        <div class="p-body"><strong>Why:</strong> Rahu in your 8th house (Capricorn) + Jupiter in Lagna + the spiritual scholar past life = a soul that came here <em>specifically to explore hidden knowledge</em>. Your attraction to astrology, tarot, meditation, energy healing, or philosophical questions is not accidental. <strong>It is your soul's calling</strong>. Following this path is following your Rahu — your soul's highest destiny in this lifetime.</div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- ═══ SECTION 5: YOGAS ═══ -->
+<div class="section" id="yogas">
+  <div class="sec-label">Special Astrological Combinations</div>
+  <div class="sec-title">Yogas in Your Chart — What Makes You Unique</div>
+  <div class="yoga-row">
+    <div class="yoga-card">
+      <div class="yoga-badge yb-gold">☀️</div>
+      <div class="yoga-info">
+        <div class="yoga-name">Budhaditya Yoga — Exceptional Intelligence</div>
+        <div class="yoga-planets">Sun + Mercury · 4th House · Virgo (Exaltation Sign)</div>
+        <div class="yoga-desc">This is one of the most powerful intellectual combinations in Vedic astrology. Sun (soul authority) and Mercury (intellect) together in Virgo (Mercury's exaltation) create an extraordinarily sharp, analytical, and communicative mind. You can dissect complex ideas, explain them simply, and heal through your words. Past life: the scholar's mind reborn. Ideal careers: writing, teaching, research, astrology, healing, analytical fields.</div>
+        <div><span class="yoga-strength ys-strong">★★★ Very Strong</span></div>
+      </div>
+    </div>
+    <div class="yoga-card">
+      <div class="yoga-badge yb-teal">🌟</div>
+      <div class="yoga-info">
+        <div class="yoga-name">Jupiter in Lagna — Soul's Blessing</div>
+        <div class="yoga-planets">Jupiter · 1st House · Gemini Rising</div>
+        <div class="yoga-desc">Jupiter in the Ascendant is like having a divine hand of protection over your life. People see you as wise, trustworthy, and spiritually elevated. You are given second chances when others are not. Life has a quality of "grace" despite challenges. This is the inheritance of the spiritual teacher past life — your wisdom earned over many lifetimes now radiates through your personality effortlessly.</div>
+        <div><span class="yoga-strength ys-strong">★★★ Very Auspicious</span></div>
+      </div>
+    </div>
+    <div class="yoga-card">
+      <div class="yoga-badge yb-purple">🔮</div>
+      <div class="yoga-info">
+        <div class="yoga-name">Rahu in 8th — Occult Mastery Yoga</div>
+        <div class="yoga-planets">Rahu · 8th House · Capricorn</div>
+        <div class="yoga-desc">Rahu in the 8th house creates a powerful, almost magnetic pull toward hidden knowledge — astrology, spirituality, tantra, research, psychology, and the unseen dimensions of life. Many great astrologers, healers, and spiritual researchers have this placement. It also gives psychic sensitivity, depth perception, and the ability to see through the surface of situations. This is Rahu's greatest gift to you.</div>
+        <div><span class="yoga-strength ys-mixed">★★ Powerful but Intense</span></div>
+      </div>
+    </div>
+    <div class="yoga-card">
+      <div class="yoga-badge yb-rose">💫</div>
+      <div class="yoga-info">
+        <div class="yoga-name">Moon-Saturn in 7th — Deep Karmic Love</div>
+        <div class="yoga-planets">Moon + Saturn · 7th House · Sagittarius</div>
+        <div class="yoga-desc">This conjunction creates one of the most karmic relationship signatures. It brings delays and emotional weight in partnerships early in life — but the purpose is deep: Saturn is training you to love with maturity, not desperation. When you find your partner (after Saturn's lessons are learned, typically post-29), the relationship becomes an unbreakable, deeply philosophical, and profoundly loyal bond. This is the most beautiful love — the one that is truly chosen, not fallen into.</div>
+        <div><span class="yoga-strength ys-mixed">★★ Karmic — Rewards Patience</span></div>
+      </div>
+    </div>
+    <div class="yoga-card">
+      <div class="yoga-badge yb-rose">⚔️</div>
+      <div class="yoga-info">
+        <div class="yoga-name">Neecha Bhanga Mars — Strength Through Challenge</div>
+        <div class="yoga-planets">Mars Retrograde (Debilitated) · 2nd House · Cancer</div>
+        <div class="yoga-desc">Mars is weakened in Cancer and retrograde — but a retrograde debilitated planet often produces "Neecha Bhanga" (cancellation of weakness). The struggle becomes the strength. Early life financial and family challenges become, over time, the source of immense resilience and practical wisdom. After age 30-32, Mars energy significantly strengthens. What felt like weakness becomes disciplined, patient power.</div>
+        <div><span class="yoga-strength ys-weak">★ Difficult Early · Strong Later</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 6: DASHA ═══ -->
+<div class="section" id="dasha">
+  <div class="sec-label">Vimshottari Dasha · Nakshatra: Uttarashada · Lord: Sun</div>
+  <div class="sec-title">Your Life Timeline — Period by Period</div>
+  <div class="dasha-line">
+    <div class="dl-item">
+      <div class="dl-dot"></div>
+      <div class="dl-content">
+        <div class="dl-period">Sep 1990 – Jun 1996 · Ages 0–6</div>
+        <div class="dl-planet">☀ Sun Mahadasha — 6 years (Balance from birth)</div>
+        <div class="dl-body">Early childhood shaped by father figures, authority, and home environment. Your analytical nature and love of learning emerged early. Sun in 4th house (Virgo) made mother's influence deeply formative. Academic curiosity showed from very young age.</div>
+      </div>
+    </div>
+    <div class="dl-item">
+      <div class="dl-dot"></div>
+      <div class="dl-content">
+        <div class="dl-period">Jun 1996 – Jun 2006 · Ages 6–16</div>
+        <div class="dl-planet">☽ Moon Mahadasha — 10 years</div>
+        <div class="dl-body">School years, emotional development, friendships. Moon in Sagittarius (7th house) with Saturn made you emotionally mature beyond your age — you understood adult feelings early. Creative interests through Venus in Leo emerged. You may have felt emotionally sensitive or easily overwhelmed during this period.</div>
+      </div>
+    </div>
+    <div class="dl-item">
+      <div class="dl-dot"></div>
+      <div class="dl-content">
+        <div class="dl-period">Jun 2006 – Jun 2013 · Ages 16–23</div>
+        <div class="dl-planet">♂ Mars Mahadasha — 7 years</div>
+        <div class="dl-body">Mars debilitated retrograde in Cancer made this a period of tension, ups and downs in finances, family pressures, and identity struggles. Career choices, higher education, and first serious relationships happened here. Challenges were real — but they built the inner strength you carry today. Neecha Bhanga began activating: struggle became wisdom.</div>
+      </div>
+    </div>
+    <div class="dl-item">
+      <div class="dl-dot curr"></div>
+      <div class="dl-content">
+        <div class="dl-period">Jun 2013 – Jun 2031 · Ages 23–41</div>
+        <div class="dl-planet curr">☊ Rahu Mahadasha — 18 years <span class="curr-badge">YOU ARE HERE</span></div>
+        <div class="dl-body">The TRANSFORMATION phase of your life. Rahu in Capricorn (8th house) = massive identity rebuilding, karmic acceleration, occult/spiritual awakening, career ambition, possible foreign connections, and encounters with the hidden and mysterious. This is the most intense and important 18-year period of your adult life. Currently running: <strong>Rahu-Venus Antardasha (Dec 2024 – Dec 2027)</strong> — peak time for relationships, creativity, and material desires. Be discerning — Rahu creates illusions in Venus matters.</div>
+      </div>
+    </div>
+    <div class="dl-item">
+      <div class="dl-dot"></div>
+      <div class="dl-content">
+        <div class="dl-period">Jun 2031 – Jun 2047 · Ages 41–57</div>
+        <div class="dl-planet">♃ Jupiter Mahadasha — 16 years · THE GOLDEN ERA</div>
+        <div class="dl-body">This will be the most blessed period of your life. Jupiter in your Lagna (Gemini) will fully activate — wisdom, recognition, prosperity, teaching, and spiritual fulfillment. Everything you are working through now prepares you for this. You will teach, guide, write, mentor, and receive the recognition your soul has earned across lifetimes. This is the harvest of all your past-life and present-life karma. <strong>It is worth every challenge you are facing today.</strong></div>
+      </div>
+    </div>
+    <div class="dl-item">
+      <div class="dl-dot"></div>
+      <div class="dl-content">
+        <div class="dl-period">Jun 2047 onwards · Ages 57+</div>
+        <div class="dl-planet">♄ Saturn Mahadasha — 19 years · LEGACY</div>
+        <div class="dl-body">Saturn in your 7th house matures fully in this period. A legacy of disciplined wisdom, established relationships, and lasting achievements. You become the elder teacher — respected, calm, deeply anchored. The karmic debts of many lifetimes are finally complete. Peace arrives.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SECTION 7: REMEDIES ═══ -->
+<div class="section" id="remedies">
+  <div class="sec-label">Vedic Healing · Easy Daily Practices</div>
+  <div class="sec-title">Karmic Remedies — What to Do Right Now</div>
+  <div class="story" style="margin-bottom:1.5rem;">
+    <p>Akansha, these remedies are not just rituals — they are <strong>conversations with your karma</strong>. Each one directly addresses a specific past-life wound or planetary weakness. Do them with sincere heart, not out of fear. Even one remedy done consistently for 40 days creates significant shifts.</p>
+  </div>
+  <div class="remedy-stack">
+
+    <div class="r-card">
+      <div class="r-head rh-gold">
+        <div class="r-icon">☀️</div>
+        <div>
+          <div class="r-name">Sun (Surya) Remedy — Most Important For You</div>
+          <div class="r-planet">Heals: Soul purpose · Uttarashada nakshatra activation · Confidence · Authority</div>
+        </div>
+      </div>
+      <div class="r-body">
+        <ul class="r-steps">
+          <li><div class="snum sn-gold">1</div><div><span class="day-tag dt-gold">Every Day</span> Go outside within the first 30 minutes after waking. Face East (direction of the rising sun).</div></li>
+          <li><div class="snum sn-gold">2</div><div>Hold a copper cup or any cup of water with both hands. Looking at the rising sun (first 15 min only — when it's soft), slowly pour the water out saying: <strong>"Om Suryaya Namaha"</strong> — 3 times.</div></li>
+          <li><div class="snum sn-gold">3</div><div><span class="day-tag dt-gold">Sunday</span> is Sun's day. Do this practice with extra devotion. Wear orange or golden color on Sundays.</div></li>
+          <li><div class="snum sn-gold">4</div><div><strong>Why this works specifically for you:</strong> Your birth nakshatra Uttarashada is ruled by the Sun. Honoring the Sun daily literally activates your soul's core purpose. Within 40 days of consistent practice, you will notice a significant increase in clarity, confidence, and life direction.</div></li>
+        </ul>
+        <div class="mantra-box">
+          <div class="mb-label">Surya Mantra — Your Primary Mantra</div>
+          <div class="mb-mantra">ॐ सूर्याय नमः</div>
+          <div class="mb-meaning">"Om Suryaya Namaha" — I bow to the brilliant, life-giving Sun</div>
+          <div class="mb-count">108 times on Sundays · 12 times daily</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="r-card">
+      <div class="r-head rh-purple">
+        <div class="r-icon">🌙</div>
+        <div>
+          <div class="r-name">Moon + Saturn Remedy — Relationship Karma Healing</div>
+          <div class="r-planet">Heals: Emotional loneliness · Relationship delays · Past-life devotion wound</div>
+        </div>
+      </div>
+      <div class="r-body">
+        <ul class="r-steps">
+          <li><div class="snum sn-purple">1</div><div><span class="day-tag dt-purple">Monday</span> Light a white diya (oil lamp) in the evening. Sit quietly for 5 minutes. Place your hands on your heart and say: <em>"I am worthy of love exactly as I am. I release the past and open to love that is freely given."</em></div></li>
+          <li><div class="snum sn-purple">2</div><div>Chant the Moon mantra 108 times on Monday evenings using a mala (rosary) or a counting app:</div></li>
+        </ul>
+        <div class="mantra-box">
+          <div class="mb-label">Chandra Mantra</div>
+          <div class="mb-mantra">ॐ सोम सोमाय नमः</div>
+          <div class="mb-meaning">"Om Som Somaya Namaha" — I honor the nourishing, healing Moon</div>
+          <div class="mb-count">108 times · Monday evenings</div>
+        </div>
+        <ul class="r-steps">
+          <li><div class="snum sn-purple">3</div><div><span class="day-tag dt-purple">Saturday</span> For Saturn in 7th: Feed black sesame seeds (til) and a piece of roti to crows or dogs. This is one of the most powerful Saturn remedies that directly heals the 7th house karma.</div></li>
+          <li><div class="snum sn-purple">4</div><div>Chant Saturn's mantra 19 times on Saturday mornings: <strong>ॐ शं शनैश्चराय नमः</strong> ("Om Sham Shanaischaraya Namaha")</div></li>
+          <li><div class="snum sn-purple">5</div><div><strong>Journal practice (very powerful):</strong> Every Sunday, write 3 things: 1) What did I need this week that I didn't ask for? 2) Where did I put others before myself? 3) What would I tell my younger self? This directly heals the Moon-Saturn and past-life devotion wound.</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="r-card">
+      <div class="r-head rh-rose">
+        <div class="r-icon">🔴</div>
+        <div>
+          <div class="r-name">Mars Remedy — Family Karma & Voice Healing</div>
+          <div class="r-planet">Heals: Suppressed anger · Family tensions · Wealth blocks · Past-life silent suffering</div>
+        </div>
+      </div>
+      <div class="r-body">
+        <ul class="r-steps">
+          <li><div class="snum sn-rose">1</div><div><span class="day-tag dt-rose">Tuesday</span> Read or listen to Hanuman Chalisa. This is the single most powerful remedy for retrograde Mars. Even listening to it counts — you don't need to read Sanskrit.</div></li>
+          <li><div class="snum sn-rose">2</div><div><span class="day-tag dt-rose">Tuesday</span> Donate red masoor dal (red lentils), or any red food item, to someone in need. Small act, enormous karmic effect on Mars in 2nd house.</div></li>
+          <li><div class="snum sn-rose">3</div><div><strong>Voice healing practice (DO THIS DAILY):</strong> Every morning, before speaking to anyone, say out loud to yourself: <em>"My words matter. My needs matter. I speak my truth with love and without fear."</em> Mars retrograde in 2nd house heals specifically through conscious use of the voice and honest self-expression.</div></li>
+          <li><div class="snum sn-rose">4</div><div>Practice saying <strong>"No"</strong> to one thing per week that you genuinely don't want to do, but would normally say yes to out of guilt. This is Neecha Bhanga Mars healing — turning the weakness of over-compliance into the strength of healthy boundaries.</div></li>
+          <li><div class="snum sn-rose">5</div><div><span class="day-tag dt-rose">Physical</span> Any form of exercise on Tuesdays activates Mars energy positively — yoga, walking, dancing. Move your body consciously. This clears stagnant Mars energy that otherwise turns into silent frustration.</div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="r-card">
+      <div class="r-head rh-teal">
+        <div class="r-icon">💛</div>
+        <div>
+          <div class="r-name">Jupiter Remedy — Activate Your Lagna Blessing</div>
+          <div class="r-planet">Heals: Doubt in your own wisdom · Undervaluing yourself · Unlocks teaching destiny</div>
+        </div>
+      </div>
+      <div class="r-body">
+        <ul class="r-steps">
+          <li><div class="snum sn-teal">1</div><div><span class="day-tag dt-teal">Thursday</span> Wear something yellow or golden — even a small accessory counts. Yellow is Jupiter's color.</div></li>
+          <li><div class="snum sn-teal">2</div><div><span class="day-tag dt-teal">Thursday</span> Read, study, or listen to something that expands your mind and spirit — a spiritual text, astrology, philosophy, psychology. Jupiter in Lagna grows when you feed your mind with wisdom.</div></li>
+          <li><div class="snum sn-teal">3</div><div>Offer yellow flowers (marigold/sunflower) to any deity or sacred space in your home on Thursday mornings.</div></li>
+          <li><div class="snum sn-teal">4</div><div><strong>Teach someone something this week.</strong> Help a younger sibling or friend understand something. Explain an idea. Share what you know. Jupiter's energy multiplies when you give wisdom. Every act of teaching returns to you as a blessing 10-fold.</div></li>
+          <li><div class="snum sn-teal">5</div><div>Chant Jupiter's mantra 108 times on Thursdays:</div></li>
+        </ul>
+        <div class="mantra-box">
+          <div class="mb-label">Guru (Jupiter) Mantra</div>
+          <div class="mb-mantra">ॐ गुरवे नमः</div>
+          <div class="mb-meaning">"Om Gurave Namaha" — I honor the great teacher Jupiter within me and around me</div>
+          <div class="mb-count">108 times · Thursday</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="r-card">
+      <div class="r-head rh-purple">
+        <div class="r-icon">🧘</div>
+        <div>
+          <div class="r-name">Daily 10-Minute Soul Practice — The Most Powerful Remedy</div>
+          <div class="r-planet">Heals: ALL karmic patterns · Works for every planet in your chart</div>
+        </div>
+      </div>
+      <div class="r-body">
+        <ul class="r-steps">
+          <li><div class="snum sn-purple">1</div><div><strong>Morning (3 min):</strong> Sit quietly. Take 7 slow breaths. Then say 3 things you're grateful for — out loud. This activates Jupiter (gratitude) and Moon (emotional health) together. Start every day this way.</div></li>
+          <li><div class="snum sn-purple">2</div><div><strong>Afternoon (2 min):</strong> When you feel stressed or pulled to give too much, pause and ask: <em>"Is this mine to carry, or am I absorbing someone else's weight?"</em> This one question breaks the healer past-life pattern faster than any mantra.</div></li>
+          <li><div class="snum sn-purple">3</div><div><strong>Evening (5 min):</strong> Light a small oil lamp (diya). In its light, write ONE sentence: either <em>"Today I received..."</em> or <em>"Today I released..."</em> or <em>"Today I chose myself by..."</em>. This practice simultaneously heals Ketu (letting go of past), activates Rahu (moving toward future), and honors Moon (emotional honoring).</div></li>
+          <li><div class="snum sn-purple">4</div><div><strong>Your personal affirmation — say before sleep every night:</strong></div></li>
+        </ul>
+        <div class="mantra-box">
+          <div class="mb-label">Akansha's Personal Affirmation</div>
+          <div class="mb-mantra" style="font-size:1.05rem;font-family:'Cormorant Garamond',serif;font-style:italic;">"I am the wisdom of many lifetimes. I am worthy of love, abundance, and success. My soul came here to shine, to build, and to teach. I release all that was, and I walk forward into all that is meant for me."</div>
+          <div class="mb-count">Every night before sleep · 40 days minimum</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ FINAL ═══ -->
+<div class="final">
+  <span class="final-sym">🌸</span>
+  <h2>Akansha, <span>You Were Never Lost —</span><br/>Your Soul Always Knew the Way</h2>
+  <p>Across many lifetimes, you were the <strong>healer, the devoted wife, the silent scholar</strong>. You gave so much. You learned so much. And now, in this lifetime, all of that wisdom is waking up inside you — through astrology, through self-reflection, through the very questions you are asking.</p>
+  <p>The challenges in your life — the delayed relationships, the money struggles, the family tensions — they are not punishments. They are <strong>precise karmic lessons designed specifically for your soul's growth</strong>. Saturn in your 7th is not blocking love — it is protecting you until you are ready for the real thing. Rahu in your 8th is not creating chaos — it is pulling you toward your greatest destiny as a healer and teacher of souls.</p>
+  <p>Your <strong>Jupiter Mahadasha (2031–2047)</strong> is coming. And it will be extraordinary — because of everything you are healing and building right now. Every remedy you do, every boundary you set, every truth you speak — you are writing the story that will flower into your golden years.</p>
+  <p class="big-quote">"The stars wrote your map before you were born. <strong>You are the one walking it.</strong> And Akansha — you are walking it beautifully."</p>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align:center;padding:2.5rem 0 1rem;font-size:0.75rem;color:#bbb;font-style:italic;">
+  Complete Karmic & Kundali Guide · Akansha Ramteke · 28 Sep 1990, 22:45 IST<br/>
+  Tumsar, Maharashtra (Lat 20°54'N, Lon 80°29'E) · Lagna: Gemini · Rashi: Sagittarius · Nakshatra: Uttarashada Pada 1<br/>
+  Lahiri Ayanamsha 23°43'39" · Vimshottari Dasha System
+</div>
+
+</div>
+</body>
+</html>
