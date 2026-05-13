@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vedic Kundali — Born 28 Sep 1990, Tumsar</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --gold: #c9a96e;
+  --gold-light: #e8d5a3;
+  --gold-dim: #7a6240;
+  --bg: #0d0f1a;
+  --bg2: #12152a;
+  --bg3: #1a1f35;
+  --bg4: #222840;
+  --text: #e8e4d8;
+  --text-dim: #9a9580;
+  --text-muted: #5c5850;
+  --accent: #4a7fc1;
+  --accent2: #7c4fc1;
+  --red: #c16060;
+  --green: #4fc17c;
+  --teal: #4fc1b0;
+  --border: rgba(201,169,110,0.2);
+  --border2: rgba(201,169,110,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+/* ── BACKGROUND ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(74,127,193,0.06) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 40% at 80% 80%, rgba(124,79,193,0.05) 0%, transparent 60%);
+  pointer-events: none; z-index: 0;
+}
+
+.wrap { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem; position: relative; z-index: 1; }
+
+/* ── HEADER ── */
+.header {
+  text-align: center;
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+}
+.header .ganesh {
+  font-family: 'Crimson Text', serif;
+  font-style: italic;
+  color: var(--gold);
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+.header h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--gold-light);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 40px rgba(201,169,110,0.3);
+}
+.header .subtitle {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+}
+.birth-pills {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+.pill {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 40px;
+  padding: 0.3rem 1rem;
+  font-size: 0.82rem;
+  color: var(--gold);
+  letter-spacing: 0.04em;
+}
+
+/* ── SECTION ── */
+.section {
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.section::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+}
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── BIRTH DOC TABLE ── */
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.4rem 2rem;
+}
+.doc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border2);
+  font-size: 0.88rem;
+}
+.doc-label { color: var(--text-dim); }
+.doc-value { color: var(--text); font-weight: 500; text-align: right; }
+.doc-value.highlight { color: var(--gold); }
+
+/* ── KUNDALI CHART ── */
+.kundali-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.kundali-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+}
+.kundali {
+  display: grid;
+  grid-template-columns: repeat(4, 110px);
+  grid-template-rows: repeat(4, 110px);
+  border: 1.5px solid var(--gold-dim);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.house {
+  border: 0.5px solid var(--border);
+  padding: 6px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 0;
+  background: var(--bg3);
+  position: relative;
+  transition: background 0.2s;
+}
+.house:hover { background: var(--bg4); }
+.house.lagna { background: rgba(201,169,110,0.07); }
+.house.lagna::after {
+  content: 'Lagna';
+  position: absolute;
+  bottom: 4px; right: 6px;
+  font-size: 9px;
+  color: var(--gold);
+  opacity: 0.6;
+  letter-spacing: 0.05em;
+}
+.house-num {
+  font-size: 9px;
+  color: var(--text-muted);
+  font-family: 'Cinzel', serif;
+}
+.house-sign {
+  font-size: 11px;
+  color: var(--gold-dim);
+  font-family: 'Crimson Text', serif;
+  font-style: italic;
+}
+.house-symbol {
+  font-size: 14px;
+  color: var(--gold);
+  opacity: 0.5;
+}
+.planets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-top: 2px;
+}
+.planet-tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 4px;
+  border-radius: 3px;
+  letter-spacing: 0.03em;
+  font-family: 'Inter', sans-serif;
+}
+.pt-sun    { color: #f4b942; background: rgba(244,185,66,0.12); }
+.pt-moon   { color: #b0c8e8; background: rgba(176,200,232,0.12); }
+.pt-mars   { color: #e06060; background: rgba(224,96,96,0.12); }
+.pt-mercury{ color: #60c8a0; background: rgba(96,200,160,0.12); }
+.pt-jupiter{ color: #e8d080; background: rgba(232,208,128,0.12); }
+.pt-venus  { color: #e090c0; background: rgba(224,144,192,0.12); }
+.pt-saturn { color: #a0a8c8; background: rgba(160,168,200,0.12); }
+.pt-rahu   { color: #c080e0; background: rgba(192,128,224,0.12); }
+.pt-ketu   { color: #d0a060; background: rgba(208,160,96,0.12); }
+.center {
+  grid-column: 2 / 4;
+  grid-row: 2 / 4;
+  background: var(--bg);
+  border: 0.5px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.75rem;
+}
+.center-name {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  text-align: center;
+}
+.center-star { font-size: 22px; color: var(--gold); opacity: 0.5; }
+.center-info {
+  font-size: 9px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* Position mapping */
+.h12 { grid-column:1; grid-row:1; }
+.h1  { grid-column:2; grid-row:1; }
+.h2  { grid-column:3; grid-row:1; }
+.h3  { grid-column:4; grid-row:1; }
+.h4  { grid-column:4; grid-row:2; }
+.h5  { grid-column:4; grid-row:3; }
+.h6  { grid-column:4; grid-row:4; }
+.h7  { grid-column:3; grid-row:4; }
+.h8  { grid-column:2; grid-row:4; }
+.h9  { grid-column:1; grid-row:4; }
+.h10 { grid-column:1; grid-row:3; }
+.h11 { grid-column:1; grid-row:2; }
+
+/* ── PLANET TABLE ── */
+.planet-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.planet-table th {
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.planet-table td {
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--border2);
+  vertical-align: middle;
+}
+.planet-table tr:last-child td { border-bottom: none; }
+.planet-table tr:hover td { background: rgba(201,169,110,0.04); }
+.p-name {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.p-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.status-good   { color: var(--green); font-size: 0.8rem; }
+.status-mixed  { color: var(--gold); font-size: 0.8rem; }
+.status-weak   { color: var(--red); font-size: 0.8rem; }
+
+/* ── CARDS GRID ── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.card {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 1.1rem;
+}
+.card-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.card-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.card-value {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.2rem;
+  color: var(--gold-light);
+}
+.card-sub {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin-top: 0.2rem;
+}
+
+/* ── YOGA CARDS ── */
+.yoga-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+.yoga-card {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 1.2rem;
+  border-left: 3px solid var(--gold-dim);
+}
+.yoga-card.strong { border-left-color: var(--green); }
+.yoga-card.mixed  { border-left-color: var(--gold); }
+.yoga-card.weak   { border-left-color: var(--red); }
+.yoga-name {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  color: var(--gold);
+  margin-bottom: 0.3rem;
+}
+.yoga-planets {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+  letter-spacing: 0.04em;
+}
+.yoga-desc {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* ── DASHA TIMELINE ── */
+.dasha-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+}
+.dasha-timeline::before {
+  content: '';
+  position: absolute;
+  left: 120px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+.dasha-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 0;
+  position: relative;
+}
+.dasha-row + .dasha-row {
+  border-top: 1px solid var(--border2);
+}
+.dasha-period {
+  width: 110px;
+  flex-shrink: 0;
+  text-align: right;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding-top: 2px;
+  line-height: 1.5;
+}
+.dasha-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--bg3);
+  border: 2px solid var(--gold-dim);
+  flex-shrink: 0;
+  margin-top: 4px;
+  position: relative;
+  z-index: 1;
+}
+.dasha-dot.current {
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 12px rgba(201,169,110,0.5);
+}
+.dasha-content { flex: 1; }
+.dasha-planet {
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 0.2rem;
+}
+.dasha-planet.current { color: var(--gold-light); }
+.dasha-years {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+.dasha-desc {
+  font-size: 0.84rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.current-badge {
+  display: inline-block;
+  background: rgba(201,169,110,0.15);
+  border: 1px solid var(--gold-dim);
+  color: var(--gold);
+  font-size: 0.7rem;
+  padding: 1px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+
+/* ── ANTARDASHA ── */
+.antardasha-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin-top: 1rem;
+}
+.antardasha-table th {
+  color: var(--gold-dim);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.4rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.antardasha-table td {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border2);
+  color: var(--text-dim);
+}
+.antardasha-table tr.curr td { background: rgba(201,169,110,0.05); color: var(--text); }
+.antardasha-table tr.curr td:first-child { color: var(--gold); font-weight: 500; }
+.past-row td { opacity: 0.5; }
+
+/* ── ANALYSIS BLOCKS ── */
+.analysis-block {
+  margin-bottom: 1.5rem;
+}
+.analysis-block:last-child { margin-bottom: 0; }
+.block-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.block-title .icon { font-size: 1rem; }
+.block-body {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  line-height: 1.85;
+  padding-left: 1rem;
+  border-left: 2px solid var(--border);
+}
+.block-body p { margin-bottom: 0.75rem; }
+.block-body p:last-child { margin-bottom: 0; }
+.block-body strong { color: var(--text); font-weight: 600; }
+
+/* ── REMEDIES ── */
+.remedy-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.remedy-list li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  font-size: 0.88rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+.remedy-list li::before {
+  content: '✦';
+  color: var(--gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  text-align: center;
+  color: var(--gold-dim);
+  font-size: 1rem;
+  letter-spacing: 0.5em;
+  margin: 1rem 0;
+  opacity: 0.4;
+}
+
+/* ── NAKSHATRA BOX ── */
+.nakshatra-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+.nak-item {
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+.nak-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.nak-value {
+  font-family: 'Cinzel', serif;
+  font-size: 1rem;
+  color: var(--gold-light);
+}
+.nak-sub { font-size: 0.78rem; color: var(--text-dim); margin-top: 0.25rem; }
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  padding: 2rem 0;
+  font-family: 'Crimson Text', serif;
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  border-top: 1px solid var(--border2);
+  margin-top: 3rem;
+}
+.footer .om { font-size: 1.5rem; display: block; margin-bottom: 0.5rem; color: var(--gold-dim); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ═══ HEADER ═══ -->
+<div class="header">
+  <div class="ganesh">॥ श्री गणेशाय नमः ॥</div>
+  <h1>Vedic Birth Chart</h1>
+  <div class="subtitle">Janma Patrika — North Indian Style</div>
+  <div class="birth-pills">
+    <span class="pill">📅 28 September 1990</span>
+    <span class="pill">⏰ 22:45 IST</span>
+    <span class="pill">📍 Tumsar, Maharashtra</span>
+    <span class="pill">♀ Daughter of</span>
+    <span class="pill">☽ Uttarashada Nakshatra, Pada 1</span>
+  </div>
+</div>
+
+<!-- ═══ BIRTH DOC DETAILS ═══ -->
+<div class="section">
+  <div class="section-title">📋 Original Document Details</div>
+  <div class="doc-grid">
+    <div class="doc-row"><span class="doc-label">देश / Country</span><span class="doc-value">India</span></div>
+    <div class="doc-row"><span class="doc-label">जन्म स्थल / Birth Place</span><span class="doc-value highlight">Tumsar, Maharashtra</span></div>
+    <div class="doc-row"><span class="doc-label">अक्षांश / Latitude</span><span class="doc-value">20°54'00" North</span></div>
+    <div class="doc-row"><span class="doc-label">रेखांश / Longitude</span><span class="doc-value">80°29'00" East</span></div>
+    <div class="doc-row"><span class="doc-label">जन्म तारिख / Birth Date</span><span class="doc-value highlight">28 September 1990</span></div>
+    <div class="doc-row"><span class="doc-label">वार / Day</span><span class="doc-value">शुक्रवार (Friday)</span></div>
+    <div class="doc-row"><span class="doc-label">जन्म समय (Standard)</span><span class="doc-value">22:45:00 IST</span></div>
+    <div class="doc-row"><span class="doc-label">जन्म समय (Local)</span><span class="doc-value">22:36:25</span></div>
+    <div class="doc-row"><span class="doc-label">जन्म तिथि / Tithi</span><span class="doc-value highlight">Dashami (10th) — Shukla Paksha</span></div>
+    <div class="doc-row"><span class="doc-label">शालिवाहन शके</span><span class="doc-value">1911–1912</span></div>
+    <div class="doc-row"><span class="doc-label">विक्रम संवत</span><span class="doc-value">2046–2047</span></div>
+    <div class="doc-row"><span class="doc-label">सूर्योदय (Local Sunrise)</span><span class="doc-value">05:51</span></div>
+    <div class="doc-row"><span class="doc-label">सूर्यास्त (Local Sunset)</span><span class="doc-value">17:55</span></div>
+    <div class="doc-row"><span class="doc-label">योग / Yoga</span><span class="doc-value highlight">Atiganda</span></div>
+    <div class="doc-row"><span class="doc-label">करण / Karana</span><span class="doc-value">Taitila</span></div>
+    <div class="doc-row"><span class="doc-label">अयनांश / Ayanamsha</span><span class="doc-value">23°43'39" (Lahiri)</span></div>
+    <div class="doc-row"><span class="doc-label">राशी अक्षर</span><span class="doc-value">भ · ध · फ</span></div>
+    <div class="doc-row"><span class="doc-label">लग्न / Ascendant</span><span class="doc-value highlight">मिथुन (Gemini)</span></div>
+    <div class="doc-row"><span class="doc-label">लग्न स्वामी / Lagna Lord</span><span class="doc-value">बुध (Mercury)</span></div>
+    <div class="doc-row"><span class="doc-label">राशी / Moon Sign</span><span class="doc-value highlight">धनु (Sagittarius)</span></div>
+    <div class="doc-row"><span class="doc-label">राशी स्वामी / Rashi Lord</span><span class="doc-value">गुरु (Jupiter)</span></div>
+    <div class="doc-row"><span class="doc-label">नक्षत्र / Nakshatra</span><span class="doc-value highlight">उत्तराषाढा (Uttarashada)</span></div>
+    <div class="doc-row"><span class="doc-label">नक्षत्र स्वामी</span><span class="doc-value">रवि (Sun)</span></div>
+    <div class="doc-row"><span class="doc-label">चरण / Pada</span><span class="doc-value">1st Pada (Aries Navamsha)</span></div>
+  </div>
+</div>
+
+<!-- ═══ KEY SNAPSHOTS ═══ -->
+<div class="section">
+  <div class="section-title">⭐ Astrological Identity Snapshot</div>
+  <div class="nakshatra-box">
+    <div class="nak-item">
+      <div class="nak-label">Lagna (Rising)</div>
+      <div class="nak-value">♊ Gemini</div>
+      <div class="nak-sub">Lord: Mercury · Air Sign</div>
+    </div>
+    <div class="nak-item">
+      <div class="nak-label">Janma Rashi (Moon Sign)</div>
+      <div class="nak-value">♐ Sagittarius</div>
+      <div class="nak-sub">Lord: Jupiter · Fire Sign</div>
+    </div>
+    <div class="nak-item">
+      <div class="nak-label">Janma Nakshatra</div>
+      <div class="nak-value">Uttarashada</div>
+      <div class="nak-sub">Lord: Sun · Pada 1 of 4</div>
+    </div>
+    <div class="nak-item">
+      <div class="nak-label">Sun Sign (Vedic)</div>
+      <div class="nak-value">♍ Virgo</div>
+      <div class="nak-sub">Kanya Rashi · 4th House</div>
+    </div>
+    <div class="nak-item">
+      <div class="nak-label">Tithi</div>
+      <div class="nak-value">Dashami</div>
+      <div class="nak-sub">10th day · Shukla Paksha</div>
+    </div>
+    <div class="nak-item">
+      <div class="nak-label">Yoga at Birth</div>
+      <div class="nak-value">Atiganda</div>
+      <div class="nak-sub">Challenges → strength</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ KUNDALI CHART ═══ -->
+<div class="section">
+  <div class="section-title">🔯 Janma Kundali — North Indian Chart</div>
+  <div class="kundali-wrap">
+    <div class="kundali-title">Lagna: Mithuna (Gemini) · Sidereal / Vedic</div>
+    <div class="kundali">
+
+      <!-- H12: Taurus (12th house) -->
+      <div class="house h12">
+        <div class="house-num">H12</div>
+        <div class="house-symbol">♉</div>
+        <div class="house-sign">Taurus</div>
+      </div>
+
+      <!-- H1: Gemini (Lagna) — Jupiter -->
+      <div class="house h1 lagna">
+        <div class="house-num">H1</div>
+        <div class="house-symbol">♊</div>
+        <div class="house-sign">Gemini</div>
+        <div class="planets">
+          <span class="planet-tag pt-jupiter">Ju</span>
+        </div>
+      </div>
+
+      <!-- H2: Cancer — Ketu + Mars(R) -->
+      <div class="house h2">
+        <div class="house-num">H2</div>
+        <div class="house-symbol">♋</div>
+        <div class="house-sign">Cancer</div>
+        <div class="planets">
+          <span class="planet-tag pt-ketu">Ke</span>
+          <span class="planet-tag pt-mars">Ma(R)</span>
+        </div>
+      </div>
+
+      <!-- H3: Leo — Venus -->
+      <div class="house h3">
+        <div class="house-num">H3</div>
+        <div class="house-symbol">♌</div>
+        <div class="house-sign">Leo</div>
+        <div class="planets">
+          <span class="planet-tag pt-venus">Ve</span>
+        </div>
+      </div>
+
+      <!-- H4: Virgo — Sun + Mercury -->
+      <div class="house h4">
+        <div class="house-num">H4</div>
+        <div class="house-symbol">♍</div>
+        <div class="house-sign">Virgo</div>
+        <div class="planets">
+          <span class="planet-tag pt-sun">Su</span>
+          <span class="planet-tag pt-mercury">Me</span>
+        </div>
+      </div>
+
+      <!-- H11: Aries -->
+      <div class="house h11">
+        <div class="house-num">H11</div>
+        <div class="house-symbol">♈</div>
+        <div class="house-sign">Aries</div>
+      </div>
+
+      <!-- CENTER -->
+      <div class="center">
+        <span class="center-star">✦</span>
+        <div class="center-name">JANMA KUNDALI</div>
+        <div class="center-info">28-09-1990<br/>22:45 IST<br/>Tumsar, MH<br/>Gemini Rising</div>
+      </div>
+
+      <!-- H5: Libra -->
+      <div class="house h5">
+        <div class="house-num">H5</div>
+        <div class="house-symbol">♎</div>
+        <div class="house-sign">Libra</div>
+      </div>
+
+      <!-- H10: Pisces -->
+      <div class="house h10">
+        <div class="house-num">H10</div>
+        <div class="house-symbol">♓</div>
+        <div class="house-sign">Pisces</div>
+      </div>
+
+      <!-- H9: Aquarius -->
+      <div class="house h9">
+        <div class="house-num">H9</div>
+        <div class="house-symbol">♒</div>
+        <div class="house-sign">Aquarius</div>
+      </div>
+
+      <!-- H8: Capricorn — Rahu -->
+      <div class="house h8">
+        <div class="house-num">H8</div>
+        <div class="house-symbol">♑</div>
+        <div class="house-sign">Capricorn</div>
+        <div class="planets">
+          <span class="planet-tag pt-rahu">Ra</span>
+        </div>
+      </div>
+
+      <!-- H7: Sagittarius — Moon + Saturn -->
+      <div class="house h7">
+        <div class="house-num">H7</div>
+        <div class="house-symbol">♐</div>
+        <div class="house-sign">Sagittarius</div>
+        <div class="planets">
+          <span class="planet-tag pt-moon">Mo</span>
+          <span class="planet-tag pt-saturn">Sa</span>
+        </div>
+      </div>
+
+      <!-- H6: Scorpio -->
+      <div class="house h6">
+        <div class="house-num">H6</div>
+        <div class="house-symbol">♏</div>
+        <div class="house-sign">Scorpio</div>
+      </div>
+
+    </div>
+
+    <!-- CHART LEGEND -->
+    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;justify-content:center;margin-top:0.5rem;">
+      <span class="planet-tag pt-sun" style="padding:3px 8px;border-radius:4px;">Su = Sun</span>
+      <span class="planet-tag pt-moon" style="padding:3px 8px;border-radius:4px;">Mo = Moon</span>
+      <span class="planet-tag pt-mars" style="padding:3px 8px;border-radius:4px;">Ma = Mars(R)</span>
+      <span class="planet-tag pt-mercury" style="padding:3px 8px;border-radius:4px;">Me = Mercury</span>
+      <span class="planet-tag pt-jupiter" style="padding:3px 8px;border-radius:4px;">Ju = Jupiter</span>
+      <span class="planet-tag pt-venus" style="padding:3px 8px;border-radius:4px;">Ve = Venus</span>
+      <span class="planet-tag pt-saturn" style="padding:3px 8px;border-radius:4px;">Sa = Saturn</span>
+      <span class="planet-tag pt-rahu" style="padding:3px 8px;border-radius:4px;">Ra = Rahu</span>
+      <span class="planet-tag pt-ketu" style="padding:3px 8px;border-radius:4px;">Ke = Ketu</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PLANETARY POSITIONS ═══ -->
+<div class="section">
+  <div class="section-title">🪐 Sidereal Planetary Positions (Lahiri Ayanamsha 23°43'39")</div>
+  <table class="planet-table">
+    <thead>
+      <tr>
+        <th>Planet</th>
+        <th>Sign (Rashi)</th>
+        <th>Approx. Degree</th>
+        <th>House</th>
+        <th>Status</th>
+        <th>Significance</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="p-name"><div class="p-dot" style="background:#f4b942;"></div>☀ Sun (Surya)</div></td>
+        <td>Virgo (Kanya)</td>
+        <td>~12° Virgo</td>
+        <td>4th House</td>
+        <td><span class="status-good">● Friendly</span></td>
+        <td>Intellect, home, mother</td>
+      </tr>
+      <tr>
+        <td><div class="p-name"><div class="p-dot" style="background:#b0c8e8;"></div>☽ Moon (Chandra)</div></td>
+        <td>Sagittarius (Dhanu)</td>
+        <td>~27°40' Dhanu</td>
+        <td>7th House</td>
+        <td><span class="status-mixed">● Neutral</span></td>
+        <td>Partnerships, philosophy</td>
+      </tr>
+      <tr>
+        <td><div class="p-name"><div class="p-dot" style="background:#e06060;"></div>♂ Mars (Mangal-R)</div></td>
+        <td>Cancer (Karka)</td>
+        <td>~20° Cancer</td>
+        <td>2nd House</td>
+        <td><span class="status-weak">● Debilitated (R)</span></td>
+        <td>Family, wealth, speech</td>
+      </tr>
+      <tr>
+        <td><div class="p-name"><div class="p-dot" style="background:#60c8a0;"></div>☿ Mercury (Budha)</div></td>
+        <td>Virgo (Kanya)</td>
+        <td>~9° Virgo</td>
+        <td>4th House</td>
+        <td><span class="status-good">● Exalted / Own Sign</span></td>
+        <td>Intelligence, communication</td>
+      </tr>
+      <tr>
+        <td><div class="p-name"><div class="p-dot" style="background:#e8d080;"></div>♃ Jupiter (Guru)</div></td>
+        <td>Gemini (Mithuna)</td>
+        <td>~17° Gemini</td>
+        <td>1st House (Lagna)</td>
+        <td><span class="status-mixed">● Neutral / Auspicious</span></td>
+        <td>Wisdom, expansion, blessings</td>
+      </tr>
+      <tr>
+        <td><div class="p-name"><div class="p-dot" style="background:#e090c0;"></div>♀ Venus (Shukra)</div></td>
+        <td>Leo (Simha)</td>
+        <td>~26° Leo</td>
+        <td>3rd House</td>
+        <td><span class="status-mixed">● Enemy Sign</span></td>
+        <td>Creativity, siblings, courage</td>
+      </tr>
+      <tr>
+        <td><div class="p-name"><div class="p-dot" style="background:#a0a8c8;"></div>♄ Saturn (Shani)</div></td>
+        <td>Sagittarius (Dhanu)</td>
+        <td>~26° Sagittarius</td>
+        <td>7th House</td>
+        <td><span class="status-mixed">● Friendly Sign</span></td>
+        <td>Relationships, discipline, karma</td>
+      </tr>
+      <tr>
+        <td><div class="p-name"><div class="p-dot" style="background:#c080e0;"></div>☊ Rahu (North Node)</div></td>
+        <td>Capricorn (Makara)</td>
+        <td>~3° Capricorn</td>
+        <td>8th House</td>
+        <td><span class="status-mixed">● Karmic</span></td>
+        <td>Transformation, occult, ambition</td>
+      </tr>
+      <tr>
+        <td><div class="p-name"><div class="p-dot" style="background:#d0a060;"></div>☋ Ketu (South Node)</div></td>
+        <td>Cancer (Karka)</td>
+        <td>~3° Cancer</td>
+        <td>2nd House</td>
+        <td><span class="status-mixed">● Karmic</span></td>
+        <td>Past life gifts, detachment</td>
+      </tr>
+    </tbody>
+  </table>
+  <div style="margin-top:1rem;font-size:0.78rem;color:var(--text-muted);font-style:italic;">
+    ✦ Positions calculated using Lahiri (Chitrapaksha) Ayanamsha as per original Janam Patrika · (R) = Retrograde at birth
+  </div>
+</div>
+
+<!-- ═══ HOUSE ANALYSIS ═══ -->
+<div class="section">
+  <div class="section-title">🏠 House-by-House Analysis</div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">♊</div>
+      <div class="card-label">H1 · Lagna · Gemini</div>
+      <div class="card-value">Jupiter ✦</div>
+      <div class="card-sub">Vibrant personality, philosophical nature. Jupiter in Lagna blesses with optimism, wisdom, and a generous, expansive spirit. You appear learned and spiritual to others.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">♋</div>
+      <div class="card-label">H2 · Wealth · Cancer</div>
+      <div class="card-value">Ketu + Mars(R)</div>
+      <div class="card-sub">Past-life financial karma. Unconventional relationship with money. Strong intuition about values. Mars retrograde suggests family tensions requiring healing.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">♌</div>
+      <div class="card-label">H3 · Courage · Leo</div>
+      <div class="card-value">Venus ✦</div>
+      <div class="card-sub">Creative self-expression, love of the arts. Charming communication style. Artistic siblings or creative writing talent. Venus here gifts beautiful speech.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">♍</div>
+      <div class="card-label">H4 · Home · Virgo</div>
+      <div class="card-value">Sun + Mercury ✦✦</div>
+      <div class="card-sub">Budhaditya Yoga forms here. Brilliant mind, strong connection to mother/homeland. Academic excellence. Deep thinking. Strong analytical and healing abilities.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">♐</div>
+      <div class="card-label">H7 · Marriage · Sagittarius</div>
+      <div class="card-value">Moon + Saturn</div>
+      <div class="card-sub">Partnership requires patience and maturity. Attracted to philosophical, older, or disciplined partners. Marriage may come after 28-30. Deep, karmic relationships.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">♑</div>
+      <div class="card-label">H8 · Occult · Capricorn</div>
+      <div class="card-value">Rahu ✦</div>
+      <div class="card-sub">Strong pull toward mysticism, astrology, healing, and hidden knowledge. Rahu here gives longevity, intuitive gifts, and potential inheritance or gains from past life karma.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ YOGAS ═══ -->
+<div class="section">
+  <div class="section-title">✨ Yogas & Special Combinations</div>
+  <div class="yoga-grid">
+    <div class="yoga-card strong">
+      <div class="yoga-name">Budhaditya Yoga ★★★</div>
+      <div class="yoga-planets">Sun + Mercury · 4th House · Virgo</div>
+      <div class="yoga-desc">One of the most powerful intellectual yogas. Sun and Mercury together in Virgo (Mercury's exaltation/own sign) create a brilliant, analytical, communicative mind. This person has gifts in writing, teaching, analysis, healthcare, or any intellectual field. The mind is razor-sharp.</div>
+    </div>
+    <div class="yoga-card strong">
+      <div class="yoga-name">Jupiter in Lagna ★★★</div>
+      <div class="yoga-planets">Jupiter · 1st House · Gemini</div>
+      <div class="yoga-desc">Jupiter's presence in the Ascendant bestows a naturally blessed, expansive personality. Others perceive this person as wise, benevolent, and trustworthy. There is a natural talent for teaching, counseling, or spiritual guidance. Overall life is protected by Jupiter's grace.</div>
+    </div>
+    <div class="yoga-card mixed">
+      <div class="yoga-name">Chandra-Shani Yoga</div>
+      <div class="yoga-planets">Moon + Saturn · 7th House · Sagittarius</div>
+      <div class="yoga-desc">Moon and Saturn together in the 7th house create a complex emotional dynamic in partnerships. There may be emotional loneliness early in life, but this conjunction also builds tremendous inner resilience, discipline, and the capacity for deeply committed, lasting love — once trust is built.</div>
+    </div>
+    <div class="yoga-card mixed">
+      <div class="yoga-name">Ketu in 2nd (Dharana Yoga)</div>
+      <div class="yoga-planets">Ketu · 2nd House · Cancer</div>
+      <div class="yoga-desc">Ketu in the 2nd house indicates a soul that has accumulated great spiritual wisdom in past lives. Financial attachment is weak but spiritual values are strong. This person may not chase money instinctively, yet wisdom and self-knowledge are immense natural resources.</div>
+    </div>
+    <div class="yoga-card mixed">
+      <div class="yoga-name">Rahu in 8th (Sarpa Yoga)</div>
+      <div class="yoga-planets">Rahu · 8th House · Capricorn</div>
+      <div class="yoga-desc">Rahu in the 8th house draws the native powerfully toward occult sciences, mysticism, astrology, tantra, and hidden knowledge. This can give psychic sensitivity, research abilities, and a deep fascination with life's mysteries. Major transformations are themes in life.</div>
+    </div>
+    <div class="yoga-card weak">
+      <div class="yoga-name">Mars Debilitated Retrograde</div>
+      <div class="yoga-planets">Mars (R) · 2nd House · Cancer (Neecha)</div>
+      <div class="yoga-desc">Mars is debilitated in Cancer and retrograde at birth. This creates internal conflict around assertion, finances, and family matters. However, retrograde debilitation can create "Neecha Bhanga" (cancellation) effects — the weakness becomes strength over time, especially post-age 30-32.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NAKSHATRA DEEP DIVE ═══ -->
+<div class="section">
+  <div class="section-title">🌟 Uttarashada Nakshatra — Your Star</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start;">
+    <div>
+      <div class="analysis-block">
+        <div class="block-title"><span class="icon">⭐</span> Nakshatra Essence</div>
+        <div class="block-body">
+          <p>Uttarashada ("The Later Victor") spans 26°40' Sagittarius to 10°00' Capricorn. Your Moon in the 1st pada places you firmly in Sagittarius — the philosophical fire of truth and wisdom.</p>
+          <p>Symbol: <strong>The Elephant Tusk</strong> — unstoppable, noble strength that cuts through obstacles with dignity. Once you commit, nothing stops you.</p>
+          <p>Deity: The <strong>Ten Vishvedevas</strong> (Universal Gods) — you carry universal wisdom and a mission to uplift humanity through your gifts.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="nakshatra-box" style="grid-template-columns:1fr 1fr;">
+        <div class="nak-item">
+          <div class="nak-label">Symbol</div>
+          <div class="nak-value">🐘 Tusk</div>
+          <div class="nak-sub">Unstoppable victory</div>
+        </div>
+        <div class="nak-item">
+          <div class="nak-label">Deity</div>
+          <div class="nak-value">Vishvedevas</div>
+          <div class="nak-sub">Universal Gods</div>
+        </div>
+        <div class="nak-item">
+          <div class="nak-label">Planet Lord</div>
+          <div class="nak-value">☀ Sun</div>
+          <div class="nak-sub">Leadership, authority</div>
+        </div>
+        <div class="nak-item">
+          <div class="nak-label">Quality</div>
+          <div class="nak-value">Dhruva</div>
+          <div class="nak-sub">Fixed, immovable</div>
+        </div>
+        <div class="nak-item">
+          <div class="nak-label">Pada</div>
+          <div class="nak-value">1st (Aries)</div>
+          <div class="nak-sub">Dynamic, initiating</div>
+        </div>
+        <div class="nak-item">
+          <div class="nak-label">Gana</div>
+          <div class="nak-value">Manushya</div>
+          <div class="nak-sub">Human nature</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:1.5rem;">
+    <div class="block-body" style="padding-left:0;border-left:none;border-top:1px solid var(--border);padding-top:1rem;">
+      <p><strong>Core Traits:</strong> Leadership, integrity, wisdom, determination, and a strong ethical compass. You have the soul of a warrior-philosopher — brave enough to fight for truth but wise enough to choose meaningful battles.</p>
+      <p><strong>Mission:</strong> Your 1st pada (Aries navamsha) makes you a pioneering soul — initiating new paths, setting trends others follow. The Sun ruling your birth star makes you naturally drawn to authority, recognition, and positions of guidance or leadership.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VIMSHOTTARI DASHA ═══ -->
+<div class="section">
+  <div class="section-title">⏳ Vimshottari Dasha Timeline</div>
+  <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1.5rem;">
+    Based on Moon in Uttarashada (Sun's nakshatra) · Starting Dasha: Sun · Balance at birth: ~5 years 9 months
+  </div>
+  <div class="dasha-timeline">
+
+    <div class="dasha-row">
+      <div class="dasha-period">Sep 1990<br/>–<br/>Jun 1996</div>
+      <div class="dasha-dot"></div>
+      <div class="dasha-content">
+        <div class="dasha-planet">Sun (Surya) Mahadasha — 6 years</div>
+        <div class="dasha-years">Balance period: ~5 years 9 months from birth</div>
+        <div class="dasha-desc">Early childhood shaped by father figures and authority. Sun in Virgo in 4th house brought focus on home, education, and mother's influence. Formation of analytical, detail-oriented thinking. Academic inclinations were evident early.</div>
+      </div>
+    </div>
+
+    <div class="dasha-row">
+      <div class="dasha-period">Jun 1996<br/>–<br/>Jun 2006</div>
+      <div class="dasha-dot"></div>
+      <div class="dasha-content">
+        <div class="dasha-planet">Moon (Chandra) Mahadasha — 10 years</div>
+        <div class="dasha-years">Ages ~6 to ~16</div>
+        <div class="dasha-desc">Moon in Sagittarius (7th house) with Saturn made this a period of emotional growth and philosophical awakening. Schooling, friendships, travel experiences. Moon-Saturn can bring emotional sensitivity and early maturity. Learning about relationships and social dynamics. Creative inclinations through Venus in 3rd emerged.</div>
+      </div>
+    </div>
+
+    <div class="dasha-row">
+      <div class="dasha-period">Jun 2006<br/>–<br/>Jun 2013</div>
+      <div class="dasha-dot"></div>
+      <div class="dasha-content">
+        <div class="dasha-planet">Mars (Mangal) Mahadasha — 7 years</div>
+        <div class="dasha-years">Ages ~16 to ~23</div>
+        <div class="dasha-desc">Mars is debilitated retrograde in Cancer (2nd house). This period likely brought financial fluctuations, family tensions, and challenges in self-assertion. However, this was also a time of immense inner courage building. Career choices, higher education decisions, and first major relationships happened here. Neecha Bhanga effects may have created surprising success through difficulty.</div>
+      </div>
+    </div>
+
+    <div class="dasha-row">
+      <div class="dasha-period">Jun 2013<br/>–<br/>Jun 2031</div>
+      <div class="dasha-dot current"></div>
+      <div class="dasha-content">
+        <div class="dasha-planet current">Rahu Mahadasha — 18 years ← CURRENT</div>
+        <div class="dasha-years">Ages ~23 to ~41 · The major transformation phase</div>
+        <div class="dasha-desc">Rahu in 8th house (Capricorn) brings massive transformation, ambition, foreign connections, occult fascination, and career leaps. This 18-year period is about breaking old patterns, crossing boundaries, and building a new identity. The world of the unconventional, technology, astrology, healing, or international work may call strongly.</div>
+      </div>
+    </div>
+
+    <div class="dasha-row">
+      <div class="dasha-period">Jun 2031<br/>–<br/>Jun 2047</div>
+      <div class="dasha-dot"></div>
+      <div class="dasha-content">
+        <div class="dasha-planet">Jupiter (Guru) Mahadasha — 16 years</div>
+        <div class="dasha-years">Ages ~41 to ~57 · The golden harvest phase</div>
+        <div class="dasha-desc">Jupiter in Lagna (Gemini) mahadasha will be a golden era of wisdom, recognition, expansion, and spiritual deepening. Teaching, mentoring, counseling, or guiding others becomes the primary life mission. Prosperity, reputation, and spiritual milestones. This is when the soul's deepest gifts fully blossom and are shared with the world.</div>
+      </div>
+    </div>
+
+    <div class="dasha-row">
+      <div class="dasha-period">Jun 2047<br/>onwards</div>
+      <div class="dasha-dot"></div>
+      <div class="dasha-content">
+        <div class="dasha-planet">Saturn (Shani) Mahadasha — 19 years</div>
+        <div class="dasha-years">Ages ~57 to ~76 · Legacy and mastery</div>
+        <div class="dasha-desc">Saturn in 7th house (Sagittarius) completes a lifetime of disciplined effort with a legacy of wisdom and lasting achievements. Saturn mahadasha brings the rewards of decades of karmic work. Elder statesperson energy — respected, established, and anchored.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ CURRENT PERIOD ═══ -->
+<div class="section">
+  <div class="section-title">🎯 Current Period — Rahu-Venus (Dec 2024 – Dec 2027)</div>
+  <div style="background:rgba(201,169,110,0.05);border:1px solid var(--gold-dim);border-radius:10px;padding:1.25rem;margin-bottom:1.5rem;">
+    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;">
+      <span style="font-size:1.5rem;">⚡</span>
+      <div>
+        <div style="font-family:'Cinzel',serif;color:var(--gold-light);font-size:1rem;">Rahu Mahadasha · Venus Antardasha</div>
+        <div style="font-size:0.8rem;color:var(--text-muted);">December 2024 → December 2027 · 3 Years of High Intensity</div>
+      </div>
+    </div>
+  </div>
+
+  <table class="antardasha-table">
+    <thead>
+      <tr><th>Antardasha</th><th>Period</th><th>Theme</th></tr>
+    </thead>
+    <tbody>
+      <tr class="past-row"><td>Rahu-Rahu</td><td>Jun 2013 – Jan 2016</td><td>Identity reinvention, ambition surges</td></tr>
+      <tr class="past-row"><td>Rahu-Jupiter</td><td>Jan 2016 – Jun 2018</td><td>Wisdom, education, spiritual growth</td></tr>
+      <tr class="past-row"><td>Rahu-Saturn</td><td>Jun 2018 – May 2021</td><td>Discipline, hard work, delays, structure</td></tr>
+      <tr class="past-row"><td>Rahu-Mercury</td><td>May 2021 – Nov 2023</td><td>Communication, business, technology</td></tr>
+      <tr class="past-row"><td>Rahu-Ketu</td><td>Nov 2023 – Dec 2024</td><td>Karmic release, spiritual detachment</td></tr>
+      <tr class="curr"><td>● Rahu-Venus (NOW)</td><td>Dec 2024 – Dec 2027</td><td>Relationships, creativity, desire, luxury, transformation</td></tr>
+      <tr><td>Rahu-Sun</td><td>Dec 2027 – Oct 2028</td><td>Authority, career peak, recognition</td></tr>
+      <tr><td>Rahu-Moon</td><td>Oct 2028 – Apr 2030</td><td>Emotional healing, home matters</td></tr>
+      <tr><td>Rahu-Mars</td><td>Apr 2030 – Jun 2031</td><td>Energy, action, completing Rahu cycle</td></tr>
+    </tbody>
+  </table>
+
+  <div class="analysis-block" style="margin-top:1.5rem;">
+    <div class="block-body">
+      <p><strong>What Rahu-Venus means for you right now (2025-2027):</strong> Venus is your 5th (creativity, romance) and 12th (liberation, foreign lands) house lord from Gemini Lagna. Rahu in 8th magnifies hidden desires and transformation. This is one of the most SIGNIFICANT periods of your adult life.</p>
+      <p>Expect: <strong>powerful romantic attractions</strong>, possibly a deep relationship or marriage decision. Creative fields light up — arts, design, beauty, music. Material desires intensify and opportunities for financial gains come through Venus-ruled areas. Foreign travel, luxury, or a new aesthetic identity may emerge.</p>
+      <p>Shadow side: Rahu creates illusion in Venus matters. Be discerning in relationships — not all that glitters is gold. Avoid overindulgence, dependency, or unrealistic expectations in love.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PAST LIFE / KARMIC ═══ -->
+<div class="section">
+  <div class="section-title">🔮 Past Life & Karmic Indicators</div>
+  <div class="analysis-block">
+    <div class="block-title"><span class="icon">☋</span> Ketu in Cancer (2nd House) — What You Carry From Past Lives</div>
+    <div class="block-body">
+      <p>Ketu in Cancer in the 2nd house speaks of <strong>a soul that has lived many lifetimes in roles of deep nurturing, family care, and emotional service</strong>. You were a caretaker — a mother, healer, or provider of emotional sustenance — so naturally skilled in these areas that they now feel hollow or "already done."</p>
+      <p>You may notice a <strong>natural detachment from money and material security</strong> — not because you don't deserve it, but because your soul knows these are impermanent. Speech and voice may carry an unusual quality — sometimes blunt, sometimes profound. Family karma (particularly around the father's lineage or wealth) requires healing in this lifetime.</p>
+      <p>Past-life gifts brought into this birth: <strong>emotional intelligence, psychic sensitivity, intuitive cooking/healing/nurturing abilities, deep memory, and connection to ancestral wisdom</strong>. These feel effortless to you.</p>
+    </div>
+  </div>
+
+  <div class="divider">✦ · · · ✦</div>
+
+  <div class="analysis-block">
+    <div class="block-title"><span class="icon">☊</span> Rahu in Capricorn (8th House) — Your Karmic Destiny</div>
+    <div class="block-body">
+      <p>Rahu's placement in Capricorn (8th house) is a powerful directive from the cosmos: <strong>this lifetime, you are meant to master the hidden, the transformative, and the structured aspects of the material and spiritual worlds</strong>. Where Ketu brings past gifts of nurturing and emotion, Rahu pulls you toward ambition, discipline, research, and power.</p>
+      <p>The 8th house is the house of <strong>tantra, astrology, occult sciences, surgery, research, inheritances, and sudden transformations</strong>. Rahu here gives a deep, almost magnetic pull toward mysticism and the unknown. Many great astrologers, healers, researchers, and transformational figures have Rahu in the 8th.</p>
+      <p><strong>Karmic mission:</strong> Move from the comfort of emotional security (Cancer/Ketu) into the mastery of systems, structures, and hidden knowledge (Capricorn/Rahu). The soul is learning to combine intuition with discipline.</p>
+    </div>
+  </div>
+
+  <div class="divider">✦ · · · ✦</div>
+
+  <div class="analysis-block">
+    <div class="block-title"><span class="icon">♄</span> Saturn + Moon in 7th House — Relationship Karma</div>
+    <div class="block-body">
+      <p>The Moon-Saturn conjunction in the 7th house of partnerships is a profound karmic signature. <strong>In past lives, you made vows, contracts, or deep commitments that were not fully honored</strong> — or you were bound in relationships through duty rather than love. Saturn now teaches you that true partnership must combine both: commitment AND love.</p>
+      <p>This placement often indicates a delay in meaningful relationships, or attracting partners who are older, more serious, or carry heavy responsibilities. However, once you find your true partner (often after Saturn matures around age 29-32), <strong>the relationship becomes a pillar of extraordinary strength and depth</strong>.</p>
+      <p>The 7th house is also about open enemies and public image. Saturn here gifts a quiet authority — people respect you, perhaps even fear you slightly, because you carry discipline and wisdom in your public interactions.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PRESENT ═══ -->
+<div class="section">
+  <div class="section-title">🌟 Present Life Themes (2024–2027)</div>
+  <div class="analysis-block">
+    <div class="block-title"><span class="icon">💫</span> Who You Are at Your Core</div>
+    <div class="block-body">
+      <p>With <strong>Gemini Lagna</strong>, you are naturally dual-natured, curious, adaptable, and communicative. Mercury (your Lagna lord) in Virgo creates a mind that is both creative AND analytical — you can see the big picture while also catching every detail. This is rare and valuable.</p>
+      <p>Jupiter in your Ascendant makes you a <strong>natural teacher and guide</strong>. People are drawn to you for advice. You have an innate philosophical nature — always asking "why," always seeking deeper meaning. This Sagittarian Moon reinforces this: you are a seeker of truth and wisdom.</p>
+      <p>The <strong>Budhaditya Yoga (Sun + Mercury in 4th house)</strong> makes you an exceptional thinker, writer, or communicator. Your intelligence is your greatest gift and your primary tool for fulfilling your life's purpose.</p>
+    </div>
+  </div>
+
+  <div class="analysis-block">
+    <div class="block-title"><span class="icon">💼</span> Career & Dharma Pathways</div>
+    <div class="block-body">
+      <p>Your chart strongly supports careers in: <strong>education and teaching, writing and publishing, astrology and metaphysics, healthcare and healing, research and analysis, psychology, philosophy, or any field requiring deep intellectual engagement combined with intuitive wisdom</strong>.</p>
+      <p>Rahu in 8th Capricorn suggests you could excel in <strong>finance, investigation, research, insurance, inheritance law, astrology, or alternative healing</strong>. Jupiter in Lagna may bring you into roles of <strong>counseling, guiding, or spiritual teaching</strong>.</p>
+      <p>Venus in Leo (3rd house) adds a creative, artistic dimension — writing, visual arts, music, or beauty/fashion could be secondary passions or even primary career paths during the current Rahu-Venus period.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FUTURE ═══ -->
+<div class="section">
+  <div class="section-title">🌄 Future Timeline — Phase by Phase</div>
+
+  <div class="analysis-block">
+    <div class="block-title"><span class="icon">⚡</span> 2025-2027 · Rahu-Venus Period</div>
+    <div class="block-body">
+      <p><strong>Peak years for relationships, creativity, and desire.</strong> If unmarried, this period strongly activates romantic life — a deep, possibly life-changing relationship arrives or intensifies. If already in a relationship, this period transforms the dynamic significantly.</p>
+      <p>Creative and artistic projects begun now have unusual power to succeed. Income from Venus-related fields (arts, beauty, luxury goods, relationships counseling, design) can surge. Travel — especially international — is likely and transformative.</p>
+    </div>
+  </div>
+
+  <div class="analysis-block">
+    <div class="block-title"><span class="icon">🌟</span> 2027-2031 · Rahu-Sun, Moon, Mars</div>
+    <div class="block-body">
+      <p>The concluding phase of Rahu Mahadasha. <strong>Rahu-Sun (2027-2028)</strong> brings career recognition, possible positions of authority, or encounters with father/authority figures that reshape identity. A peak professional moment is possible.</p>
+      <p><strong>Rahu-Moon (2028-2030)</strong> brings emotional healing and resolution of old family or home-related karma. Deep inner work, possibly spiritual retreats or relocation.</p>
+    </div>
+  </div>
+
+  <div class="analysis-block">
+    <div class="block-title"><span class="icon">🌻</span> 2031-2047 · Jupiter Mahadasha — The Golden Years</div>
+    <div class="block-body">
+      <p>This will be the most BLESSED and fulfilling period of your life. <strong>Jupiter is in your Lagna (Gemini) in your own chart</strong> — when Jupiter's Mahadasha runs, it activates its own placement with maximum power. Wisdom gained through all the karmic work of the Rahu period now bears fruit.</p>
+      <p>Expect: <strong>reputation, recognition, prosperity, spiritual advancement, teaching or publishing, expansion into larger roles, possible international recognition, and deep fulfillment in relationships</strong>. The soul's mission becomes clear and actively lived. Children or mentoring the young generation may become central.</p>
+      <p>This 16-year period is when others will seek you out for wisdom, guidance, and counsel. You become the teacher, the elder guide — fulfilling the highest promise of your Uttarashada nakshatra and Jupiter Lagna combination.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ REMEDIES ═══ -->
+<div class="section">
+  <div class="section-title">🙏 Vedic Remedies & Practices</div>
+  <ul class="remedy-list">
+    <li><strong>For Moon-Saturn in 7th:</strong> Chant "Om Shri Shanaischaraya Namah" on Saturdays. Offer black sesame seeds and mustard oil to Shani on Saturdays. Practice patience and non-reactivity in relationships.</li>
+    <li><strong>For Mars Retrograde (Neecha in Cancer):</strong> Chant Hanuman Chalisa on Tuesdays. Wear red coral (Moonga) only after consulting a Jyotishi. Light a ghee lamp on Tuesdays at a Hanuman temple.</li>
+    <li><strong>For Rahu in 8th:</strong> Chant "Om Rahave Namah" or Durga Chalisa. Donate to charitable causes on Saturdays. Practice mindfulness and avoid attachment to outcomes. Hessonite (Gomed) gemstone may strengthen Rahu if recommended.</li>
+    <li><strong>For Jupiter in Lagna:</strong> Wear Yellow Sapphire (Pukhraj) in gold on the index finger (check with a Jyotishi). Chant "Om Gurave Namah" on Thursdays. Study and teach — Jupiter grows through wisdom-sharing.</li>
+    <li><strong>Nakshatra remedy (Uttarashada):</strong> The Sun is your nakshatra lord. Salute the rising Sun daily (Surya Namaskar). Meditate at sunrise. Offer water to the Sun — "Arghya" practice. This activates your core soul power.</li>
+    <li><strong>General:</strong> Practice honest, disciplined speech (2nd house Ketu). Donate food on Fridays (Venus). Study Vedanta, philosophy, or spiritual texts (Sagittarius Moon). Keep a gratitude journal (Budhaditya Yoga activates through writing).</li>
+    <li><strong>Gemstone guidance:</strong> Emerald (Panna) for Mercury (Lagna lord) in silver on the little finger may be most universally beneficial. Always get gemstone recommendations from a practicing Vedic astrologer who can verify your full chart.</li>
+  </ul>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+  <span class="om">☽ ॐ ☀</span>
+  <em>"The stars incline, they do not compel. You are the master of your own chart."</em>
+  <div style="margin-top:0.75rem;font-size:0.8rem;opacity:0.6;">
+    Vedic Kundali · Lahiri Ayanamsha · Tumsar, Maharashtra · 28 September 1990 · 22:45 IST<br/>
+    Lagna: Gemini · Rashi: Sagittarius · Nakshatra: Uttarashada · Pada: 1
+  </div>
+</div>
+
+</div>
+</body>
+</html>
